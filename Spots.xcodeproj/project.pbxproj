@@ -19,6 +19,13 @@
 		01805FE4196EC853002E79F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCC196EC853002E79F6 /* UIKit.framework */; };
 		01805FEC196EC853002E79F6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01805FEA196EC853002E79F6 /* InfoPlist.strings */; };
 		01805FEE196EC853002E79F6 /* SpotsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01805FED196EC853002E79F6 /* SpotsTests.m */; };
+		01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01805FFA196EC8BC002E79F6 /* UIImage+AlphaAdditions.m */; };
+		01806000196EC8BC002E79F6 /* UIImage+ResizeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01805FFC196EC8BC002E79F6 /* UIImage+ResizeAdditions.m */; };
+		01806001196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 01805FFE196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m */; };
+		01806006196EC926002E79F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 01806005196EC926002E79F6 /* Reachability.m */; };
+		01806008196EC97F002E79F6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01806007196EC97F002E79F6 /* FacebookSDK.framework */; };
+		0180600A196EC986002E79F6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01806009196EC986002E79F6 /* Parse.framework */; };
+		0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180600D196EC9A4002E79F6 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,18 @@
 		01805FE9196EC853002E79F6 /* SpotsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpotsTests-Info.plist"; sourceTree = "<group>"; };
 		01805FEB196EC853002E79F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01805FED196EC853002E79F6 /* SpotsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpotsTests.m; sourceTree = "<group>"; };
+		01805FF9196EC8BC002E79F6 /* UIImage+AlphaAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AlphaAdditions.h"; sourceTree = "<group>"; };
+		01805FFA196EC8BC002E79F6 /* UIImage+AlphaAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AlphaAdditions.m"; sourceTree = "<group>"; };
+		01805FFB196EC8BC002E79F6 /* UIImage+ResizeAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeAdditions.h"; sourceTree = "<group>"; };
+		01805FFC196EC8BC002E79F6 /* UIImage+ResizeAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeAdditions.m"; sourceTree = "<group>"; };
+		01805FFD196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCornerAdditions.h"; sourceTree = "<group>"; };
+		01805FFE196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCornerAdditions.m"; sourceTree = "<group>"; };
+		01806004196EC926002E79F6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		01806005196EC926002E79F6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		01806007196EC97F002E79F6 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		01806009196EC986002E79F6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		0180600C196EC9A4002E79F6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		0180600D196EC9A4002E79F6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +75,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01805FCB196EC853002E79F6 /* CoreGraphics.framework in Frameworks */,
+				01806008196EC97F002E79F6 /* FacebookSDK.framework in Frameworks */,
 				01805FCD196EC853002E79F6 /* UIKit.framework in Frameworks */,
 				01805FC9196EC853002E79F6 /* Foundation.framework in Frameworks */,
+				0180600A196EC986002E79F6 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +128,9 @@
 		01805FCE196EC853002E79F6 /* Spots */ = {
 			isa = PBXGroup;
 			children = (
+				01806002196EC905002E79F6 /* Vendor */,
+				01805FF8196EC8AA002E79F6 /* Categories */,
+				01805FF7196EC8A2002E79F6 /* Views */,
 				01805FD7196EC853002E79F6 /* AppDelegate.h */,
 				01805FD8196EC853002E79F6 /* AppDelegate.m */,
 				01805FDA196EC853002E79F6 /* Images.xcassets */,
@@ -142,6 +166,55 @@
 				01805FEA196EC853002E79F6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01805FF7196EC8A2002E79F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		01805FF8196EC8AA002E79F6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				01805FF9196EC8BC002E79F6 /* UIImage+AlphaAdditions.h */,
+				01805FFA196EC8BC002E79F6 /* UIImage+AlphaAdditions.m */,
+				01805FFB196EC8BC002E79F6 /* UIImage+ResizeAdditions.h */,
+				01805FFC196EC8BC002E79F6 /* UIImage+ResizeAdditions.m */,
+				01805FFD196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.h */,
+				01805FFE196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		01806002196EC905002E79F6 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0180600B196EC996002E79F6 /* MBProgressHUD */,
+				01806009196EC986002E79F6 /* Parse.framework */,
+				01806007196EC97F002E79F6 /* FacebookSDK.framework */,
+				01806003196EC91B002E79F6 /* Reachability */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		01806003196EC91B002E79F6 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				01806004196EC926002E79F6 /* Reachability.h */,
+				01806005196EC926002E79F6 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		0180600B196EC996002E79F6 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				0180600C196EC9A4002E79F6 /* MBProgressHUD.h */,
+				0180600D196EC9A4002E79F6 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,8 +312,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01806001196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m in Sources */,
+				01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */,
+				01806000196EC8BC002E79F6 /* UIImage+ResizeAdditions.m in Sources */,
 				01805FD9196EC853002E79F6 /* AppDelegate.m in Sources */,
+				01806006196EC926002E79F6 /* Reachability.m in Sources */,
 				01805FD5196EC853002E79F6 /* main.m in Sources */,
+				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +437,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Spots",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Spots/Spots-Prefix.pch";
 				INFOPLIST_FILE = "Spots/Spots-Info.plist";
@@ -372,6 +454,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Spots",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Spots/Spots-Prefix.pch";
 				INFOPLIST_FILE = "Spots/Spots-Info.plist";
