@@ -7,6 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import "SPWelcomeViewController.h"
+#import "SPLogInViewController.h"
+
+@interface AppDelegate () {
+    NSMutableData *_data;
+    BOOL firstLaunch;
+}
+
+@property (nonatomic, strong) SPWelcomeViewController *welcomeViewController;
+
+@end
+
+
 
 @implementation AppDelegate
 
@@ -15,35 +28,68 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    // ****************************************************************************
+    // Parse initialization
+    [Parse setApplicationId:@"GitsOrpE6s6v4RB30Xrkfjr9LazUrORIZrHcqDGb"
+                  clientKey:@"KWZI2125IsHodVq7WlNHukaguohs5uk8QiBrJ6U8"];
+    
+    [PFFacebookUtils initializeFacebook];
+    // ****************************************************************************
+    
+    PFACL *defaultACL = [PFACL ACL];
+    
+    // Enable public read access by default, with any newly created PFObjects belonging to the current user
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    
+    
+    self.welcomeViewController = [[SPWelcomeViewController alloc] init];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
+    self.navController.navigationBarHidden = YES;
+    
+    self.window.rootViewController = self.navController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+- (void)presentLoginViewControllerAnimated:(BOOL)animated {
+    
+    SPLogInViewController *loginViewController = [[SPLogInViewController alloc] init];
+    
+    [loginViewController setDelegate:self];
+    loginViewController.fields = PFLogInFieldsFacebook;
+    loginViewController.facebookPermissions = @[ @"user_about_me" ];
+    
+    [self.welcomeViewController presentViewController:loginViewController animated:NO completion:nil];
+    
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+#pragma mark - PFLoginViewController
+
+- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    
+    /*
+    // user has logged in - we need to fetch all of their Facebook data before we let them in
+    if (![self shouldProceedToMainInterface:user]) {
+        self.hud = [MBProgressHUD showHUDAddedTo:self.navController.presentedViewController.view animated:YES];
+        self.hud.labelText = NSLocalizedString(@"Loading", nil);
+        self.hud.dimBackground = YES;
+    }
+    
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            [self facebookRequestDidLoad:result];
+        } else {
+            [self facebookRequestDidFailWithError:error];
+        }
+    }];
+     */
+    
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
 
 @end
