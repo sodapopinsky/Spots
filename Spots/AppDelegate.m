@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MBProgressHUD.h"
 #import "SPWelcomeViewController.h"
 #import "SPLogInViewController.h"
 
@@ -16,6 +17,7 @@
 }
 
 @property (nonatomic, strong) SPWelcomeViewController *welcomeViewController;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -27,7 +29,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor redColor];
     
     
     // ****************************************************************************
@@ -70,13 +72,16 @@
 #pragma mark - PFLoginViewController
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+   
     
-    /*
     // user has logged in - we need to fetch all of their Facebook data before we let them in
     if (![self shouldProceedToMainInterface:user]) {
+        
+        
         self.hud = [MBProgressHUD showHUDAddedTo:self.navController.presentedViewController.view animated:YES];
         self.hud.labelText = NSLocalizedString(@"Loading", nil);
         self.hud.dimBackground = YES;
+        
     }
     
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
@@ -86,10 +91,47 @@
             [self facebookRequestDidFailWithError:error];
         }
     }];
-     */
+    
     
 }
 
+
+- (BOOL)shouldProceedToMainInterface:(PFUser *)user {
+    
+    if ([SPUtility userHasValidFacebookData:[PFUser currentUser]]) {
+        [MBProgressHUD hideHUDForView:self.navController.presentedViewController.view animated:YES];
+        
+        [self presentTabBarController];
+        
+        [self.navController dismissViewControllerAnimated:YES completion:nil];
+        return YES;
+    }
+    return NO;
+}
+
+
+
+- (void)presentTabBarController {
+    
+    
+    
+}
+
+#pragma mark -- Facebook Methods
+- (void)facebookRequestDidLoad:(id)result {
+     // This method is called twice - once for the user's /me profile, and a second time when obtaining their friends. We will try and handle both scenarios in a single method.    
+}
+
+- (void)facebookRequestDidFailWithError:(NSError *)error {
+    NSLog(@"Facebook error: %@", error);
+    
+    if ([PFUser currentUser]) {
+        if ([[error userInfo][@"error"][@"type"] isEqualToString:@"OAuthException"]) {
+            NSLog(@"The Facebook token was invalidated. Logging out.");
+          //  [self logOut];
+        }
+    }
+}
 
 
 @end

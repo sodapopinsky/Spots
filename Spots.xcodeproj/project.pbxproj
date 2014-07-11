@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		01278AD3196F558900BC013A /* SPWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278AD2196F558900BC013A /* SPWelcomeViewController.m */; };
 		01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278AD8196F593500BC013A /* SPLogInViewController.m */; };
+		01278ADC196F5C3900BC013A /* SPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADB196F5C3900BC013A /* SPUtility.m */; };
+		01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADE196F5D1F00BC013A /* SPConstants.m */; };
 		01805FC9196EC853002E79F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FC8196EC853002E79F6 /* Foundation.framework */; };
 		01805FCB196EC853002E79F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCA196EC853002E79F6 /* CoreGraphics.framework */; };
 		01805FCD196EC853002E79F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCC196EC853002E79F6 /* UIKit.framework */; };
@@ -45,6 +47,10 @@
 		01278AD2196F558900BC013A /* SPWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPWelcomeViewController.m; sourceTree = "<group>"; };
 		01278AD7196F593500BC013A /* SPLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPLogInViewController.h; sourceTree = "<group>"; };
 		01278AD8196F593500BC013A /* SPLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPLogInViewController.m; sourceTree = "<group>"; };
+		01278ADA196F5C3900BC013A /* SPUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUtility.h; sourceTree = "<group>"; };
+		01278ADB196F5C3900BC013A /* SPUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtility.m; sourceTree = "<group>"; };
+		01278ADD196F5D1F00BC013A /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
+		01278ADE196F5D1F00BC013A /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
 		01805FC5196EC853002E79F6 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01805FC8196EC853002E79F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01805FCA196EC853002E79F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -161,6 +167,10 @@
 				01805FD8196EC853002E79F6 /* AppDelegate.m */,
 				01805FDA196EC853002E79F6 /* Images.xcassets */,
 				01805FCF196EC853002E79F6 /* Supporting Files */,
+				01278ADA196F5C3900BC013A /* SPUtility.h */,
+				01278ADB196F5C3900BC013A /* SPUtility.m */,
+				01278ADD196F5D1F00BC013A /* SPConstants.h */,
+				01278ADE196F5D1F00BC013A /* SPConstants.m */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -341,8 +351,10 @@
 				01806001196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */,
 				01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */,
+				01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */,
 				01278AD3196F558900BC013A /* SPWelcomeViewController.m in Sources */,
 				01806000196EC8BC002E79F6 /* UIImage+ResizeAdditions.m in Sources */,
+				01278ADC196F5C3900BC013A /* SPUtility.m in Sources */,
 				01805FD9196EC853002E79F6 /* AppDelegate.m in Sources */,
 				01806006196EC926002E79F6 /* Reachability.m in Sources */,
 				01805FD5196EC853002E79F6 /* main.m in Sources */,
