@@ -30,6 +30,9 @@
 		01806008196EC97F002E79F6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01806007196EC97F002E79F6 /* FacebookSDK.framework */; };
 		0180600A196EC986002E79F6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01806009196EC986002E79F6 /* Parse.framework */; };
 		0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180600D196EC9A4002E79F6 /* MBProgressHUD.m */; };
+		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
+		01E3ED351971EF4F001A9388 /* SPHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED341971EF4F001A9388 /* SPHomeViewController.m */; };
+		01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED381971F088001A9388 /* SPDiscoverViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,12 @@
 		01806009196EC986002E79F6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0180600C196EC9A4002E79F6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		0180600D196EC9A4002E79F6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		01E3ED301971ED35001A9388 /* SPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTabBarController.h; sourceTree = "<group>"; };
+		01E3ED311971ED35001A9388 /* SPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTabBarController.m; sourceTree = "<group>"; };
+		01E3ED331971EF4F001A9388 /* SPHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPHomeViewController.h; sourceTree = "<group>"; };
+		01E3ED341971EF4F001A9388 /* SPHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPHomeViewController.m; sourceTree = "<group>"; };
+		01E3ED371971F088001A9388 /* SPDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDiscoverViewController.h; sourceTree = "<group>"; };
+		01E3ED381971F088001A9388 /* SPDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDiscoverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +119,10 @@
 		01278ACC196F54B200BC013A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01E3ED361971F071001A9388 /* Discover */,
+				01E3ED301971ED35001A9388 /* SPTabBarController.h */,
+				01E3ED311971ED35001A9388 /* SPTabBarController.m */,
+				01E3ED2F1971ED1D001A9388 /* Home */,
 				01278ACD196F54D800BC013A /* Login */,
 			);
 			name = Controllers;
@@ -253,6 +266,24 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		01E3ED2F1971ED1D001A9388 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				01E3ED331971EF4F001A9388 /* SPHomeViewController.h */,
+				01E3ED341971EF4F001A9388 /* SPHomeViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		01E3ED361971F071001A9388 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				01E3ED371971F088001A9388 /* SPDiscoverViewController.h */,
+				01E3ED381971F088001A9388 /* SPDiscoverViewController.m */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -351,11 +382,14 @@
 				01806001196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */,
 				01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */,
+				01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */,
 				01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */,
 				01278AD3196F558900BC013A /* SPWelcomeViewController.m in Sources */,
+				01E3ED351971EF4F001A9388 /* SPHomeViewController.m in Sources */,
 				01806000196EC8BC002E79F6 /* UIImage+ResizeAdditions.m in Sources */,
 				01278ADC196F5C3900BC013A /* SPUtility.m in Sources */,
 				01805FD9196EC853002E79F6 /* AppDelegate.m in Sources */,
+				01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */,
 				01806006196EC926002E79F6 /* Reachability.m in Sources */,
 				01805FD5196EC853002E79F6 /* main.m in Sources */,
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,

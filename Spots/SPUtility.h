@@ -11,5 +11,5 @@
 @interface SPUtility : NSObject
 
 + (BOOL)userHasValidFacebookData:(PFUser *)user;
-
++ (void)addBottomDropShadowToNavigationBarForNavigationController:(UINavigationController *)navigationController;
 @end

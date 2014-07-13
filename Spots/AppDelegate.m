@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import "MBProgressHUD.h"
 #import "SPWelcomeViewController.h"
+#import "SPHomeViewController.h"
 #import "SPLogInViewController.h"
+#import "SPDiscoverViewController.h"
 
 @interface AppDelegate () {
     NSMutableData *_data;
@@ -17,6 +19,8 @@
 }
 
 @property (nonatomic, strong) SPWelcomeViewController *welcomeViewController;
+@property (nonatomic, strong) SPHomeViewController *homeViewController;
+@property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
 @property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
@@ -113,13 +117,43 @@
 
 - (void)presentTabBarController {
     
+    self.tabBarController = [[SPTabBarController alloc] init];
+    self.homeViewController = [[SPHomeViewController alloc] init];
+    self.discoverViewController = [[SPDiscoverViewController alloc] init];
     
+    UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
+    
+     UINavigationController *discoverNavigationController = [[UINavigationController alloc] initWithRootViewController:self.discoverViewController];
+    
+    [SPUtility addBottomDropShadowToNavigationBarForNavigationController:homeNavigationController];
+    
+    UITabBarItem *homeTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Friends", @"Friends") image:nil selectedImage:nil];
+    [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
+    [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
+    [homeTabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -20)];
+    
+    [homeNavigationController setTabBarItem:homeTabBarItem];
+    
+    UITabBarItem *discoverTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Discover", @"Discover") image:nil selectedImage:nil];
+    [discoverTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
+    [discoverTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
+    [discoverTabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -20)];
+    
+    [discoverNavigationController setTabBarItem:discoverTabBarItem];
+    
+    self.tabBarController.tabBar.barTintColor =  [UIColor colorWithRed:20.0f/255.0f green:126.0f/255.0f blue:187.0f/255.0f alpha:1.000];
+    
+    
+    self.tabBarController.delegate = self;
+    self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController];
+    
+    [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
     
 }
 
 #pragma mark -- Facebook Methods
 - (void)facebookRequestDidLoad:(id)result {
-     // This method is called twice - once for the user's /me profile, and a second time when obtaining their friends. We will try and handle both scenarios in a single method.    
+     // This method is called twice - once for the user's /me profile, and a second time when obtaining their friends. We will try and handle both scenarios in a single method.
 }
 
 - (void)facebookRequestDidFailWithError:(NSError *)error {

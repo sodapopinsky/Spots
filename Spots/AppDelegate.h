@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate, PFLogInViewControllerDelegate>
+#import "SPTabBarController.h"
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, PFLogInViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (nonatomic, strong) SPTabBarController *tabBarController;
 @property (nonatomic, strong) UINavigationController *navController;
 - (void)presentTabBarController;
 - (void)presentLoginViewControllerAnimated:(BOOL)animated;
