@@ -22,7 +22,7 @@
 @property (nonatomic, strong) SPHomeViewController *homeViewController;
 @property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
 @property (nonatomic, strong) MBProgressHUD *hud;
-
+- (void)setupAppearance;
 @end
 
 
@@ -50,6 +50,7 @@
     [defaultACL setPublicReadAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
+    [self setupAppearance];
     
     self.welcomeViewController = [[SPWelcomeViewController alloc] init];
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
@@ -72,6 +73,45 @@
     [self.welcomeViewController presentViewController:loginViewController animated:NO completion:nil];
     
 }
+
+
+#pragma mark - ()
+
+- (void)setupAppearance {
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+    /*
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.498f green:0.388f blue:0.329f alpha:1.0f]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor whiteColor],UITextAttributeTextColor,
+                                                          [UIColor colorWithWhite:0.0f alpha:0.750f],UITextAttributeTextShadowColor,
+                                                          [NSValue valueWithCGSize:CGSizeMake(0.0f, 1.0f)],UITextAttributeTextShadowOffset,
+                                                          nil]];
+    */
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"BackgroundNavigationBar.png"] forBarMetrics:UIBarMetricsDefault];
+    
+    [[UIButton appearanceWhenContainedIn:[UINavigationBar class], nil] setBackgroundImage:[UIImage imageNamed:@"ButtonNavigationBar.png"] forState:UIControlStateNormal];
+    [[UIButton appearanceWhenContainedIn:[UINavigationBar class], nil] setBackgroundImage:[UIImage imageNamed:@"ButtonNavigationBarSelected.png"] forState:UIControlStateHighlighted];
+    [[UIButton appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleColor:[UIColor colorWithRed:214.0f/255.0f green:210.0f/255.0f blue:197.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[UIImage imageNamed:@"ButtonBack.png"]
+                                                      forState:UIControlStateNormal
+                                                    barMetrics:UIBarMetricsDefault];
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[UIImage imageNamed:@"ButtonBackSelected.png"]
+                                                      forState:UIControlStateSelected
+                                                    barMetrics:UIBarMetricsDefault];
+    /*
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                          [UIColor colorWithRed:214.0f/255.0f green:210.0f/255.0f blue:197.0f/255.0f alpha:1.0f],UITextAttributeTextColor,
+                                                          [UIColor colorWithWhite:0.0f alpha:0.750f],UITextAttributeTextShadowColor,
+                                                          [NSValue valueWithCGSize:CGSizeMake(0.0f, 1.0f)],UITextAttributeTextShadowOffset,
+                                                          nil] forState:UIControlStateNormal];
+    */
+    [[UISearchBar appearance] setTintColor:[UIColor colorWithRed:32.0f/255.0f green:19.0f/255.0f blue:16.0f/255.0f alpha:1.0f]];
+}
+
 
 #pragma mark - PFLoginViewController
 
@@ -118,7 +158,7 @@
 - (void)presentTabBarController {
     
     self.tabBarController = [[SPTabBarController alloc] init];
-    self.homeViewController = [[SPHomeViewController alloc] init];
+    self.homeViewController = [[SPHomeViewController alloc] initWithStyle:UITableViewStylePlain];
     self.discoverViewController = [[SPDiscoverViewController alloc] init];
     
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];

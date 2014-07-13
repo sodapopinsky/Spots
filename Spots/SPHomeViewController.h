@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPTimelineViewController.h"
 
-@interface SPHomeViewController : UIViewController
-
+@interface SPHomeViewController : SPTimelineViewController
+@property (nonatomic, assign, getter = isFirstLaunch) BOOL firstLaunch;
 @end
