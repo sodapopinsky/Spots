@@ -7,8 +7,12 @@
 //
 
 #import "SPHomeViewController.h"
+#import "SPSettingsActionSheetDelegate.h"
+#import "SPSettingsButtonItem.h"
+#import "MBProgressHUD.h"
 
 @interface SPHomeViewController ()
+@property (nonatomic, strong) SPSettingsActionSheetDelegate *settingsActionSheetDelegate;
 @property (nonatomic, strong) UIView *blankTimelineView;
 @end
 
@@ -23,7 +27,7 @@
     
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
     
-   // self.navigationItem.rightBarButtonItem = [[PAPSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
+    self.navigationItem.rightBarButtonItem = [[SPSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
     
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
     
@@ -41,11 +45,8 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     
-    if (self.objects.count == 0){
-        
-    }
+   
     if (self.objects.count == 0 && ![[self queryForTable] hasCachedResult] & !self.firstLaunch) {
-        
         
         self.tableView.scrollEnabled = NO;
         
@@ -66,8 +67,15 @@
 
 #pragma mark - ()
 
+- (void)settingsButtonAction:(id)sender {
+    self.settingsActionSheetDelegate = [[SPSettingsActionSheetDelegate alloc] initWithNavigationController:self.navigationController];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self.settingsActionSheetDelegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"My Profile",@"Find Friends",@"Log Out", nil];
+    
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+}
 
 - (void)inviteFriendsButtonAction:(id)sender {
+    
  // not enabled
   //  PAPFindFriendsViewController *detailViewController = [[PAPFindFriendsViewController alloc] init];
   //  [self.navigationController pushViewController:detailViewController animated:YES];

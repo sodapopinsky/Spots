@@ -15,7 +15,10 @@
 @property (nonatomic, strong) SPTabBarController *tabBarController;
 @property (nonatomic, strong) UINavigationController *navController;
 - (void)presentTabBarController;
+- (void)presentLoginViewController;
 - (void)presentLoginViewControllerAnimated:(BOOL)animated;
 - (void)facebookRequestDidLoad:(id)result;
 - (void)facebookRequestDidFailWithError:(NSError *)error;
+
+- (void)logOut;
 @end

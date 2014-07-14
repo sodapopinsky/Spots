@@ -13,6 +13,7 @@
 #import "SPLogInViewController.h"
 #import "SPDiscoverViewController.h"
 
+
 @interface AppDelegate () {
     NSMutableData *_data;
     BOOL firstLaunch;
@@ -113,6 +114,40 @@
 }
 
 
+- (void)logOut {
+    // clear cache
+   // [[PAPCache sharedCache] clear];
+    
+    
+    //MUST RESTORE !!
+    
+    
+    // clear NSUserDefaults
+  //  [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPAPUserDefaultsCacheFacebookFriendsKey];
+  //  [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // Unsubscribe from push notifications by removing the user association from the current installation.
+//    [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
+  //  [[PFInstallation currentInstallation] saveInBackground];
+    
+    // Clear all caches
+    [PFQuery clearAllCachedResults];
+    
+    // Log out
+    [PFUser logOut];
+    
+    // clear out cached data, view controllers, etc
+    [self.navController popToRootViewControllerAnimated:NO];
+    
+    [self presentLoginViewController];
+    
+    self.homeViewController = nil;
+    self.discoverViewController = nil;
+}
+
+
+
 #pragma mark - PFLoginViewController
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
@@ -137,6 +172,10 @@
     }];
     
     
+}
+
+- (void)presentLoginViewController {
+    [self presentLoginViewControllerAnimated:YES];
 }
 
 
@@ -193,7 +232,11 @@
 
 #pragma mark -- Facebook Methods
 - (void)facebookRequestDidLoad:(id)result {
+    
+    
      // This method is called twice - once for the user's /me profile, and a second time when obtaining their friends. We will try and handle both scenarios in a single method.
+    
+    
 }
 
 - (void)facebookRequestDidFailWithError:(NSError *)error {

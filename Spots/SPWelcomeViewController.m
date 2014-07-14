@@ -43,6 +43,7 @@
 
 - (void)refreshCurrentUserCallbackWithResult:(PFObject *)refreshedObject error:(NSError *)error {
     
+    
     /*
     // A kPFErrorObjectNotFound error on currentUser refresh signals a deleted user
     if (error && error.code == kPFErrorObjectNotFound) {
