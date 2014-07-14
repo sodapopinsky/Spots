@@ -12,7 +12,7 @@
 
 + (BOOL)userHasValidFacebookData:(PFUser *)user;
 + (void)processFacebookProfilePictureData:(NSData *)data;
-
++ (void)drawSideDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
 + (void)addBottomDropShadowToNavigationBarForNavigationController:(UINavigationController *)navigationController;
 + (void)followUserInBackground:(PFUser *)user block:(void (^)(BOOL succeeded, NSError *error))completionBlock;
 @end

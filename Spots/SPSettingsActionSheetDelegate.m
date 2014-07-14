@@ -8,14 +8,14 @@
 
 #import "SPSettingsActionSheetDelegate.h"
 #import "AppDelegate.h"
-
+#import "SPAccountViewController.h"
 // ActionSheet button indexes
 typedef enum {
-	kPAPSettingsProfile = 0,
-	kPAPSettingsFindFriends,
-	kPAPSettingsLogout,
-    kPAPSettingsNumberOfButtons
-} kPAPSettingsActionSheetButtons;
+	kSPSettingsProfile = 0,
+	kSPSettingsFindFriends,
+	kSPSettingsLogout,
+    kSPSettingsNumberOfButtons
+} kSPSettingsActionSheetButtons;
 
 @implementation SPSettingsActionSheetDelegate
 
@@ -46,18 +46,18 @@ typedef enum {
         return;
     }
     
-    switch ((kPAPSettingsActionSheetButtons)buttonIndex) {
-        case kPAPSettingsProfile:
+    switch ((kSPSettingsActionSheetButtons)buttonIndex) {
+        case kSPSettingsProfile:
         {
             
-            /*
-            PAPAccountViewController *accountViewController = [[PAPAccountViewController alloc] initWithStyle:UITableViewStylePlain];
+            
+            SPAccountViewController *accountViewController = [[SPAccountViewController alloc] initWithStyle:UITableViewStylePlain];
             [accountViewController setUser:[PFUser currentUser]];
             [navController pushViewController:accountViewController animated:YES];
-             */
+            
             break;
         }
-        case kPAPSettingsFindFriends:
+        case kSPSettingsFindFriends:
         {
             
             /*
@@ -66,7 +66,7 @@ typedef enum {
             break;
              */
         }
-        case kPAPSettingsLogout:
+        case kSPSettingsLogout:
             // Log out user and present the login view controller
             [(AppDelegate *)[[UIApplication sharedApplication] delegate] logOut];
             break;
