@@ -12,4 +12,5 @@
 
 + (BOOL)userHasValidFacebookData:(PFUser *)user;
 + (void)addBottomDropShadowToNavigationBarForNavigationController:(UINavigationController *)navigationController;
++ (void)followUserInBackground:(PFUser *)user block:(void (^)(BOOL succeeded, NSError *error))completionBlock;
 @end

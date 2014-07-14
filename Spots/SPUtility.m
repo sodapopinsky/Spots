@@ -27,4 +27,28 @@
     [navigationController.navigationBar addSubview:gradientView];
 }
 
+#pragma mark User Following
+
++ (void)followUserInBackground:(PFUser *)user block:(void (^)(BOOL succeeded, NSError *error))completionBlock {
+    if ([[user objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        return;
+    }
+    
+    PFObject *followActivity = [PFObject objectWithClassName:kSPActivityClassKey];
+    [followActivity setObject:[PFUser currentUser] forKey:kSPActivityFromUserKey];
+    [followActivity setObject:user forKey:kSPActivityToUserKey];
+    [followActivity setObject:kSPActivityTypeFollow forKey:kSPActivityTypeKey];
+    
+    PFACL *followACL = [PFACL ACLWithUser:[PFUser currentUser]];
+    [followACL setPublicReadAccess:YES];
+    followActivity.ACL = followACL;
+    
+    [followActivity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (completionBlock) {
+            completionBlock(succeeded, error);
+        }
+    }];
+    [[SPCache sharedCache] setFollowStatus:YES user:user];
+}
+
 @end

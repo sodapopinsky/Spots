@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - NSUserDefaults
+extern NSString *const kSPUserDefaultsCacheFacebookFriendsKey;
+
 
 #pragma mark - PFObject User Class
 // Field keys
@@ -16,6 +19,7 @@ extern NSString *const kSPUserFacebookIDKey;
 extern NSString *const kSPUserPhotoIDKey;
 extern NSString *const kSPUserProfilePicSmallKey;
 extern NSString *const kSPUserProfilePicMediumKey;
+extern NSString *const kSPUserFacebookFriendsKey;
 extern NSString *const kSPUserAlreadyAutoFollowedFacebookFriendsKey;
 extern NSString *const kSPUserPrivateChannelKey;
 
@@ -41,4 +45,8 @@ extern NSString *const kSPActivityTypeLike;
 extern NSString *const kSPActivityTypeFollow;
 extern NSString *const kSPActivityTypeComment;
 extern NSString *const kSPActivityTypeJoined;
+
+#pragma mark - Cached User Attributes
+// keys
+extern NSString *const kSPUserAttributesIsFollowedByCurrentUserKey;
 

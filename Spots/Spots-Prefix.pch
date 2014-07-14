@@ -18,5 +18,6 @@
 #import <Parse/Parse.h>
 #import "SPUtility.h"
 #import "SPConstants.h"
+#import "SPCache.h"
 
 #endif

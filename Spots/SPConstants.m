@@ -8,7 +8,8 @@
 
 #import "SPConstants.h"
 
-
+#pragma mark - NSUserDefaults
+NSString *const kSPUserDefaultsCacheFacebookFriendsKey                     = @"com.parse.Anypic.userDefaults.cache.facebookFriends"; /// *durr
 
 #pragma mark - User Class
 // Field keys
@@ -17,6 +18,7 @@ NSString *const kSPUserFacebookIDKey                           = @"facebookId";
 NSString *const kSPUserPhotoIDKey                              = @"photoId";
 NSString *const kSPUserProfilePicSmallKey                      = @"profilePictureSmall";
 NSString *const kSPUserProfilePicMediumKey                     = @"profilePictureMedium";
+NSString *const kSPUserFacebookFriendsKey                      = @"facebookFriends";
 NSString *const kSPUserAlreadyAutoFollowedFacebookFriendsKey   = @"userAlreadyAutoFollowedFacebookFriends";
 NSString *const kSPUserPrivateChannelKey                       = @"channel";
 
@@ -43,5 +45,9 @@ NSString *const kSPActivityTypeLike       = @"like";
 NSString *const kSPActivityTypeFollow     = @"follow";
 NSString *const kSPActivityTypeComment    = @"comment";
 NSString *const kSPActivityTypeJoined     = @"joined";
+
+#pragma mark - Cached User Attributes
+// keys
+NSString *const kSPUserAttributesIsFollowedByCurrentUserKey    = @"isFollowedByCurrentUser";
 
 
