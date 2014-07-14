@@ -10,6 +10,7 @@
 #import "SPPhotoCell.h"
 #import "SPUtility.h"
 
+
 @interface SPTimelineViewController ()
 @property (nonatomic, assign) BOOL shouldReloadOnAppear;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
@@ -117,11 +118,11 @@
     }
     
     
-    /*
-    PAPPhotoHeaderView *headerView = [self dequeueReusableSectionHeaderView];
+    
+    SPTimelineHeaderView *headerView = [self dequeueReusableSectionHeaderView];
     
     if (!headerView) {
-        headerView = [[PAPPhotoHeaderView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.view.bounds.size.width, 44.0f) buttons:PAPPhotoHeaderButtonsDefault];
+        headerView = [[SPTimelineHeaderView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.view.bounds.size.width, 44.0f) buttons:SPTimelineHeaderButtonsUser];
         headerView.delegate = self;
         [self.reusableSectionHeaderViews addObject:headerView];
     }
@@ -129,9 +130,10 @@
     PFObject *photo = [self.objects objectAtIndex:section];
     [headerView setPhoto:photo];
     headerView.tag = section;
+   
+    /*  [SP] ALL OF THIS HAS TO DO WITH HEADER VIEW ITEMS WHICH WE ARENT CURRENTLY USING
     [headerView.likeButton setTag:section];
-    
-    NSDictionary *attributesForPhoto = [[PAPCache sharedCache] attributesForPhoto:photo];
+    NSDictionary *attributesForPhoto = [[SPCache sharedCache] attributesForPhoto:photo];
     
     if (attributesForPhoto) {
         [headerView setLikeStatus:[[PAPCache sharedCache] isPhotoLikedByCurrentUser:photo]];
@@ -201,13 +203,10 @@
             }
         }
     }
-    
+    */
     return headerView;
-     */
     
-    UIView *temp = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [temp setBackgroundColor:[UIColor yellowColor]];
-    return temp;
+  
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -325,7 +324,7 @@
         }
         
         cell.photoButton.tag = indexPath.section;
-        cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
+      //  cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
       //  cell.imageView.file = [object objectForKey:kPAPPhotoPictureKey];
         
         // PFQTVC will take care of asynchronously downloading files, but will only load them when the tableview is not moving. If the data is there, let's load it right away.
@@ -354,5 +353,17 @@
 */
 
 
+#pragma mark - PAPPhotoTimelineViewController
+
+- (SPTimelineHeaderView *)dequeueReusableSectionHeaderView {
+    for (SPTimelineHeaderView *sectionHeaderView in self.reusableSectionHeaderViews) {
+        if (!sectionHeaderView.superview) {
+            // we found a section header that is no longer visible
+            return sectionHeaderView;
+        }
+    }
+    
+    return nil;
+}
 
 @end

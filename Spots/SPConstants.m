@@ -23,10 +23,15 @@ NSString *const kSPUserAlreadyAutoFollowedFacebookFriendsKey   = @"userAlreadyAu
 NSString *const kSPUserPrivateChannelKey                       = @"channel";
 
 
+
 #pragma mark - Photo Class
 // Class key
 NSString *const kSPPhotoClassKey = @"Photo";
 
+// Field keys
+NSString *const kSPPhotoPictureKey         = @"image";
+NSString *const kSPPhotoThumbnailKey       = @"thumbnail";
+NSString *const kSPPhotoUserKey            = @"user";
 
 
 #pragma mark - Activity Class

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "SPTimelineHeaderView.h"
 @interface SPTimelineViewController : PFQueryTableViewController
-
+- (SPTimelineHeaderView *)dequeueReusableSectionHeaderView;
 
 
 @end

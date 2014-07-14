@@ -38,6 +38,10 @@
 
 #pragma mark - SPCache
 
+- (void)clear {
+    [self.cache removeAllObjects];
+}
+
 - (void)setFacebookFriends:(NSArray *)friends {
     NSString *key = kSPUserDefaultsCacheFacebookFriendsKey;
     [self.cache setObject:friends forKey:key];

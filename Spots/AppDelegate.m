@@ -117,16 +117,16 @@
 
 - (void)logOut {
     // clear cache
-   // [[PAPCache sharedCache] clear];
+    [[SPCache sharedCache] clear];
     
     
-    //MUST RESTORE !!
     
     
-    // clear NSUserDefaults
-  //  [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPAPUserDefaultsCacheFacebookFriendsKey];
-  //  [[NSUserDefaults standardUserDefaults] removeObjectForKey:kPAPUserDefaultsActivityFeedViewControllerLastRefreshKey];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+     //clear NSUserDefaults
+   [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSPUserDefaultsCacheFacebookFriendsKey];
+   // [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSPUserDefaultsActivityFeedViewControllerLastRefreshKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Unsubscribe from push notifications by removing the user association from the current installation.
 //    [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
@@ -245,7 +245,7 @@
     PFUser *user = [PFUser currentUser];
     
     NSArray *data = [result objectForKey:@"data"];
-    
+    NSLog(@"%@",data);
     if (data) {
         // we have friends data
         NSMutableArray *facebookIds = [[NSMutableArray alloc] initWithCapacity:[data count]];
