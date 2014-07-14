@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Reachability.h"
 #import "MBProgressHUD.h"
 #import "SPWelcomeViewController.h"
 #import "SPHomeViewController.h"
@@ -24,12 +25,34 @@
 @property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
+
+@property (nonatomic, strong) Reachability *hostReach;
+@property (nonatomic, strong) Reachability *internetReach;
+@property (nonatomic, strong) Reachability *wifiReach;
+
+
 - (void)setupAppearance;
 @end
 
 
 
 @implementation AppDelegate
+
+@synthesize window;
+@synthesize navController;
+@synthesize tabBarController;
+@synthesize networkStatus;
+
+@synthesize homeViewController;
+@synthesize welcomeViewController;
+
+@synthesize hud;
+@synthesize autoFollowTimer;
+
+@synthesize hostReach;
+@synthesize internetReach;
+@synthesize wifiReach;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -54,6 +77,8 @@
     
     [self setupAppearance];
     
+    [self monitorReachability];
+    
     self.welcomeViewController = [[SPWelcomeViewController alloc] init];
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
     self.navController.navigationBarHidden = YES;
@@ -63,6 +88,27 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+- (void)monitorReachability {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:ReachabilityChangedNotification object:nil];
+
+    
+    self.hostReach = [Reachability reachabilityWithHostName: @"api.parse.com"];
+    [self.hostReach startNotifier];
+
+    
+    self.internetReach = [Reachability reachabilityForInternetConnection];
+    [self.internetReach startNotifier];
+    
+    self.wifiReach = [Reachability reachabilityForLocalWiFi];
+    [self.wifiReach startNotifier];
+}
+
+- (BOOL)isParseReachable {
+    return self.networkStatus != NotReachable;
+}
+
 
 - (void)presentLoginViewControllerAnimated:(BOOL)animated {
     
@@ -229,6 +275,22 @@
     
     [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
     
+    
+    /* [SP]Durrr
+     
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+     UIRemoteNotificationTypeAlert|
+     UIRemoteNotificationTypeSound];
+     */
+    
+    NSLog(@"Downloading user's profile picture");
+    // Download user's profile picture
+    NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [[PFUser currentUser] objectForKey:kSPUserFacebookIDKey]]];
+    NSURLRequest *profilePictureURLRequest = [NSURLRequest requestWithURL:profilePictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f]; // Facebook profile picture cache policy: Expires in 2 weeks
+    [NSURLConnection connectionWithRequest:profilePictureURLRequest delegate:self];
+
+    
+    
 }
 
 - (void)autoFollowTimerFired:(NSTimer *)aTimer {
@@ -236,6 +298,9 @@
     [MBProgressHUD hideHUDForView:self.homeViewController.view animated:YES];
     [self.homeViewController loadObjects];
 }
+
+
+
 
 #pragma mark -- Facebook Methods
 - (void)facebookRequestDidLoad:(id)result {
@@ -245,7 +310,7 @@
     PFUser *user = [PFUser currentUser];
     
     NSArray *data = [result objectForKey:@"data"];
-    NSLog(@"%@",data);
+
     if (data) {
         // we have friends data
         NSMutableArray *facebookIds = [[NSMutableArray alloc] initWithCapacity:[data count]];
@@ -376,5 +441,37 @@
     }
 }
 
+
+#pragma mark - NSURLConnectionDataDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    _data = [[NSMutableData alloc] init];
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [_data appendData:data];
+    
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    
+    [SPUtility processFacebookProfilePictureData:_data];
+}
+
+
+//Called by Reachability whenever status changes.
+- (void)reachabilityChanged:(NSNotification* )note {
+    Reachability *curReach = (Reachability *)[note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NSLog(@"Reachability changed: %@", curReach);
+    networkStatus = [curReach currentReachabilityStatus];
+    
+    if ([self isParseReachable] && [PFUser currentUser] && self.homeViewController.objects.count == 0) {
+        // Refresh home timeline on network restoration. Takes care of a freshly installed app that failed to load the main timeline under bad network conditions.
+        // In this case, they'd see the empty timeline placeholder and have no way of refreshing the timeline unless they followed someone.
+        [self.homeViewController loadObjects];
+    }
+}
 
 @end
