@@ -43,8 +43,6 @@
 
 - (void)refreshCurrentUserCallbackWithResult:(PFObject *)refreshedObject error:(NSError *)error {
     
-    
-    /*
     // A kPFErrorObjectNotFound error on currentUser refresh signals a deleted user
     if (error && error.code == kPFErrorObjectNotFound) {
         NSLog(@"User does not exist.");
@@ -53,7 +51,7 @@
     }
     
     // Check if user is missing a Facebook ID
-    if ([PAPUtility userHasValidFacebookData:[PFUser currentUser]]) {
+    if ([SPUtility userHasValidFacebookData:[PFUser currentUser]]) {
         // User has Facebook ID.
         
         // refresh Facebook friends on each launch
@@ -83,7 +81,7 @@
             }
         }];
     }
-     */
+    
 }
 
 @end
