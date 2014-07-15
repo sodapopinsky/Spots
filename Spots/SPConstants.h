@@ -28,6 +28,11 @@ extern NSString *const kSPUserPrivateChannelKey;
 // Class key
 extern NSString *const kSPPhotoClassKey;
 
+// Field keys
+extern NSString *const kSPPhotoPictureKey;
+extern NSString *const kSPPhotoThumbnailKey;
+extern NSString *const kSPPhotoUserKey;
+
 
 #pragma mark - PFObject Activity Class
 // Class key

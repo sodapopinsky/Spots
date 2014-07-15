@@ -12,7 +12,7 @@
 
 + (id)sharedCache;
 
-
+- (void)clear;
 - (void)setFacebookFriends:(NSArray *)friends;
 - (NSArray *)facebookFriends;
 - (void)setFollowStatus:(BOOL)following user:(PFUser *)user;
