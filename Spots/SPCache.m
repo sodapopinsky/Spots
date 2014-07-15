@@ -42,6 +42,23 @@
     [self.cache removeAllObjects];
 }
 
+- (void)setAttributesForPhoto:(PFObject *)photo likers:(NSArray *)likers commenters:(NSArray *)commenters likedByCurrentUser:(BOOL)likedByCurrentUser {
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithBool:likedByCurrentUser],kSPPhotoAttributesIsLikedByCurrentUserKey,
+                                @([likers count]),kSPPhotoAttributesLikeCountKey,
+                                likers,kSPPhotoAttributesLikersKey,
+                                @([commenters count]),kSPPhotoAttributesCommentCountKey,
+                                commenters,kSPPhotoAttributesCommentersKey,
+                                nil];
+    [self setAttributes:attributes forPhoto:photo];
+}
+
+- (NSDictionary *)attributesForPhoto:(PFObject *)photo {
+    NSString *key = [self keyForPhoto:photo];
+    return [self.cache objectForKey:key];
+}
+
+
 - (void)setFacebookFriends:(NSArray *)friends {
     NSString *key = kSPUserDefaultsCacheFacebookFriendsKey;
     [self.cache setObject:friends forKey:key];
@@ -70,10 +87,50 @@
 }
 
 
+- (BOOL)followStatusForUser:(PFUser *)user {
+    NSDictionary *attributes = [self attributesForUser:user];
+    if (attributes) {
+        NSNumber *followStatus = [attributes objectForKey:kSPUserAttributesIsFollowedByCurrentUserKey];
+        if (followStatus) {
+            return [followStatus boolValue];
+        }
+    }
+    
+    return NO;
+}
 - (void)setFollowStatus:(BOOL)following user:(PFUser *)user {
     NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:[self attributesForUser:user]];
     [attributes setObject:[NSNumber numberWithBool:following] forKey:kSPUserAttributesIsFollowedByCurrentUserKey];
     [self setAttributes:attributes forUser:user];
+}
+
+- (void)setPhotoCount:(NSNumber *)count user:(PFUser *)user {
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:[self attributesForUser:user]];
+    [attributes setObject:count forKey:kSPUserAttributesPhotoCountKey];
+    [self setAttributes:attributes forUser:user];
+}
+
+- (NSNumber *)photoCountForUser:(PFUser *)user {
+    NSDictionary *attributes = [self attributesForUser:user];
+    if (attributes) {
+        NSNumber *photoCount = [attributes objectForKey:kSPUserAttributesPhotoCountKey];
+        if (photoCount) {
+            return photoCount;
+        }
+    }
+    
+    return [NSNumber numberWithInt:0];
+}
+
+#pragma mark - ()
+
+- (void)setAttributes:(NSDictionary *)attributes forPhoto:(PFObject *)photo {
+    NSString *key = [self keyForPhoto:photo];
+    [self.cache setObject:attributes forKey:key];
+}
+
+- (NSString *)keyForPhoto:(PFObject *)photo {
+    return [NSString stringWithFormat:@"photo_%@", [photo objectId]];
 }
 
 

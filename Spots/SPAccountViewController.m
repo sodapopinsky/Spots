@@ -191,6 +191,7 @@
                 self.navigationItem.rightBarButtonItem = nil;
             } else {
                 if (number == 0) {
+                    
                     [self configureFollowButton];
                 } else {
                     [self configureUnfollowButton];
@@ -245,6 +246,7 @@
 #pragma mark - ()
 
 - (void)followButtonAction:(id)sender {
+    
     /*
     UIActivityIndicatorView *loadingActivityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [loadingActivityIndicatorView startAnimating];

@@ -23,6 +23,11 @@ NSString *const kSPUserAlreadyAutoFollowedFacebookFriendsKey   = @"userAlreadyAu
 NSString *const kSPUserPrivateChannelKey                       = @"channel";
 
 
+#pragma mark - Cached User Attributes
+// keys
+NSString *const kSPUserAttributesPhotoCountKey                 = @"photoCount";
+NSString *const kSPUserAttributesIsFollowedByCurrentUserKey    = @"isFollowedByCurrentUser";
+
 
 #pragma mark - Photo Class
 // Class key
@@ -32,6 +37,15 @@ NSString *const kSPPhotoClassKey = @"Photo";
 NSString *const kSPPhotoPictureKey         = @"image";
 NSString *const kSPPhotoThumbnailKey       = @"thumbnail";
 NSString *const kSPPhotoUserKey            = @"user";
+
+
+#pragma mark - Cached Photo Attributes
+// keys
+extern NSString *const kSPPhotoAttributesIsLikedByCurrentUserKey;
+extern NSString *const kSPPhotoAttributesLikeCountKey;
+extern NSString *const kSPPhotoAttributesLikersKey;
+extern NSString *const kSPPhotoAttributesCommentCountKey;
+extern NSString *const kSPPhotoAttributesCommentersKey;
 
 
 #pragma mark - Activity Class
@@ -51,8 +65,6 @@ NSString *const kSPActivityTypeFollow     = @"follow";
 NSString *const kSPActivityTypeComment    = @"comment";
 NSString *const kSPActivityTypeJoined     = @"joined";
 
-#pragma mark - Cached User Attributes
-// keys
-NSString *const kSPUserAttributesIsFollowedByCurrentUserKey    = @"isFollowedByCurrentUser";
+
 
 
