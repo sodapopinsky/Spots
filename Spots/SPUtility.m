@@ -137,5 +137,40 @@
 }
 
 
++ (void)followUserEventually:(PFUser *)user block:(void (^)(BOOL succeeded, NSError *error))completionBlock {
+    if ([[user objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
+        return;
+    }
+    
+    PFObject *followActivity = [PFObject objectWithClassName:kSPActivityClassKey];
+    [followActivity setObject:[PFUser currentUser] forKey:kSPActivityFromUserKey];
+    [followActivity setObject:user forKey:kSPActivityToUserKey];
+    [followActivity setObject:kSPActivityTypeFollow forKey:kSPActivityTypeKey];
+    
+    PFACL *followACL = [PFACL ACLWithUser:[PFUser currentUser]];
+    [followACL setPublicReadAccess:YES];
+    followActivity.ACL = followACL;
+    
+    [followActivity saveEventually:completionBlock];
+    [[SPCache sharedCache] setFollowStatus:YES user:user];
+}
+
+
++ (void)unfollowUserEventually:(PFUser *)user {
+    PFQuery *query = [PFQuery queryWithClassName:kSPActivityClassKey];
+    [query whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
+    [query whereKey:kSPActivityToUserKey equalTo:user];
+    [query whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *followActivities, NSError *error) {
+        // While normally there should only be one follow activity returned, we can't guarantee that.
+        
+        if (!error) {
+            for (PFObject *followActivity in followActivities) {
+                [followActivity deleteEventually];
+            }
+        }
+    }];
+    [[SPCache sharedCache] setFollowStatus:NO user:user];
+}
 
 @end

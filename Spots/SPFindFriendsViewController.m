@@ -228,7 +228,7 @@ typedef enum {
     
     if (self.followStatus == SPFindFriendsFollowingSome) {
         if (attributes) {
-           // [cell.followButton setSelected:[[SPCache sharedCache] followStatusForUser:(PFUser *)object]];
+            [cell.followButton setSelected:[[SPCache sharedCache] followStatusForUser:(PFUser *)object]];
         } else {
             @synchronized(self) {
                 NSNumber *outstandingQuery = [self.outstandingFollowQueries objectForKey:indexPath];
@@ -445,8 +445,8 @@ typedef enum {
     if ([cell.followButton isSelected]) {
         // Unfollow
         cell.followButton.selected = NO;
-     //   [SPUtility unfollowUserEventually:cellUser];
-     //   [[NSNotificationCenter defaultCenter] postNotificationName:PAPUtilityUserFollowingChangedNotification object:nil];
+    [SPUtility unfollowUserEventually:cellUser];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SPUtilityUserFollowingChangedNotification object:nil];
     } else {
         // Follow
         cell.followButton.selected = YES;
@@ -458,14 +458,14 @@ typedef enum {
                 cell.followButton.selected = NO;
             }
         }];
-         
+        
     }
 }
 
 
 - (void)followUsersTimerFired:(NSTimer *)timer {
     [self.tableView reloadData];
-   // [[NSNotificationCenter defaultCenter] postNotificationName:SPUtilityUserFollowingChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SPUtilityUserFollowingChangedNotification object:nil];
 }
 
 

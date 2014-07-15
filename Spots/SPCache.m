@@ -64,6 +64,19 @@
     return friends;
 }
 
+- (BOOL)followStatusForUser:(PFUser *)user {
+    NSDictionary *attributes = [self attributesForUser:user];
+    if (attributes) {
+        NSNumber *followStatus = [attributes objectForKey:kSPUserAttributesIsFollowedByCurrentUserKey];
+        if (followStatus) {
+            return [followStatus boolValue];
+        }
+    }
+    
+    return NO;
+}
+
+
 - (NSDictionary *)attributesForUser:(PFUser *)user {
     NSString *key = [self keyForUser:user];
     return [self.cache objectForKey:key];

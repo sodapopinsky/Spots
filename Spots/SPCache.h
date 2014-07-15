@@ -16,6 +16,6 @@
 - (void)setFacebookFriends:(NSArray *)friends;
 - (NSArray *)facebookFriends;
 - (void)setFollowStatus:(BOOL)following user:(PFUser *)user;
-
+- (BOOL)followStatusForUser:(PFUser *)user;
 - (NSDictionary *)attributesForUser:(PFUser *)user;
 @end

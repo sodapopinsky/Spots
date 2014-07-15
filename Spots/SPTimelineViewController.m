@@ -8,7 +8,10 @@
 
 #import "SPTimelineViewController.h"
 #import "SPPhotoCell.h"
+#import "SPAccountViewController.h"
+//#import "SPPhotoDetailsViewController.h"
 #import "SPUtility.h"
+#import "SPLoadMoreCell.h"
 
 
 @interface SPTimelineViewController ()
@@ -24,14 +27,14 @@
 
 - (void)dealloc {
     
-    /*
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPTabBarControllerDidFinishEditingPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPUtilityUserFollowingChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:PAPPhotoDetailsViewControllerUserDeletedPhotoNotification object:nil];
-     */
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPUtilityUserFollowingChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SPPhotoDetailsViewControllerUserDeletedPhotoNotification object:nil];
+    
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -265,19 +268,19 @@
     [followingActivitiesQuery whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
     followingActivitiesQuery.limit = 1000;
     
-    /*
-    PFQuery *photosFromFollowedUsersQuery = [PFQuery queryWithClassName:self.className];
-    [photosFromFollowedUsersQuery whereKey:kPAPPhotoUserKey matchesKey:kPAPActivityToUserKey inQuery:followingActivitiesQuery];
-    [photosFromFollowedUsersQuery whereKeyExists:kPAPPhotoPictureKey];
     
-    PFQuery *photosFromCurrentUserQuery = [PFQuery queryWithClassName:self.className];
-    [photosFromCurrentUserQuery whereKey:kPAPPhotoUserKey equalTo:[PFUser currentUser]];
-    [photosFromCurrentUserQuery whereKeyExists:kPAPPhotoPictureKey];
+    PFQuery *photosFromFollowedUsersQuery = [PFQuery queryWithClassName:self.parseClassName];
+    [photosFromFollowedUsersQuery whereKey:kSPPhotoUserKey matchesKey:kSPActivityToUserKey inQuery:followingActivitiesQuery];
+    [photosFromFollowedUsersQuery whereKeyExists:kSPPhotoPictureKey];
+    
+    PFQuery *photosFromCurrentUserQuery = [PFQuery queryWithClassName:self.parseClassName];
+    [photosFromCurrentUserQuery whereKey:kSPPhotoUserKey equalTo:[PFUser currentUser]];
+    [photosFromCurrentUserQuery whereKeyExists:kSPPhotoPictureKey];
     
     PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:photosFromFollowedUsersQuery, photosFromCurrentUserQuery, nil]];
-     */
-    PFQuery *query = followingActivitiesQuery;
-    //[query includeKey:kSPPhotoUserKey];
+    
+//    PFQuery *query = followingActivitiesQuery;
+    [query includeKey:kSPPhotoUserKey];
     [query orderByDescending:@"createdAt"];
     
     // A pull-to-refresh should always trigger a network request.
@@ -292,7 +295,7 @@
     if (self.objects.count == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
         [query setCachePolicy:kPFCachePolicyCacheThenNetwork];
     }
-     */
+    */
     
     return query;
 }
@@ -320,12 +323,12 @@
         
         if (cell == nil) {
             cell = [[SPPhotoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-          //  [cell.photoButton addTarget:self action:@selector(didTapOnPhotoAction:) forControlEvents:UIControlEventTouchUpInside];
+         //  [cell.photoButton addTarget:self action:@selector(didTapOnPhotoAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         
         cell.photoButton.tag = indexPath.section;
-      //  cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
-      //  cell.imageView.file = [object objectForKey:kPAPPhotoPictureKey];
+        cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
+       cell.imageView.file = [object objectForKey:kSPPhotoPictureKey];
         
         // PFQTVC will take care of asynchronously downloading files, but will only load them when the tableview is not moving. If the data is there, let's load it right away.
         if ([cell.imageView.file isDataAvailable]) {
@@ -336,13 +339,13 @@
     }
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForNextPageAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *LoadMoreCellIdentifier = @"LoadMoreCell";
     
-    PAPLoadMoreCell *cell = [tableView dequeueReusableCellWithIdentifier:LoadMoreCellIdentifier];
+    SPLoadMoreCell *cell = [tableView dequeueReusableCellWithIdentifier:LoadMoreCellIdentifier];
     if (!cell) {
-        cell = [[PAPLoadMoreCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:LoadMoreCellIdentifier];
+        cell = [[SPLoadMoreCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:LoadMoreCellIdentifier];
         cell.selectionStyle =UITableViewCellSelectionStyleGray;
         cell.separatorImageTop.image = [UIImage imageNamed:@"SeparatorTimelineDark.png"];
         cell.hideSeparatorBottom = YES;
@@ -350,7 +353,7 @@
     }
     return cell;
 }
-*/
+
 
 
 #pragma mark - PAPPhotoTimelineViewController

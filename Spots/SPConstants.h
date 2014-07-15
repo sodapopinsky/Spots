@@ -12,6 +12,17 @@
 extern NSString *const kSPUserDefaultsCacheFacebookFriendsKey;
 
 
+#pragma mark - NSNotification
+extern NSString *const SPAppDelegateApplicationDidReceiveRemoteNotification;
+extern NSString *const SPUtilityUserFollowingChangedNotification;
+extern NSString *const SPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification;
+extern NSString *const SPUtilityDidFinishProcessingProfilePictureNotification;
+extern NSString *const SPTabBarControllerDidFinishEditingPhotoNotification;
+extern NSString *const SPTabBarControllerDidFinishImageFileUploadNotification;
+extern NSString *const SPPhotoDetailsViewControllerUserDeletedPhotoNotification;
+extern NSString *const SPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification;
+extern NSString *const SPPhotoDetailsViewControllerUserCommentedOnPhotoNotification;
+
 #pragma mark - PFObject User Class
 // Field keys
 extern NSString *const kSPUserDisplayNameKey;

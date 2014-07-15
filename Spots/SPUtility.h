@@ -15,4 +15,7 @@
 + (void)drawSideDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
 + (void)addBottomDropShadowToNavigationBarForNavigationController:(UINavigationController *)navigationController;
 + (void)followUserInBackground:(PFUser *)user block:(void (^)(BOOL succeeded, NSError *error))completionBlock;
+
++ (void)followUserEventually:(PFUser *)user block:(void (^)(BOOL succeeded, NSError *error))completionBlock;
++ (void)unfollowUserEventually:(PFUser *)user;
 @end

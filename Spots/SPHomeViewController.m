@@ -10,6 +10,7 @@
 #import "SPSettingsActionSheetDelegate.h"
 #import "SPSettingsButtonItem.h"
 #import "MBProgressHUD.h"
+#import "SPFindFriendsViewController.h"
 
 @interface SPHomeViewController ()
 @property (nonatomic, strong) SPSettingsActionSheetDelegate *settingsActionSheetDelegate;
@@ -45,7 +46,10 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     
-   
+    if(self.objects.count == 0){
+        
+        
+    }
     if (self.objects.count == 0 && ![[self queryForTable] hasCachedResult] & !self.firstLaunch) {
         
         self.tableView.scrollEnabled = NO;
@@ -76,9 +80,9 @@
 
 - (void)inviteFriendsButtonAction:(id)sender {
     
- // not enabled
-  //  PAPFindFriendsViewController *detailViewController = [[PAPFindFriendsViewController alloc] init];
-  //  [self.navigationController pushViewController:detailViewController animated:YES];
+
+    SPFindFriendsViewController *detailViewController = [[SPFindFriendsViewController alloc] init];
+[self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 @end

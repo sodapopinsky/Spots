@@ -276,13 +276,12 @@
     
     [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
     
-    
-    /* [SP]Durrr
+
      
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
      UIRemoteNotificationTypeAlert|
      UIRemoteNotificationTypeSound];
-     */
+  
     
     NSLog(@"Downloading user's profile picture");
     // Download user's profile picture
