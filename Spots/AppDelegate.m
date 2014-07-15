@@ -26,7 +26,7 @@
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
 
-@property (nonatomic, strong) Reachability *hostReach;
+
 @property (nonatomic, strong) Reachability *internetReach;
 @property (nonatomic, strong) Reachability *wifiReach;
 
@@ -41,7 +41,7 @@
 @synthesize window;
 @synthesize navController;
 @synthesize tabBarController;
-@synthesize networkStatus;
+
 
 @synthesize homeViewController;
 @synthesize welcomeViewController;
@@ -49,7 +49,7 @@
 @synthesize hud;
 @synthesize autoFollowTimer;
 
-@synthesize hostReach;
+
 @synthesize internetReach;
 @synthesize wifiReach;
 
@@ -89,24 +89,25 @@
     return YES;
 }
 
+
 - (void)monitorReachability {
+    Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:ReachabilityChangedNotification object:nil];
-
+    hostReach.reachableBlock = ^(Reachability*reach) {
+        _networkStatus = [reach currentReachabilityStatus];
+        
+        if ([self isParseReachable] && [PFUser currentUser] && self.homeViewController.objects.count == 0) {
+            // Refresh home timeline on network restoration. Takes care of a freshly installed app that failed to load the main timeline under bad network conditions.
+            // In this case, they'd see the empty timeline placeholder and have no way of refreshing the timeline unless they followed someone.
+            [self.homeViewController loadObjects];
+        }
+    };
     
-    self.hostReach = [Reachability reachabilityWithHostName: @"api.parse.com"];
-    [self.hostReach startNotifier];
-
+    hostReach.unreachableBlock = ^(Reachability*reach) {
+        _networkStatus = [reach currentReachabilityStatus];
+    };
     
-    self.internetReach = [Reachability reachabilityForInternetConnection];
-    [self.internetReach startNotifier];
-    
-    self.wifiReach = [Reachability reachabilityForLocalWiFi];
-    [self.wifiReach startNotifier];
-}
-
-- (BOOL)isParseReachable {
-    return self.networkStatus != NotReachable;
+    [hostReach startNotifier];
 }
 
 
@@ -441,7 +442,9 @@
     }
 }
 
-
+- (BOOL)isParseReachable {
+    return self.networkStatus != NotReachable;
+}
 #pragma mark - NSURLConnectionDataDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -465,7 +468,7 @@
     Reachability *curReach = (Reachability *)[note object];
     NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
     NSLog(@"Reachability changed: %@", curReach);
-    networkStatus = [curReach currentReachabilityStatus];
+    _networkStatus = [curReach currentReachabilityStatus];
     
     if ([self isParseReachable] && [PFUser currentUser] && self.homeViewController.objects.count == 0) {
         // Refresh home timeline on network restoration. Takes care of a freshly installed app that failed to load the main timeline under bad network conditions.
