@@ -9,6 +9,7 @@
 #import "SPSettingsActionSheetDelegate.h"
 #import "AppDelegate.h"
 #import "SPAccountViewController.h"
+#import "SPFindFriendsViewController.h"
 // ActionSheet button indexes
 typedef enum {
 	kSPSettingsProfile = 0,
@@ -60,11 +61,11 @@ typedef enum {
         case kSPSettingsFindFriends:
         {
             
-            /*
-            PAPFindFriendsViewController *findFriendsVC = [[PAPFindFriendsViewController alloc] init];
+            
+            SPFindFriendsViewController *findFriendsVC = [[SPFindFriendsViewController alloc] init];
             [navController pushViewController:findFriendsVC animated:YES];
             break;
-             */
+            
         }
         case kSPSettingsLogout:
             // Log out user and present the login view controller
