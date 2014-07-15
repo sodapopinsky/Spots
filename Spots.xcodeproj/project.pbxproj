@@ -38,6 +38,7 @@
 		01BD87D019730DA000DAC965 /* SPPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87CF19730DA000DAC965 /* SPPhotoCell.m */; };
 		01BD87D319742D1600DAC965 /* SPProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87D219742D1600DAC965 /* SPProfileImageView.m */; };
 		01BD87D719742E1400DAC965 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87D619742E1400DAC965 /* TTTTimeIntervalFormatter.m */; };
+		01BF4A801975BBC600AAA927 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4A7F1975BBC600AAA927 /* UIImage+ImageEffects.m */; };
 		01BF979119746DBE006C2613 /* SPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF979019746DBE006C2613 /* SPAccountViewController.m */; };
 		01BF979419746E45006C2613 /* SPLoadMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF979319746E45006C2613 /* SPLoadMoreCell.m */; };
 		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
@@ -108,6 +109,8 @@
 		01BD87D219742D1600DAC965 /* SPProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPProfileImageView.m; sourceTree = "<group>"; };
 		01BD87D519742E1400DAC965 /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
 		01BD87D619742E1400DAC965 /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
+		01BF4A7E1975BBC600AAA927 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		01BF4A7F1975BBC600AAA927 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		01BF978F19746DBE006C2613 /* SPAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPAccountViewController.h; sourceTree = "<group>"; };
 		01BF979019746DBE006C2613 /* SPAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPAccountViewController.m; sourceTree = "<group>"; };
 		01BF979219746E45006C2613 /* SPLoadMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPLoadMoreCell.h; sourceTree = "<group>"; };
@@ -279,6 +282,7 @@
 		01806002196EC905002E79F6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				01BF4A7D1975BBA700AAA927 /* UIImage+ImageEffects */,
 				01BD87D419742DFE00DAC965 /* TTTTimeIntervalFormatter */,
 				0180600B196EC996002E79F6 /* MBProgressHUD */,
 				01806009196EC986002E79F6 /* Parse.framework */,
@@ -342,6 +346,15 @@
 				01BD87D619742E1400DAC965 /* TTTTimeIntervalFormatter.m */,
 			);
 			name = TTTTimeIntervalFormatter;
+			sourceTree = "<group>";
+		};
+		01BF4A7D1975BBA700AAA927 /* UIImage+ImageEffects */ = {
+			isa = PBXGroup;
+			children = (
+				01BF4A7E1975BBC600AAA927 /* UIImage+ImageEffects.h */,
+				01BF4A7F1975BBC600AAA927 /* UIImage+ImageEffects.m */,
+			);
+			name = "UIImage+ImageEffects";
 			sourceTree = "<group>";
 		};
 		01E3ED2F1971ED1D001A9388 /* Home */ = {
@@ -467,6 +480,7 @@
 				018060181973685B002E79F6 /* SPCache.m in Sources */,
 				0180601B1974D387002E79F6 /* Reachability.m in Sources */,
 				01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */,
+				01BF4A801975BBC600AAA927 /* UIImage+ImageEffects.m in Sources */,
 				01BD87C81972FB6E00DAC965 /* SPTimelineViewController.m in Sources */,
 				01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */,
 				01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */,
