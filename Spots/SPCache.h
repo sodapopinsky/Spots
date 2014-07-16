@@ -12,10 +12,15 @@
 
 + (id)sharedCache;
 
+- (void)setAttributesForPhoto:(PFObject *)photo likers:(NSArray *)likers commenters:(NSArray *)commenters likedByCurrentUser:(BOOL)likedByCurrentUser;
+
 - (void)clear;
 - (void)setFacebookFriends:(NSArray *)friends;
 - (NSArray *)facebookFriends;
 - (void)setFollowStatus:(BOOL)following user:(PFUser *)user;
 - (BOOL)followStatusForUser:(PFUser *)user;
 - (NSDictionary *)attributesForUser:(PFUser *)user;
+- (NSDictionary *)attributesForPhoto:(PFObject *)photo;
+- (void)incrementCommentCountForPhoto:(PFObject *)photo;
+- (NSNumber *)commentCountForPhoto:(PFObject *)photo;
 @end

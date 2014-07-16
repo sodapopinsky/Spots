@@ -250,6 +250,9 @@
     
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
     
+      UINavigationController *emptyNavigationController = [[UINavigationController alloc] init];
+     [SPUtility addBottomDropShadowToNavigationBarForNavigationController:emptyNavigationController];
+    
      UINavigationController *discoverNavigationController = [[UINavigationController alloc] initWithRootViewController:self.discoverViewController];
     
     [SPUtility addBottomDropShadowToNavigationBarForNavigationController:homeNavigationController];
@@ -272,7 +275,7 @@
     
     
     self.tabBarController.delegate = self;
-    self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController];
+    self.tabBarController.viewControllers = @[ homeNavigationController, emptyNavigationController, discoverNavigationController];
     
     [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
     

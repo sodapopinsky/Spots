@@ -12,6 +12,10 @@
 NSString *const kSPUserDefaultsCacheFacebookFriendsKey                     = @"com.parse.Anypic.userDefaults.cache.facebookFriends"; /// *durr
 
 
+#pragma mark - User Info Keys
+NSString *const SPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey = @"liked";
+NSString *const kSPEditPhotoViewControllerUserInfoCommentKey = @"comment";
+
 #pragma mark - NSNotification
 
 NSString *const SPAppDelegateApplicationDidReceiveRemoteNotification           = @"com.parse.Anypic.appDelegate.applicationDidReceiveRemoteNotification";
@@ -68,5 +72,16 @@ NSString *const kSPActivityTypeJoined     = @"joined";
 #pragma mark - Cached User Attributes
 // keys
 NSString *const kSPUserAttributesIsFollowedByCurrentUserKey    = @"isFollowedByCurrentUser";
+
+#pragma mark - Cached Photo Attributes
+// keys
+NSString *const kSPPhotoAttributesIsLikedByCurrentUserKey = @"isLikedByCurrentUser";
+NSString *const kSPPhotoAttributesLikeCountKey            = @"likeCount";
+NSString *const kSPPhotoAttributesLikersKey               = @"likers";
+NSString *const kSPPhotoAttributesCommentCountKey         = @"commentCount";
+NSString *const kSPPhotoAttributesCommentersKey           = @"commenters";
+
+
+
 
 

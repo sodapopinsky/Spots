@@ -11,6 +11,9 @@
 #pragma mark - NSUserDefaults
 extern NSString *const kSPUserDefaultsCacheFacebookFriendsKey;
 
+#pragma mark - User Info Keys
+extern NSString *const SPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey;
+extern NSString *const kSPEditPhotoViewControllerUserInfoCommentKey;
 
 #pragma mark - NSNotification
 extern NSString *const SPAppDelegateApplicationDidReceiveRemoteNotification;
@@ -65,4 +68,13 @@ extern NSString *const kSPActivityTypeJoined;
 #pragma mark - Cached User Attributes
 // keys
 extern NSString *const kSPUserAttributesIsFollowedByCurrentUserKey;
+
+
+#pragma mark - Cached Photo Attributes
+// keys
+extern NSString *const kSPPhotoAttributesIsLikedByCurrentUserKey;
+extern NSString *const kSPPhotoAttributesLikeCountKey;
+extern NSString *const kSPPhotoAttributesLikersKey;
+extern NSString *const kSPPhotoAttributesCommentCountKey;
+extern NSString *const kSPPhotoAttributesCommentersKey;
 

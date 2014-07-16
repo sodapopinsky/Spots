@@ -6,7 +6,19 @@
 //  Copyright (c) 2014 NickSpitale. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
-@interface SPTabBarController : UITabBarController <UINavigationControllerDelegate, UIActionSheetDelegate>
+#import "SPEditPhotoViewController.h"
+
+@protocol SPTabBarControllerDelegate;
+
+@interface SPTabBarController  : UITabBarController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+
+- (BOOL)shouldPresentPhotoCaptureController;
+
+@end
+
+@protocol SPTabBarControllerDelegate <NSObject>
+
+- (void)tabBarController:(UITabBarController *)tabBarController cameraButtonTouchUpInsideAction:(UIButton *)button;
+
 @end
