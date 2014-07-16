@@ -7,14 +7,16 @@
 //
 
 #import "SPTabBarController.h"
+#import "SPCheckInViewController.h"
 
 @interface SPTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;
+@property (nonatomic, strong) UINavigationController *checkInNavigationController;
 @end
 
 @implementation SPTabBarController
 @synthesize navController;
-
+@synthesize checkInNavigationController;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,6 +31,7 @@
      self.tabBar.barTintColor = [UIColor colorWithRed:77.0f/255.0f green:49.0f/255.0f blue:37.0f/255.0f alpha:1.0f];
      */
     self.navController = [[UINavigationController alloc] init];
+   
     [SPUtility addBottomDropShadowToNavigationBarForNavigationController:self.navController];
 }
 
@@ -87,7 +90,7 @@
 }
 
 
-#pragma mark - PAPTabBarController
+#pragma mark - SPTabBarController
 
 - (BOOL)shouldPresentPhotoCaptureController {
     BOOL presentedPhotoCaptureController = [self shouldStartCameraController];
@@ -102,6 +105,7 @@
 #pragma mark - ()
 
 - (void)photoCaptureButtonAction:(id)sender {
+    /*
     BOOL cameraDeviceAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     BOOL photoLibraryAvailable = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
     
@@ -112,6 +116,11 @@
         // if we don't have at least two options, we automatically show whichever is available (camera or roll)
         [self shouldPresentPhotoCaptureController];
     }
+     */
+     SPCheckInViewController *checkInViewController = [[SPCheckInViewController alloc] init];
+     checkInNavigationController = [[UINavigationController alloc] initWithRootViewController:checkInViewController];
+    [self presentViewController:checkInNavigationController animated:YES completion:nil];
+    
 }
 
 - (BOOL)shouldStartCameraController {
