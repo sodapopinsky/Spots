@@ -9,10 +9,11 @@
 #import "SPCheckInViewController.h"
 
 @interface SPCheckInViewController ()
-
+@property CLLocation *currentLocation;
 @end
 
 @implementation SPCheckInViewController
+@synthesize currentLocation, people;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,13 +43,14 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    NSLog(@"didUpdateToLocation: %@", newLocation);
-    CLLocation *currentLocation = newLocation;
+
+   currentLocation = newLocation;
     
     if (currentLocation != nil) {
-        NSString *txt = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        NSLog(@"%@",txt);
+       // NSString *txt = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+      
     }
+    
 }
 - (void)viewDidLoad
 {
@@ -71,9 +73,32 @@
    // [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.navigationItem setTitle:@"Check In"];
        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonAction:)];
+    
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"get" style:UIBarButtonItemStyleBordered target:self action:@selector(queryGooglePlaces)];
    
+   
+    people = [[NSMutableArray alloc] init];
+ 
+  
 }
 
+
+-(void) queryGooglePlaces{
+    // Build the url string to send to Google. NOTE: The kGOOGLE_API_KEY is a constant that should contain your own API key that you obtain from Google. See this link for more info:
+    // https://developers.google.com/maps/documentation/places/#Authentication
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=5000&types=food&sensor=true&key=%@", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, kGOOGLE_API_KEY];
+    
+ 
+ 
+    //Formulate the string as a URL object.
+    NSURL *googleRequestURL=[NSURL URLWithString:url];
+    
+    // Retrieve the results of the URL.
+    dispatch_async(kBgQueue, ^{
+        NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
+        [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+    });
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -81,21 +106,61 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)fetchedData:(NSData *)responseData {
+    
+    //parse out the json data
+    NSError* error;
+    NSDictionary* json = [NSJSONSerialization
+                          JSONObjectWithData:responseData
+                          
+                          options:kNilOptions
+                          error:&error];
+   // NSLog(@"%@",json);
+    //The results from Google will be an array obtained from the NSDictionary object with the key "results".
+    NSArray* places = [json objectForKey:@"results"];
+    
+    //Write out the data to the console.
+ //  NSLog(@"Google Data: %@", places);
+    for(NSMutableDictionary *place in places){
+        [people addObject:[place objectForKey:@"name"]];
+    }
+
+    
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return [people count];
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // Check if a reusable cell object was dequeued
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    // Populate the cell with the appropriate name based on the indexPath
+    cell.textLabel.text = [people objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

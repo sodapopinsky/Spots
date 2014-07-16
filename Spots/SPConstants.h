@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kGOOGLE_API_KEY;
+
 #pragma mark - NSUserDefaults
 extern NSString *const kSPUserDefaultsCacheFacebookFriendsKey;
 

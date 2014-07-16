@@ -8,6 +8,8 @@
 
 #import "SPConstants.h"
 
+NSString *const kGOOGLE_API_KEY = @"AIzaSyCvAt6OnrRukTDmZLZ_oMLhgGbt0OrEgrI";
+
 #pragma mark - NSUserDefaults
 NSString *const kSPUserDefaultsCacheFacebookFriendsKey                     = @"com.parse.Anypic.userDefaults.cache.facebookFriends"; /// *durr
 
