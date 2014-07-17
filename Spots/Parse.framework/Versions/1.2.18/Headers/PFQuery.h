@@ -329,7 +329,7 @@
 /** @name Getting Objects by ID */
 
 /*!
- Returns a PFObject with a given class and id.
+ Returns a PFObject with a given class  id.
  @param objectClass The class name for the object that is being requested.
  @param objectId The id of the object that is being requested.
  @result The PFObject if found. Returns nil if the object isn't found, or if there was an error.

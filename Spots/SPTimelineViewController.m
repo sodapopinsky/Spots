@@ -7,7 +7,7 @@
 //
 
 #import "SPTimelineViewController.h"
-#import "SPPhotoCell.h"
+#import "SPCheckInCell.h"
 #import "SPAccountViewController.h"
 //#import "SPPhotoDetailsViewController.h"
 #import "SPUtility.h"
@@ -98,6 +98,8 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+        NSLog(@"%i",self.objects.count);
     NSInteger sections = self.objects.count;
     if (self.paginationEnabled && sections != 0)
         sections++;
@@ -130,9 +132,9 @@
         [self.reusableSectionHeaderViews addObject:headerView];
     }
     
-    PFObject *photo = [self.objects objectAtIndex:section];
-    [headerView setPhoto:photo];
-    headerView.tag = section;
+   // PFObject *photo = [self.objects objectAtIndex:section];
+  //  [headerView setPhoto:photo];
+  //  headerView.tag = section;
    
     /*  [SP] ALL OF THIS HAS TO DO WITH HEADER VIEW ITEMS WHICH WE ARENT CURRENTLY USING
     [headerView.likeButton setTag:section];
@@ -265,39 +267,34 @@
     
     PFQuery *followingActivitiesQuery = [PFQuery queryWithClassName:kSPActivityClassKey];
     [followingActivitiesQuery whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
-    [followingActivitiesQuery whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
+    [followingActivitiesQuery whereKey:kSPActivityToUserKey equalTo:[PFUser currentUser]];
     followingActivitiesQuery.limit = 1000;
     
+    PFQuery *checkinsFromBroadcastingUsersQuery = [PFQuery queryWithClassName:kSPCheckInClassKey];
+    [checkinsFromBroadcastingUsersQuery whereKey:kSPCheckInUserKey matchesKey:kSPActivityFromUserKey inQuery:followingActivitiesQuery];
+   // [checkinsFromBroadcastingUsersQuery includeKey:kSPCheckInUserKey];
     
-    PFQuery *photosFromFollowedUsersQuery = [PFQuery queryWithClassName:self.parseClassName];
-    [photosFromFollowedUsersQuery whereKey:kSPPhotoUserKey matchesKey:kSPActivityToUserKey inQuery:followingActivitiesQuery];
-    [photosFromFollowedUsersQuery whereKeyExists:kSPPhotoPictureKey];
-    
-    PFQuery *photosFromCurrentUserQuery = [PFQuery queryWithClassName:self.parseClassName];
-    [photosFromCurrentUserQuery whereKey:kSPPhotoUserKey equalTo:[PFUser currentUser]];
-    [photosFromCurrentUserQuery whereKeyExists:kSPPhotoPictureKey];
-    
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:photosFromFollowedUsersQuery, photosFromCurrentUserQuery, nil]];
-    
-//    PFQuery *query = followingActivitiesQuery;
-    [query includeKey:kSPPhotoUserKey];
-    [query orderByDescending:@"createdAt"];
-    
-    // A pull-to-refresh should always trigger a network request.
-    [query setCachePolicy:kPFCachePolicyNetworkOnly];
-    
+    PFQuery *myCheckins = [PFQuery queryWithClassName:kSPCheckInClassKey];
+    [myCheckins whereKey:kSPCheckInUserKey equalTo:[PFUser currentUser]];
+
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:checkinsFromBroadcastingUsersQuery,myCheckins, nil]];
+    return query;
+   // [query includeKey:kSPPhotoUserKey];
+  //  [query orderByDescending:@"createdAt"];
+
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     //
     // If there is no network connection, we will hit the cache first.
-  
+    
+  //[SP]
+    
     /*
     if (self.objects.count == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
         [query setCachePolicy:kPFCachePolicyCacheThenNetwork];
     }
     */
-    
-    return query;
+
 }
 
 
@@ -318,23 +315,13 @@
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
         return cell;
     } else {
-        
-        SPPhotoCell *cell = (SPPhotoCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        SPCheckInCell *cell = (SPCheckInCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil) {
-            cell = [[SPPhotoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-         //  [cell.photoButton addTarget:self action:@selector(didTapOnPhotoAction:) forControlEvents:UIControlEventTouchUpInside];
+            cell = [[SPCheckInCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
         }
-        
-        cell.photoButton.tag = indexPath.section;
-        cell.imageView.image = [UIImage imageNamed:@"PlaceholderPhoto.png"];
-       cell.imageView.file = [object objectForKey:kSPPhotoPictureKey];
-        
-        // PFQTVC will take care of asynchronously downloading files, but will only load them when the tableview is not moving. If the data is there, let's load it right away.
-        if ([cell.imageView.file isDataAvailable]) {
-            [cell.imageView loadInBackground];
-        }
-        
+
         return cell;
     }
 }
