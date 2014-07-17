@@ -39,7 +39,13 @@ extern NSString *const kSPUserFacebookFriendsKey;
 extern NSString *const kSPUserAlreadyAutoFollowedFacebookFriendsKey;
 extern NSString *const kSPUserPrivateChannelKey;
 
+#pragma mark - PFObject Checkin Class
+// Class key
+extern NSString *const kSPCheckInClassKey;
 
+//Field Key
+extern NSString *const kSPCheckInPlaceKey;
+extern NSString *const kSPCheckInUserKey;
 #pragma mark - PFObject Photo Class
 // Class key
 extern NSString *const kSPPhotoClassKey;

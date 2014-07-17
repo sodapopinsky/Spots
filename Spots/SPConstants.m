@@ -42,7 +42,13 @@ NSString *const kSPUserFacebookFriendsKey                      = @"facebookFrien
 NSString *const kSPUserAlreadyAutoFollowedFacebookFriendsKey   = @"userAlreadyAutoFollowedFacebookFriends";
 NSString *const kSPUserPrivateChannelKey                       = @"channel";
 
+#pragma mark - Checkin Class
+// Class key
+NSString *const kSPCheckInClassKey = @"CheckIn";
 
+//Field keys
+NSString *const kSPCheckInPlaceKey = @"googlePlaceID";
+NSString *const kSPCheckInUserKey = @"user";
 
 #pragma mark - Photo Class
 // Class key
