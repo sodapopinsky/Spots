@@ -26,6 +26,7 @@
 {
     [super viewDidLoad];
     
+    [SPUtility setNavigationBarTintColor:self];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
     
     self.navigationItem.rightBarButtonItem = [[SPSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];

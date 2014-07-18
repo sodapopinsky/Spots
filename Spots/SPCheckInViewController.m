@@ -14,12 +14,13 @@
 @end
 
 @implementation SPCheckInViewController
-@synthesize currentLocation, people;
+@synthesize currentLocation,places;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+      
         // Custom initialization
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
@@ -58,46 +59,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [SPUtility setNavigationBarTintColor:self];
+
     [self.navigationItem setTitle:@"Check In"];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonAction:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"get" style:UIBarButtonItemStyleBordered target:self action:@selector(queryGooglePlaces)];
 
-    people = [[NSMutableArray alloc] init];
+   
     places = [[NSArray alloc] init];
     
     
-    PFQuery *followingActivitiesQuery = [PFQuery queryWithClassName:kSPActivityClassKey];
-    [followingActivitiesQuery whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
-    [followingActivitiesQuery whereKey:kSPActivityToUserKey equalTo:[PFUser currentUser]];
-    followingActivitiesQuery.limit = 1000;
-    
-    PFQuery *checkinsFromBroadcastingUsersQuery = [PFQuery queryWithClassName:kSPCheckInClassKey];
-    [checkinsFromBroadcastingUsersQuery whereKey:kSPCheckInUserKey matchesKey:kSPActivityFromUserKey inQuery:followingActivitiesQuery];
-    // [checkinsFromBroadcastingUsersQuery includeKey:kSPCheckInUserKey];
-    
-    PFQuery *myCheckins = [PFQuery queryWithClassName:kSPCheckInClassKey];
-    [myCheckins whereKey:kSPCheckInUserKey equalTo:[PFUser currentUser]];
-    
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:checkinsFromBroadcastingUsersQuery,myCheckins, nil]];
-    
-    [query includeKey:kSPCheckInUserKey];
-    
-    // Issue the query
-    [query findObjectsInBackgroundWithBlock:^(NSArray *songs, NSError *error) {
-        if (error) return;
-        
-        // Songs now contains the last ten songs, and the band field has
-        // been populated. For example:
-        for (PFObject *song in songs) {
-            
-            // This does not require a network access.
-            PFObject *band = [song objectForKey:@"user"];
-            NSLog(@"%@",[band objectForKey:@"displayName"]);
-            
-        }
-    }];
+   
     
 }
 
@@ -138,9 +111,7 @@
     
     //Write out the data to the console.
  //  NSLog(@"Google Data: %@", places);
-    for(NSMutableDictionary *place in places){
-        [people addObject:[place objectForKey:@"name"]];
-    }
+ 
 
     
     [self.tableView reloadData];

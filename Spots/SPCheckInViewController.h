@@ -15,9 +15,8 @@
 
 {
     CLLocationManager *locationManager;
-    NSMutableArray *people;
     NSArray *places;
 }
-@property (nonatomic, retain) NSMutableArray *people;
+
 @property (nonatomic, retain) NSArray *places;
 @end

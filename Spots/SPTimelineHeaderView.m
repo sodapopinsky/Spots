@@ -154,7 +154,7 @@
     NSString *timestamp = [self.timeIntervalFormatter stringForTimeInterval:timeInterval];
     [self.timestampLabel setText:timestamp];
     
-    NSString *place = [self.photo objectForKey:kSPCheckInPlaceKey];
+    NSString *place = [self.photo objectForKey:kSPCheckInPlaceNameKey];
     [self.placeLabel setText:place];
     
     [self setNeedsDisplay];
