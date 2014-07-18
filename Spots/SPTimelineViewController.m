@@ -12,6 +12,7 @@
 //#import "SPPhotoDetailsViewController.h"
 #import "SPUtility.h"
 #import "SPLoadMoreCell.h"
+#import "AppDelegate.h"
 
 
 @interface SPTimelineViewController ()
@@ -75,13 +76,13 @@
     self.tableView.backgroundView = texturedBackgroundView;
     
     /*
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:PAPTabBarControllerDidFinishEditingPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:PAPUtilityUserFollowingChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidDeletePhoto:) name:PAPPhotoDetailsViewControllerUserDeletedPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:PAPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:PAPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnPhoto:) name:PAPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
-     */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:SPUtilityUserFollowingChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidDeletePhoto:) name:SPPhotoDetailsViewControllerUserDeletedPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:SPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:SPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnPhoto:) name:SPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
+    */
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -98,8 +99,6 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-        NSLog(@"%i",self.objects.count);
     NSInteger sections = self.objects.count;
     if (self.paginationEnabled && sections != 0)
         sections++;
@@ -112,14 +111,13 @@
 
 
 
-
-
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == self.objects.count) {
         // Load More section
         return nil;
+        
     }
     
     
@@ -131,10 +129,15 @@
         headerView.delegate = self;
         [self.reusableSectionHeaderViews addObject:headerView];
     }
+   // NSLog(@"%@",[self.objects objectAtIndex:section]);
     
-   // PFObject *photo = [self.objects objectAtIndex:section];
-  //  [headerView setPhoto:photo];
-  //  headerView.tag = section;
+ 
+        
+        // This does not require a network access.
+    
+       // NSLog(@"%@",[band objectForKey:@"displayName"]);
+    [headerView setPhoto:[self.objects objectAtIndex:section]];
+    headerView.tag = section;
    
     /*  [SP] ALL OF THIS HAS TO DO WITH HEADER VIEW ITEMS WHICH WE ARENT CURRENTLY USING
     [headerView.likeButton setTag:section];
@@ -278,22 +281,25 @@
     [myCheckins whereKey:kSPCheckInUserKey equalTo:[PFUser currentUser]];
 
     PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:checkinsFromBroadcastingUsersQuery,myCheckins, nil]];
-    return query;
-   // [query includeKey:kSPPhotoUserKey];
+   
+
+   //[query includeKey:kSPUserProfilePicSmallKey];
+    
+   [query includeKey:kSPCheckInUserKey];
+   return query;
   //  [query orderByDescending:@"createdAt"];
 
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     //
     // If there is no network connection, we will hit the cache first.
+
     
-  //[SP]
     
-    /*
     if (self.objects.count == 0 || ![[UIApplication sharedApplication].delegate performSelector:@selector(isParseReachable)]) {
         [query setCachePolicy:kPFCachePolicyCacheThenNetwork];
     }
-    */
+    
 
 }
 

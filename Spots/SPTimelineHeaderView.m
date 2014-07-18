@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) SPProfileImageView *avatarImageView;
 @property (nonatomic, strong) UIButton *userButton;
+@property (nonatomic, strong) UILabel *placeLabel;
 @property (nonatomic, strong) UILabel *timestampLabel;
 @property (nonatomic, strong) TTTTimeIntervalFormatter *timeIntervalFormatter;
 @end
@@ -29,12 +30,14 @@
 @synthesize photo;
 @synthesize buttons;
 @synthesize delegate;
+@synthesize placeLabel;
 
 #pragma mark - Initialization
 
 - (id)initWithFrame:(CGRect)frame buttons:(SPTimelineHeaderButtons)otherButtons {
     self = [super initWithFrame:frame];
     if (self) {
+        
         [SPTimelineHeaderView validateButtons:otherButtons];
         buttons = otherButtons;
         
@@ -54,48 +57,7 @@
         [self.avatarImageView.profileButton addTarget:self action:@selector(didTapUserButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.containerView addSubview:self.avatarImageView];
         
-        /*
-        if (self.buttons & PAPPhotoHeaderButtonsComment) {
-            // comments button
-            commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [containerView addSubview:self.commentButton];
-            [self.commentButton setFrame:CGRectMake( 242.0f, 10.0f, 29.0f, 28.0f)];
-            [self.commentButton setBackgroundColor:[UIColor clearColor]];
-            [self.commentButton setTitle:@"" forState:UIControlStateNormal];
-            [self.commentButton setTitleColor:[UIColor colorWithRed:0.369f green:0.271f blue:0.176f alpha:1.0f] forState:UIControlStateNormal];
-            [self.commentButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.750f] forState:UIControlStateNormal];
-            [self.commentButton setTitleEdgeInsets:UIEdgeInsetsMake( -4.0f, 0.0f, 0.0f, 0.0f)];
-            [[self.commentButton titleLabel] setShadowOffset:CGSizeMake( 0.0f, 1.0f)];
-            [[self.commentButton titleLabel] setFont:[UIFont systemFontOfSize:12.0f]];
-            [[self.commentButton titleLabel] setMinimumFontSize:11.0f];
-            [[self.commentButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
-            [self.commentButton setBackgroundImage:[UIImage imageNamed:@"IconComment.png"] forState:UIControlStateNormal];
-            [self.commentButton setSelected:NO];
-        }
-        
-        if (self.buttons & PAPPhotoHeaderButtonsLike) {
-            // like button
-            likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [containerView addSubview:self.likeButton];
-            [self.likeButton setFrame:CGRectMake(206.0f, 8.0f, 29.0f, 29.0f)];
-            [self.likeButton setBackgroundColor:[UIColor clearColor]];
-            [self.likeButton setTitle:@"" forState:UIControlStateNormal];
-            [self.likeButton setTitleColor:[UIColor colorWithRed:0.369f green:0.271f blue:0.176f alpha:1.0f] forState:UIControlStateNormal];
-            [self.likeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-            [self.likeButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.750f] forState:UIControlStateNormal];
-            [self.likeButton setTitleShadowColor:[UIColor colorWithWhite:0.0f alpha:0.750f] forState:UIControlStateSelected];
-            [self.likeButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-            [[self.likeButton titleLabel] setShadowOffset:CGSizeMake(0.0f, 1.0f)];
-            [[self.likeButton titleLabel] setFont:[UIFont systemFontOfSize:12.0f]];
-            [[self.likeButton titleLabel] setMinimumFontSize:11.0f];
-            [[self.likeButton titleLabel] setAdjustsFontSizeToFitWidth:YES];
-            [self.likeButton setAdjustsImageWhenHighlighted:NO];
-            [self.likeButton setAdjustsImageWhenDisabled:NO];
-            [self.likeButton setBackgroundImage:[UIImage imageNamed:@"ButtonLike.png"] forState:UIControlStateNormal];
-            [self.likeButton setBackgroundImage:[UIImage imageNamed:@"ButtonLikeSelected.png"] forState:UIControlStateSelected];
-            [self.likeButton setSelected:NO];
-        }
-        */
+ 
         if (self.buttons & SPTimelineHeaderButtonsUser) {
             // This is the user's display name, on a button so that we can tap on it
             self.userButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -109,10 +71,18 @@
             [self.userButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.750f] forState:UIControlStateNormal];
         }
         
+        //place
+        self.placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0f, 24.0f, containerView.bounds.size.width -10.0f-50.0f, 18.0f)];
+        [containerView addSubview:self.placeLabel];
+        [self.placeLabel setShadowColor:[UIColor colorWithWhite:1.0f alpha:0.750f]];
+        [self.placeLabel setShadowOffset:CGSizeMake( 0.0f, 1.0f)];
+        [self.placeLabel setFont:[UIFont systemFontOfSize:11.0f]];
+        [self.placeLabel setBackgroundColor:[UIColor clearColor]];
+        
         self.timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
         
         // timestamp
-        self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake( 50.0f, 24.0f, containerView.bounds.size.width - 50.0f - 72.0f, 18.0f)];
+        self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(containerView.bounds.size.width - 60.0f, 24.0f, 60.0f, 18.0f)];
         [containerView addSubview:self.timestampLabel];
         [self.timestampLabel setTextColor:[UIColor colorWithRed:124.0f/255.0f green:124.0f/255.0f blue:124.0f/255.0f alpha:1.0f]];
         [self.timestampLabel setShadowColor:[UIColor colorWithWhite:1.0f alpha:0.750f]];
@@ -138,9 +108,9 @@
 
 - (void)setPhoto:(PFObject *)aPhoto {
     photo = aPhoto;
+ 
+    PFObject *user = [aPhoto objectForKey:@"user"];
     
-    // user's avatar
-    PFUser *user = [self.photo objectForKey:kSPPhotoUserKey];
     PFFile *profilePictureSmall = [user objectForKey:kSPUserProfilePicSmallKey];
     [self.avatarImageView setFile:profilePictureSmall];
     
@@ -157,7 +127,7 @@
         /*
         constrainWidth = self.commentButton.frame.origin.x;
         [self.commentButton addTarget:self action:@selector(didTapCommentOnPhotoButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-         */
+        */
     }
     
     if (self.buttons & SPTimelineHeaderButtonsLike) {
@@ -183,6 +153,9 @@
     NSTimeInterval timeInterval = [[self.photo createdAt] timeIntervalSinceNow];
     NSString *timestamp = [self.timeIntervalFormatter stringForTimeInterval:timeInterval];
     [self.timestampLabel setText:timestamp];
+    
+    NSString *place = [self.photo objectForKey:kSPCheckInPlaceKey];
+    [self.placeLabel setText:place];
     
     [self setNeedsDisplay];
 }

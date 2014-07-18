@@ -7,7 +7,7 @@
 //
 
 #import <Parse/Parse.h>
-
+@class PFImageView;
 @interface SPCheckInCell : PFTableViewCell
-
+@property (nonatomic, strong) UIButton *photoButton;
 @end

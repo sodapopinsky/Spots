@@ -67,6 +67,38 @@
     people = [[NSMutableArray alloc] init];
     places = [[NSArray alloc] init];
     
+    
+    PFQuery *followingActivitiesQuery = [PFQuery queryWithClassName:kSPActivityClassKey];
+    [followingActivitiesQuery whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
+    [followingActivitiesQuery whereKey:kSPActivityToUserKey equalTo:[PFUser currentUser]];
+    followingActivitiesQuery.limit = 1000;
+    
+    PFQuery *checkinsFromBroadcastingUsersQuery = [PFQuery queryWithClassName:kSPCheckInClassKey];
+    [checkinsFromBroadcastingUsersQuery whereKey:kSPCheckInUserKey matchesKey:kSPActivityFromUserKey inQuery:followingActivitiesQuery];
+    // [checkinsFromBroadcastingUsersQuery includeKey:kSPCheckInUserKey];
+    
+    PFQuery *myCheckins = [PFQuery queryWithClassName:kSPCheckInClassKey];
+    [myCheckins whereKey:kSPCheckInUserKey equalTo:[PFUser currentUser]];
+    
+    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:checkinsFromBroadcastingUsersQuery,myCheckins, nil]];
+    
+    [query includeKey:kSPCheckInUserKey];
+    
+    // Issue the query
+    [query findObjectsInBackgroundWithBlock:^(NSArray *songs, NSError *error) {
+        if (error) return;
+        
+        // Songs now contains the last ten songs, and the band field has
+        // been populated. For example:
+        for (PFObject *song in songs) {
+            
+            // This does not require a network access.
+            PFObject *band = [song objectForKey:@"user"];
+            NSLog(@"%@",[band objectForKey:@"displayName"]);
+            
+        }
+    }];
+    
 }
 
 
