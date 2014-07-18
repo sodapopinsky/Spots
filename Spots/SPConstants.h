@@ -45,6 +45,7 @@ extern NSString *const kSPCheckInClassKey;
 
 //Field Key
 extern NSString *const kSPCheckInPlaceKey;
+extern NSString *const kSPCheckInPlaceNameKey;
 extern NSString *const kSPCheckInUserKey;
 #pragma mark - PFObject Photo Class
 // Class key

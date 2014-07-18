@@ -49,6 +49,7 @@ NSString *const kSPCheckInClassKey = @"CheckIn";
 //Field keys
 NSString *const kSPCheckInPlaceKey = @"googlePlaceID";
 NSString *const kSPCheckInUserKey = @"user";
+NSString *const kSPCheckInPlaceNameKey = @"placeName";
 
 #pragma mark - Photo Class
 // Class key
