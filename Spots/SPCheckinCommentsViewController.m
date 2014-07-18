@@ -29,7 +29,12 @@
     // Do any additional setup after loading the view.
   
   self.title = [place objectForKey:@"name"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"do checkin" style:UIBarButtonItemStyleBordered target:self action:@selector(doCheckin)];
+  
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"do" style:UIBarButtonItemStyleBordered target:self action:@selector(doCheckin)];
+
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0]];
+
 
    
 }
