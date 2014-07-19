@@ -10,6 +10,7 @@
 
 @interface SPCheckinCommentsViewController ()
 @property (nonatomic, retain) NSDictionary* place;
+
 @end
 
 @implementation SPCheckinCommentsViewController

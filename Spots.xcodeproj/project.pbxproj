@@ -39,6 +39,7 @@
 		01A10FDA1976CAE80038CA65 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A10FD91976CAE80038CA65 /* CoreLocation.framework */; };
 		01A10FDE1976D0760038CA65 /* SPCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */; };
 		01B7789119783F020010FB0F /* SPCheckinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B7789019783F020010FB0F /* SPCheckinCell.m */; };
+		01BA0A5E1979D37600E16A85 /* SPCheckInHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA0A5D1979D37600E16A85 /* SPCheckInHeaderView.m */; };
 		01BCB1E21978166E006D7072 /* SPCheckinCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */; };
 		01BD87C81972FB6E00DAC965 /* SPTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87C71972FB6E00DAC965 /* SPTimelineViewController.m */; };
 		01BD87CC1972FC4800DAC965 /* SPTimelineHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87CB1972FC4800DAC965 /* SPTimelineHeaderView.m */; };
@@ -118,6 +119,8 @@
 		01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInViewController.m; sourceTree = "<group>"; };
 		01B7788F19783F020010FB0F /* SPCheckinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckinCell.h; sourceTree = "<group>"; };
 		01B7789019783F020010FB0F /* SPCheckinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckinCell.m; sourceTree = "<group>"; };
+		01BA0A5C1979D37600E16A85 /* SPCheckInHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInHeaderView.h; sourceTree = "<group>"; };
+		01BA0A5D1979D37600E16A85 /* SPCheckInHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInHeaderView.m; sourceTree = "<group>"; };
 		01BCB1E01978166E006D7072 /* SPCheckinCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckinCommentsViewController.h; sourceTree = "<group>"; };
 		01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckinCommentsViewController.m; sourceTree = "<group>"; };
 		01BD87C61972FB6E00DAC965 /* SPTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimelineViewController.h; sourceTree = "<group>"; };
@@ -287,6 +290,7 @@
 		01805FF7196EC8A2002E79F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				01BA0A5B1979D34900E16A85 /* CheckInHeaderView */,
 				01A10FD31976BA4F0038CA65 /* PhotoDetailsViews */,
 				01BD87CD19730D8800DAC965 /* UITableViewCells */,
 				01BD87C91972FC0500DAC965 /* TimelineViews */,
@@ -380,6 +384,15 @@
 				01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */,
 			);
 			name = "Check In";
+			sourceTree = "<group>";
+		};
+		01BA0A5B1979D34900E16A85 /* CheckInHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				01BA0A5C1979D37600E16A85 /* SPCheckInHeaderView.h */,
+				01BA0A5D1979D37600E16A85 /* SPCheckInHeaderView.m */,
+			);
+			name = CheckInHeaderView;
 			sourceTree = "<group>";
 		};
 		01BD87C91972FC0500DAC965 /* TimelineViews */ = {
@@ -581,6 +594,7 @@
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,
 				01BD87CC1972FC4800DAC965 /* SPTimelineHeaderView.m in Sources */,
 				01BD87D719742E1400DAC965 /* TTTTimeIntervalFormatter.m in Sources */,
+				01BA0A5E1979D37600E16A85 /* SPCheckInHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
