@@ -76,6 +76,13 @@
     return NO;
 }
 
+-(NSArray *)broadcastingToUsers{
+    NSString *key = kSPUserDefaultsCacheBroadcastingToKey;
+    if([self.cache objectForKey:key]){
+        return [self.cache objectForKey:key];
+    }
+    return nil;
+}
 
 - (NSDictionary *)attributesForPhoto:(PFObject *)photo {
     NSString *key = [self keyForPhoto:photo];

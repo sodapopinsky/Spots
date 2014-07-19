@@ -12,6 +12,7 @@ NSString *const kGOOGLE_API_KEY = @"AIzaSyCvAt6OnrRukTDmZLZ_oMLhgGbt0OrEgrI";
 
 #pragma mark - NSUserDefaults
 NSString *const kSPUserDefaultsCacheFacebookFriendsKey                     = @"com.parse.Anypic.userDefaults.cache.facebookFriends"; /// *durr
+NSString *const kSPUserDefaultsCacheBroadcastingToKey                      = @"com.Spots.userDefaults.cache.broadcastingTo";
 
 
 #pragma mark - User Info Keys

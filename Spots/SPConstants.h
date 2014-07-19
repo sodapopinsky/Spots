@@ -12,6 +12,7 @@ extern NSString *const kGOOGLE_API_KEY;
 
 #pragma mark - NSUserDefaults
 extern NSString *const kSPUserDefaultsCacheFacebookFriendsKey;
+extern NSString *const kSPUserDefaultsCacheBroadcastingToKey;
 
 #pragma mark - User Info Keys
 extern NSString *const SPPhotoDetailsViewControllerUserLikedUnlikedPhotoNotificationUserInfoLikedKey;
