@@ -39,11 +39,6 @@
    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 -(id)initWithPlace:(NSDictionary *)placeObject
 {
@@ -56,6 +51,7 @@
     
     return self;
 }
+
 
 -(void)doCheckin{
     

@@ -23,4 +23,6 @@
 - (NSDictionary *)attributesForPhoto:(PFObject *)photo;
 - (void)incrementCommentCountForPhoto:(PFObject *)photo;
 - (NSNumber *)commentCountForPhoto:(PFObject *)photo;
+
+- (NSArray *)broadcastingToUsers;
 @end

@@ -19,6 +19,7 @@
 @property (nonatomic, assign) BOOL shouldReloadOnAppear;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
 @property (nonatomic, strong) NSMutableDictionary *outstandingSectionHeaderQueries;
+typedef void (^Handler)(int i);
 @end
 
 @implementation SPTimelineViewController
@@ -83,8 +84,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidLikeOrUnlikePhoto:) name:SPUtilityUserLikedUnlikedPhotoCallbackFinishedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnPhoto:) name:SPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
     */
-}
+  
+    [self followsUserEventually:^(int i) {
+            NSLog(@"fda%i",i);
+    }];
+    
 
+}
+- (void)followsUserEventually:(Handler)completionBlock{
+    completionBlock(2);
+    
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     

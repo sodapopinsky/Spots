@@ -10,6 +10,7 @@
 
 @interface SPUtility : NSObject
 
+
 + (BOOL)userHasValidFacebookData:(PFUser *)user;
 + (void)processFacebookProfilePictureData:(NSData *)data;
 + (void)drawSideDropShadowForRect:(CGRect)rect inContext:(CGContextRef)context;
@@ -24,4 +25,7 @@
 + (void)unfollowUserEventually:(PFUser *)user;
 
 +(void)setNavigationBarTintColor:(UIViewController *)viewController;
+
+
+
 @end
