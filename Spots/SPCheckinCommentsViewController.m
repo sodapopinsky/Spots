@@ -10,7 +10,7 @@
 
 @interface SPCheckinCommentsViewController ()
 @property (nonatomic, retain) NSDictionary* place;
-
+@property (nonatomic, assign) BOOL broadcastingToQueryInProgress;
 @end
 
 @implementation SPCheckinCommentsViewController
@@ -38,6 +38,41 @@
 
 
    
+    
+    PFQuery *query = [PFQuery queryWithClassName:kSPActivityClassKey];
+    [query whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
+    [query whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *followActivities, NSError *error) {
+        // While normally there should only be one follow activity returned, we can't guarantee that.
+        
+        if (!error) {
+            NSLog(@"%@",followActivities);
+        }
+    }];
+    
+    
+}
+
+-(void)loadBroadcastingToBar{
+    if (self.broadcastingToQueryInProgress) {
+        return;
+    }
+    self.broadcastingToQueryInProgress = YES;
+    PFQuery *query = [PFQuery queryWithClassName:kSPActivityClassKey];
+    [query whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
+    [query whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        // While normally there should only be one follow activity returned, we can't guarantee that.
+        if (error) {
+            NSLog(@"Error Loading Broadcasting To");
+            return;
+        }
+      
+      
+     
+        
+        
+    }];
 }
 
 
