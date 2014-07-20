@@ -36,19 +36,9 @@
     
     [self.view setBackgroundColor:[UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0]];
 
-
+    [self loadBroadcastingToBar];
    
-    
-    PFQuery *query = [PFQuery queryWithClassName:kSPActivityClassKey];
-    [query whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
-    [query whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *followActivities, NSError *error) {
-        // While normally there should only be one follow activity returned, we can't guarantee that.
-        
-        if (!error) {
-            NSLog(@"%@",followActivities);
-        }
-    }];
+
     
     
 }
@@ -61,16 +51,17 @@
     PFQuery *query = [PFQuery queryWithClassName:kSPActivityClassKey];
     [query whereKey:kSPActivityFromUserKey equalTo:[PFUser currentUser]];
     [query whereKey:kSPActivityTypeKey equalTo:kSPActivityTypeFollow];
+    [query includeKey:kSPActivityToUserKey];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         // While normally there should only be one follow activity returned, we can't guarantee that.
         if (error) {
             NSLog(@"Error Loading Broadcasting To");
             return;
         }
-      
-      
-     
-        
+        for (PFObject *broadcastees in objects) {
+           NSLog(@"%@",[broadcastees objectForKey:@"toUser"]);
+            NSLog(@"%@",[[broadcastees objectForKey:@"toUser"] allKeys]);
+        }
         
     }];
 }
