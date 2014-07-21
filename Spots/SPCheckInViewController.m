@@ -8,6 +8,8 @@
 
 #import "SPCheckInViewController.h"
 #import "SPCheckinCommentsViewController.h"
+#import "UIView+ConvertToImage.h"
+#import "UIImage+ImageEffects.h"
 
 @interface SPCheckInViewController ()
 @property CLLocation *currentLocation;
@@ -60,39 +62,52 @@
 {
     [super viewDidLoad];
     [SPUtility setNavigationBarTintColor:self];
+   
+    [self setupAppearance];
  
-    /*
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake( 0.0f, 0.0f, 52.0f, 32.0f)];
-    [backButton setTitle:@"Backfd" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor colorWithRed:214.0f/255.0f green:210.0f/255.0f blue:197.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
-    [[backButton titleLabel] setFont:[UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]]];
-    [backButton setTitleEdgeInsets:UIEdgeInsetsMake( 0.0f, 5.0f, 0.0f, 0.0f)];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"ButtonBack.png"] forState:UIControlStateNormal];
-    [backButton setBackgroundImage:[UIImage imageNamed:@"ButtonBackSelected.png"] forState:UIControlStateHighlighted];
-
-  
-    
-    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:backButton]];
-  */
-    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SpotIcon.png"] style:UIBarButtonItemStylePlain target:self action:nil]];
-  
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonAction:)];
-
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"get" style:UIBarButtonItemStyleBordered target:self action:@selector(queryGooglePlaces)];
 
    
     places = [[NSArray alloc] init];
     
     
 
-   \
+
    
     
 }
 
-
+-(void)setupAppearance{
+    
+    CALayer *capa = [self.navigationController navigationBar].layer;
+    [capa setShadowColor: [[UIColor blackColor] CGColor]];
+    [capa setShadowOpacity:0.85f];
+    [capa setShadowOffset: CGSizeMake(0.0f, 1.5f)];
+    [capa setShadowRadius:2.0f];
+    [capa setShouldRasterize:YES];
+    
+    
+    //Round
+    CGRect bounds = capa.bounds;
+    bounds.size.height += 10.0f;    //I'm reserving enough room for the shadow
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:bounds
+                                                   byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight)
+                                                         cornerRadii:CGSizeMake(5.0, 5.0)];
+    
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = bounds;
+    maskLayer.path = maskPath.CGPath;
+    
+    [capa addSublayer:maskLayer];
+    capa.mask = maskLayer;
+    self.view.layer.cornerRadius = 5.0f;
+    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SpotIcon.png"] style:UIBarButtonItemStylePlain target:self action:nil]];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(cancelButtonAction:)];
+    
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"get" style:UIBarButtonItemStyleBordered target:self action:@selector(queryGooglePlaces)];
+    
+}
 -(void) queryGooglePlaces{
     // Build the url string to send to Google. NOTE: The kGOOGLE_API_KEY is a constant that should contain your own API key that you obtain from Google. See this link for more info:
     // https://developers.google.com/maps/documentation/places/#Authentication
