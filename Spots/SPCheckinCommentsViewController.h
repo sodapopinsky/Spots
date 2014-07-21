@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPCheckinCommentsViewController : UIViewController
+@interface SPCheckinCommentsViewController : UIViewController <UITextViewDelegate>
 -(id)initWithPlace:(NSDictionary *)place;
 
 @end
