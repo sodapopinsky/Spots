@@ -86,7 +86,7 @@ typedef void (^Handler)(int i);
     */
   
     [self followsUserEventually:^(int i) {
-            NSLog(@"fda%i",i);
+            NSLog(@"blocktest",i);
     }];
     
 
