@@ -10,13 +10,16 @@
 #import "SPCheckinCommentsViewController.h"
 #import "UIView+ConvertToImage.h"
 #import "UIImage+ImageEffects.h"
+#import "MBProgressHUD.h"
+#import "SPCheckinTVCell.h"
 
 @interface SPCheckInViewController ()
 @property CLLocation *currentLocation;
+@property MBProgressHUD *hud;
 @end
 
 @implementation SPCheckInViewController
-@synthesize currentLocation,places;
+@synthesize currentLocation,places,hud;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -65,12 +68,15 @@
    
     [self setupAppearance];
  
-
+    self.title = @"Check In";
    
     places = [[NSArray alloc] init];
     
-    
-
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.labelText = NSLocalizedString(@"Loading", nil);
+    self.hud.dimBackground = NO;
+  
+    [self queryGooglePlaces];
 
    
     
@@ -100,12 +106,14 @@
     [capa addSublayer:maskLayer];
     capa.mask = maskLayer;
     self.view.layer.cornerRadius = 5.0f;
-    [self.navigationItem setBackBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SpotIcon.png"] style:UIBarButtonItemStylePlain target:self action:nil]];
+ 
+  
+   
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(cancelButtonAction:)];
     
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"get" style:UIBarButtonItemStyleBordered target:self action:@selector(queryGooglePlaces)];
+
     
 }
 -(void) queryGooglePlaces{
@@ -124,13 +132,14 @@
     dispatch_async(kBgQueue, ^{
         NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
         [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+       
     });
 }
 
 
 
 -(void)fetchedData:(NSData *)responseData {
-    
+       [MBProgressHUD hideHUDForView:self.view animated:YES];
     //parse out the json data
     NSError* error;
     NSDictionary* json = [NSJSONSerialization
@@ -169,19 +178,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SPCheckinTVCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Check if a reusable cell object was dequeued
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+       
+        cell = [[SPCheckinTVCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
+  //  [cell.contentView addSubview:cell.placeName];
     // Populate the cell with the appropriate name based on the indexPath
-    cell.textLabel.text = [[places objectAtIndex:indexPath.row] objectForKey:@"name"];;
-    
+    cell.textLabel.text = [[places objectAtIndex:indexPath.row] objectForKey:@"name"];
+ [cell.imageView setImage:[UIImage imageNamed:@"SpotIcon"]];
+    cell.imageView.layer.cornerRadius = 5.0f;
+    [cell.imageView setBackgroundColor:[UIColor colorWithRed:0.0f/255.0f green:124.0f/255.0f blue:179.0f/255.0f alpha:1.0f]];
+    cell.detailTextLabel.text = @"5 miles";
     return cell;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+      [self.navigationController.view setFrame:CGRectMake(10, 30, 300,[[UIScreen mainScreen] bounds].size.height - 40)];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    // [super tableView:tableView didSelectRowAtIndexPath:indexPath];

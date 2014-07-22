@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 NickSpitale. All rights reserved.
 //
 
-#import "SPCheckInVC.h"
+#import "SPCheckInContainer.h"
 #import "SPCheckInViewController.h"
 
-@interface SPCheckInVC ()
+@interface SPCheckInContainer ()
 @property (nonatomic, retain) UIImage* backgroundImage;
 @end
 
-@implementation SPCheckInVC
+@implementation SPCheckInContainer
 @synthesize backgroundImage;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,7 +56,7 @@
     [self addChildViewController:myNav];
 
     [myNav willMoveToParentViewController:self];
-    myNav.view.frame = CGRectMake(10,30 , 300, self.view.frame.size.height - 80);  //Set a frame or constraints
+    myNav.view.frame = CGRectMake(10,30 , 300, self.view.frame.size.height - 60);  //Set a frame or constraints
     
    
     

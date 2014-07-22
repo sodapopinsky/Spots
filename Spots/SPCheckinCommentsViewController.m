@@ -34,14 +34,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-  
+  self.navigationController.navigationBar.topItem.title = @"";
   self.title = [place objectForKey:@"name"];
-  
+   
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"do" style:UIBarButtonItemStyleBordered target:self action:@selector(doCheckin)];
 
     
     [self.view setBackgroundColor:[UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0]];
-
+        self.view.layer.cornerRadius = 5.0f;
     [self loadBroadcastingToBar];
    
     commentTextField = [[UITextView alloc] initWithFrame:CGRectMake(10, 100, 300, 50)];
@@ -50,7 +50,10 @@
     [self.view addSubview:commentTextField];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated {
+      [self.navigationController.navigationItem setBackBarButtonItem:UIBarButtonItemStylePlain];
+     [self.navigationController.view setFrame:CGRectMake(10, 30, 300,[[UIScreen mainScreen] bounds].size.height - 270)];
+}
 -(void)loadBroadcastingToBar{
     if (self.broadcastingToQueryInProgress) {
         return;

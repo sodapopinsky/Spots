@@ -10,7 +10,7 @@
 #import "SPCheckInViewController.h"
 #import "UIImage+ImageEffects.h"
 #import "UIView+ConvertToImage.h"
-#import "SPCheckInVC.h"
+#import "SPCheckInContainer.h"
 
 @interface SPTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;
@@ -135,7 +135,7 @@
     
 
     
-    SPCheckInVC *checkInViewController = [[SPCheckInVC alloc] initWithBackgroundImage:imageOfUnderlyingView];
+    SPCheckInContainer *checkInViewController = [[SPCheckInContainer alloc] initWithBackgroundImage:imageOfUnderlyingView];
   // checkInNavigationController = [[UINavigationController alloc] initWithRootViewController:checkInViewController];
  
   //  [checkInNavigationController.view setFrame:CGRectMake(10, 10, 300, 300)];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPCheckInVC : UIViewController
+@interface SPCheckInContainer : UIViewController
 -(id)initWithBackgroundImage:(UIImage *)image;
 
 @end
