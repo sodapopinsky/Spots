@@ -81,14 +81,7 @@
     [btnDoCheckIn addTarget:self action:@selector(doCheckin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnDoCheckIn];
     
-    UIButton *btnDoCheckIn = [[UIButton alloc] initWithFrame:CGRectMake(160, 130, 135, 30)];
-    [btnDoCheckIn setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:24.0f/255.0f alpha:1.0f]];
-    [btnDoCheckIn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnDoCheckIn setShowsTouchWhenHighlighted:YES];
-    [btnDoCheckIn setTitle:@"Check In" forState:UIControlStateNormal];
-    btnDoCheckIn.layer.cornerRadius = 5.0f;
-    [btnDoCheckIn addTarget:self action:@selector(doCheckin) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnDoCheckIn];
+
     
     [self.view addSubview:commentTextField];
     
