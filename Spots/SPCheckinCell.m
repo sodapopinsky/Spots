@@ -17,6 +17,7 @@
     
     if (self) {
         // Initialization code
+        /*
         self.opaque = NO;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryNone;
@@ -46,6 +47,7 @@
         [self.contentView addSubview:self.photoButton];
         
         [self.contentView bringSubviewToFront:self.imageView];
+         */
     }
     
     return self;
@@ -55,9 +57,11 @@
 #pragma mark - UIView
 
 - (void)layoutSubviews {
+    /*
     [super layoutSubviews];
-    self.imageView.frame = CGRectMake( 20.0f, 0.0f, 280.0f, 280.0f);
+    self.imageView.frame = CGRectMake( 20.0f, 0.0f, 280.0f, 0.0f);
    // self.photoButton.frame = CGRectMake( 20.0f, 0.0f, 280.0f, 280.0f);
+     */
 }
 
 

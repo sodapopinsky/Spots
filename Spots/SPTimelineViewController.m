@@ -75,7 +75,7 @@ typedef void (^Handler)(int i);
     UIView *texturedBackgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
     texturedBackgroundView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
     self.tableView.backgroundView = texturedBackgroundView;
-    
+  
     /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:SPUtilityUserFollowingChangedNotification object:nil];
@@ -135,7 +135,7 @@ typedef void (^Handler)(int i);
     SPTimelineHeaderView *headerView = [self dequeueReusableSectionHeaderView];
     
     if (!headerView) {
-        headerView = [[SPTimelineHeaderView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.view.bounds.size.width, 44.0f) buttons:SPTimelineHeaderButtonsUser];
+        headerView = [[SPTimelineHeaderView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.view.bounds.size.width, 80.0f) buttons:SPTimelineHeaderButtonsUser];
         headerView.delegate = self;
         [self.reusableSectionHeaderViews addObject:headerView];
     }

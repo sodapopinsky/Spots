@@ -49,11 +49,13 @@
         // translucent portion
         self.containerView = [[UIView alloc] initWithFrame:CGRectMake( 20.0f, 0.0f, self.bounds.size.width - 20.0f * 2.0f, self.bounds.size.height)];
         [self addSubview:self.containerView];
-        [self.containerView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundComments.png"]]];
+      
         
         
         self.avatarImageView = [[SPProfileImageView alloc] init];
         self.avatarImageView.frame = CGRectMake( 4.0f, 4.0f, 35.0f, 35.0f);
+        [self.avatarImageView.layer setMasksToBounds:YES];
+        self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.height / 2;
         [self.avatarImageView.profileButton addTarget:self action:@selector(didTapUserButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.containerView addSubview:self.avatarImageView];
         
@@ -63,12 +65,13 @@
             self.userButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [containerView addSubview:self.userButton];
             [self.userButton setBackgroundColor:[UIColor clearColor]];
-            [[self.userButton titleLabel] setFont:[UIFont boldSystemFontOfSize:15]];
-            [self.userButton setTitleColor:[UIColor colorWithRed:73.0f/255.0f green:55.0f/255.0f blue:35.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
-            [self.userButton setTitleColor:[UIColor colorWithRed:134.0f/255.0f green:100.0f/255.0f blue:65.0f/255.0f alpha:1.0f] forState:UIControlStateHighlighted];
+            [[self.userButton titleLabel] setFont:[UIFont systemFontOfSize:14.0f]];
+            [self.userButton setTitleColor:kSPColorBlue forState:UIControlStateNormal];
+
             [[self.userButton titleLabel] setLineBreakMode:NSLineBreakByTruncatingTail];
             [[self.userButton titleLabel] setShadowOffset:CGSizeMake( 0.0f, 1.0f)];
             [self.userButton setTitleShadowColor:[UIColor colorWithWhite:1.0f alpha:0.750f] forState:UIControlStateNormal];
+   
         }
         
         //place
