@@ -22,7 +22,7 @@
         self.accessoryType = UITableViewCellAccessoryNone;
         self.clipsToBounds = NO;
    
-        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundLeather.png"]]];
+        [self setBackgroundColor: [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
     
         UIView *dropshadowView = [[UIView alloc] init];
         dropshadowView.backgroundColor = [UIColor whiteColor];
