@@ -68,14 +68,18 @@ typedef void (^Handler)(int i);
 #pragma mark - UIViewController
 
 - (void)viewDidLoad {
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone]; // PFQueryTableViewController reads this in viewDidLoad -- would prefer to throw this in init, but didn't work
+
     
+    // PFQueryTableViewController reads this in viewDidLoad -- would prefer to throw this in init, but didn't work
+
     [super viewDidLoad];
-    
+        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
+
+        self.tableView.backgroundColor = [UIColor colorWithRed:221.0f/255.0f green:221.0f/255.0f  blue:221.0f/255.0f  alpha:1.0f];
     UIView *texturedBackgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
     texturedBackgroundView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
     self.tableView.backgroundView = texturedBackgroundView;
-  
+    [self.tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0f, 0.0f, 0.0f)];
     /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:SPUtilityUserFollowingChangedNotification object:nil];
@@ -124,6 +128,7 @@ typedef void (^Handler)(int i);
 #pragma mark - UITableViewDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+
     if (section == self.objects.count) {
         // Load More section
         return nil;
@@ -139,6 +144,10 @@ typedef void (^Handler)(int i);
         headerView.delegate = self;
         [self.reusableSectionHeaderViews addObject:headerView];
     }
+    
+    [headerView setPhoto:[self.objects objectAtIndex:section]];
+    headerView.tag = section;
+    
    // NSLog(@"%@",[self.objects objectAtIndex:section]);
     
  
@@ -231,13 +240,15 @@ typedef void (^Handler)(int i);
     if (section == self.objects.count) {
         return 0.0f;
     }
-    return 44.0f;
+    return 80.0f;
 }
 
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.tableView.bounds.size.width, 16.0f)];
     return footerView;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == self.objects.count) {
@@ -245,14 +256,14 @@ typedef void (^Handler)(int i);
     }
     return 16.0f;
 }
-
+*/
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section >= self.objects.count) {
         // Load More Section
         return 44.0f;
     }
     
-    return 280.0f;
+    return 0.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -325,6 +336,7 @@ typedef void (^Handler)(int i);
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *CellIdentifier = @"Cell";
+
     
     if (indexPath.section == self.objects.count) {
         // this behavior is normally handled by PFQueryTableViewController, but we are using sections for each object and we must handle this ourselves

@@ -52,7 +52,7 @@ typedef enum {
         {
             
             
-            SPAccountViewController *accountViewController = [[SPAccountViewController alloc] initWithStyle:UITableViewStylePlain];
+            SPAccountViewController *accountViewController = [[SPAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [accountViewController setUser:[PFUser currentUser]];
             [navController pushViewController:accountViewController animated:YES];
             

@@ -16,14 +16,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        // Initialization code
-        /*
+              // Initialization code
+      /*
         self.opaque = NO;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.accessoryType = UITableViewCellAccessoryNone;
         self.clipsToBounds = NO;
-   
+        [self setFrame:CGRectMake(5.0f, 5.0f, 300.0f, 20.0f)];
         [self setBackgroundColor: [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f]];
+        [self.textLabel setText:@"fa"];
     
         UIView *dropshadowView = [[UIView alloc] init];
         dropshadowView.backgroundColor = [UIColor whiteColor];

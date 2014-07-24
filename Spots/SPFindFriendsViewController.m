@@ -284,7 +284,7 @@ typedef enum {
 
 - (void)cell:(SPFindFriendsCell *)cellView didTapUserButton:(PFUser *)aUser {
     // Push account view controller
-    SPAccountViewController *accountViewController = [[SPAccountViewController alloc] initWithStyle:UITableViewStylePlain];
+    SPAccountViewController *accountViewController = [[SPAccountViewController alloc] initWithStyle:UITableViewStyleGrouped];
     [accountViewController setUser:aUser];
     [self.navigationController pushViewController:accountViewController animated:YES];
 }
