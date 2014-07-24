@@ -127,6 +127,7 @@
 #pragma mark Facebook
 
 + (void)processFacebookProfilePictureData:(NSData *)newProfilePictureData {
+    
     if (newProfilePictureData.length == 0) {
         NSLog(@"Profile picture did not download successfully.");
         return;
@@ -148,6 +149,7 @@
             return;
         }
     }
+    
     
     BOOL cachedToDisk = [[NSFileManager defaultManager] createFileAtPath:[profilePictureCacheURL path] contents:newProfilePictureData attributes:nil];
     NSLog(@"Wrote profile picture to disk cache: %d", cachedToDisk);

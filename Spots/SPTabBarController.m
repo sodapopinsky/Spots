@@ -8,6 +8,9 @@
 
 #import "SPTabBarController.h"
 #import "SPCheckInViewController.h"
+#import "UIImage+ImageEffects.h"
+#import "UIView+ConvertToImage.h"
+#import "SPCheckInContainer.h"
 
 @interface SPTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;
@@ -117,9 +120,34 @@
         [self shouldPresentPhotoCaptureController];
     }
      */
-     SPCheckInViewController *checkInViewController = [[SPCheckInViewController alloc] init];
-     checkInNavigationController = [[UINavigationController alloc] initWithRootViewController:checkInViewController];
-    [self presentViewController:checkInNavigationController animated:YES completion:nil];
+    
+    
+    
+   
+    
+    
+    
+    UIImage* imageOfUnderlyingView = [self.view convertViewToImage];
+    imageOfUnderlyingView = [imageOfUnderlyingView applyBlurWithRadius:20
+                                                             tintColor:[UIColor colorWithWhite:1.0 alpha:0.2]
+                                                 saturationDeltaFactor:1.3
+                                                             maskImage:nil];
+    
+
+    
+    SPCheckInContainer *checkInViewController = [[SPCheckInContainer alloc] initWithBackgroundImage:imageOfUnderlyingView];
+  // checkInNavigationController = [[UINavigationController alloc] initWithRootViewController:checkInViewController];
+ 
+  //  [checkInNavigationController.view setFrame:CGRectMake(10, 10, 300, 300)];
+ //   [self presentViewController:checkInNavigationController animated:YES completion:nil];
+
+   [checkInViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+   [self.navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+  //  [self.navController pushViewController:checkInNavigationController animated:NO];
+    
+   [self presentViewController:checkInViewController animated:YES completion:nil];
+    
     
 }
 
