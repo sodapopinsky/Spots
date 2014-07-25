@@ -38,6 +38,7 @@
 		01A10FD81976CAE20038CA65 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A10FD71976CAE20038CA65 /* MapKit.framework */; };
 		01A10FDA1976CAE80038CA65 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A10FD91976CAE80038CA65 /* CoreLocation.framework */; };
 		01A10FDE1976D0760038CA65 /* SPCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */; };
+		01A5B1271982D0430015D78A /* SPActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B1261982D0430015D78A /* SPActivityCell.m */; };
 		01B7789119783F020010FB0F /* SPCheckinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B7789019783F020010FB0F /* SPCheckinCell.m */; };
 		01BA0A5E1979D37600E16A85 /* SPCheckInHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA0A5D1979D37600E16A85 /* SPCheckInHeaderView.m */; };
 		01BCB1E21978166E006D7072 /* SPCheckinCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */; };
@@ -120,6 +121,8 @@
 		01A10FD91976CAE80038CA65 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		01A10FDC1976D0760038CA65 /* SPCheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInViewController.h; sourceTree = "<group>"; };
 		01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInViewController.m; sourceTree = "<group>"; };
+		01A5B1251982D0430015D78A /* SPActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityCell.h; sourceTree = "<group>"; };
+		01A5B1261982D0430015D78A /* SPActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPActivityCell.m; sourceTree = "<group>"; };
 		01B7788F19783F020010FB0F /* SPCheckinCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckinCell.h; sourceTree = "<group>"; };
 		01B7789019783F020010FB0F /* SPCheckinCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckinCell.m; sourceTree = "<group>"; };
 		01BA0A5C1979D37600E16A85 /* SPCheckInHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInHeaderView.h; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 				01B7789019783F020010FB0F /* SPCheckinCell.m */,
 				01C8AE7D197DEBE70046FDCF /* SPCheckinTVCell.h */,
 				01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */,
+				01A5B1251982D0430015D78A /* SPActivityCell.h */,
+				01A5B1261982D0430015D78A /* SPActivityCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 				018060181973685B002E79F6 /* SPCache.m in Sources */,
 				0180601B1974D387002E79F6 /* Reachability.m in Sources */,
 				01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */,
+				01A5B1271982D0430015D78A /* SPActivityCell.m in Sources */,
 				01BF4A801975BBC600AAA927 /* UIImage+ImageEffects.m in Sources */,
 				01BD87C81972FB6E00DAC965 /* SPTimelineViewController.m in Sources */,
 				01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */,

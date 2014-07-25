@@ -7,7 +7,7 @@
 //
 
 #import "SPTimelineViewController.h"
-#import "SPCheckInCell.h"
+#import "SPActivityCell.h"
 #import "SPAccountViewController.h"
 //#import "SPPhotoDetailsViewController.h"
 #import "SPUtility.h"
@@ -19,7 +19,6 @@
 @property (nonatomic, assign) BOOL shouldReloadOnAppear;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
 @property (nonatomic, strong) NSMutableDictionary *outstandingSectionHeaderQueries;
-typedef void (^Handler)(int i);
 @end
 
 @implementation SPTimelineViewController
@@ -74,11 +73,11 @@ typedef void (^Handler)(int i);
 
     [super viewDidLoad];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
-        self.tableView.backgroundColor = [UIColor colorWithRed:221.0f/255.0f green:221.0f/255.0f  blue:221.0f/255.0f  alpha:1.0f];
-    UIView *texturedBackgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-    texturedBackgroundView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
-    self.tableView.backgroundView = texturedBackgroundView;
+    //[SP] This shouldnt be necessary, how to disable seperator line?
+    [self.tableView setSeparatorColor:[UIColor whiteColor]];
+    
+    self.tableView.backgroundColor = [UIColor colorWithRed:221.0f/255.0f green:221.0f/255.0f  blue:221.0f/255.0f  alpha:1.0f];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
    // [self.tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0f, 0.0f, 0.0f)];
     /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
@@ -89,16 +88,8 @@ typedef void (^Handler)(int i);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnPhoto:) name:SPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
     */
   
-    [self followsUserEventually:^(int i) {
-            NSLog(@"blocktest",i);
-    }];
-    
+}
 
-}
-- (void)followsUserEventually:(Handler)completionBlock{
-    completionBlock(2);
-    
-}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -107,7 +98,6 @@ typedef void (^Handler)(int i);
         [self loadObjects];
     }
 }
-
 
 
 #pragma mark - UITableViewDataSource
@@ -333,7 +323,7 @@ typedef void (^Handler)(int i);
         return 44.0f;
     }
     
-    return 90.0f;
+    return 130.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -359,10 +349,10 @@ typedef void (^Handler)(int i);
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
         return cell;
     } else {
-        SPCheckInCell *cell = (SPCheckInCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        SPActivityCell *cell = (SPActivityCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil) {
-            cell = [[SPCheckInCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[SPActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 
         }
 
