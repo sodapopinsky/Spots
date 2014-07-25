@@ -224,7 +224,7 @@
 - (void)presentTabBarController {
     
     self.tabBarController = [[SPTabBarController alloc] init];
-    self.homeViewController = [[SPHomeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    self.homeViewController = [[SPHomeViewController alloc] initWithStyle:UITableViewStylePlain];
     self.discoverViewController = [[SPDiscoverViewController alloc] init];
     
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];

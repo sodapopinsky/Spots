@@ -32,7 +32,7 @@
     self.navigationItem.rightBarButtonItem = [[SPSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
     
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
-    
+   
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake( 33.0f, 96.0f, 253.0f, 173.0f);
     [button setBackgroundImage:[UIImage imageNamed:@"HomeTimelineBlank.png"] forState:UIControlStateNormal];

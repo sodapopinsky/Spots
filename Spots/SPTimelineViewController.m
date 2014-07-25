@@ -73,13 +73,13 @@ typedef void (^Handler)(int i);
     // PFQueryTableViewController reads this in viewDidLoad -- would prefer to throw this in init, but didn't work
 
     [super viewDidLoad];
-        [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
         self.tableView.backgroundColor = [UIColor colorWithRed:221.0f/255.0f green:221.0f/255.0f  blue:221.0f/255.0f  alpha:1.0f];
     UIView *texturedBackgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
     texturedBackgroundView.backgroundColor = [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
     self.tableView.backgroundView = texturedBackgroundView;
-    [self.tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0f, 0.0f, 0.0f)];
+   // [self.tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0f, 0.0f, 0.0f)];
     /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userFollowingChanged:) name:SPUtilityUserFollowingChangedNotification object:nil];
@@ -126,7 +126,7 @@ typedef void (^Handler)(int i);
 
 
 #pragma mark - UITableViewDelegate
-
+/*
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 
     if (section == self.objects.count) {
@@ -158,7 +158,7 @@ typedef void (^Handler)(int i);
     [headerView setPhoto:[self.objects objectAtIndex:section]];
     headerView.tag = section;
    
-    /*  [SP] ALL OF THIS HAS TO DO WITH HEADER VIEW ITEMS WHICH WE ARENT CURRENTLY USING
+      [SP] ALL OF THIS HAS TO DO WITH HEADER VIEW ITEMS WHICH WE ARENT CURRENTLY USING
     [headerView.likeButton setTag:section];
     NSDictionary *attributesForPhoto = [[SPCache sharedCache] attributesForPhoto:photo];
     
@@ -230,7 +230,7 @@ typedef void (^Handler)(int i);
             }
         }
     }
-    */
+ 
     return headerView;
     
   
@@ -242,7 +242,7 @@ typedef void (^Handler)(int i);
     }
     return 80.0f;
 }
-
+   */
 /*
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake( 0.0f, 0.0f, self.tableView.bounds.size.width, 16.0f)];
@@ -256,30 +256,22 @@ typedef void (^Handler)(int i);
     }
     return 16.0f;
 }
-*/
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section >= self.objects.count) {
-        // Load More Section
-        return 44.0f;
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == self.objects.count) {
+        return 0.0f;
     }
-    
     return 0.0f;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == self.objects.count && self.paginationEnabled) {
-        // Load More Cell
-        [self loadNextPage];
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == self.objects.count) {
+        return 0.0f;
     }
+    return 0.0f;
 }
-
-
-
+*/
 #pragma mark - PFQueryTableViewController
 
 - (PFQuery *)queryForTable {
@@ -334,6 +326,30 @@ typedef void (^Handler)(int i);
     return nil;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section >= self.objects.count) {
+        // Load More Section
+        return 44.0f;
+    }
+    
+    return 90.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == self.objects.count && self.paginationEnabled) {
+        // Load More Cell
+        [self loadNextPage];
+    }
+}
+
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *CellIdentifier = @"Cell";
 
@@ -372,7 +388,7 @@ typedef void (^Handler)(int i);
 
 
 #pragma mark - PAPPhotoTimelineViewController
-
+/*
 - (SPTimelineHeaderView *)dequeueReusableSectionHeaderView {
     for (SPTimelineHeaderView *sectionHeaderView in self.reusableSectionHeaderViews) {
         if (!sectionHeaderView.superview) {
@@ -383,5 +399,5 @@ typedef void (^Handler)(int i);
     
     return nil;
 }
-
+*/
 @end

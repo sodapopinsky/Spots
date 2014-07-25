@@ -17,6 +17,10 @@
     
     if (self) {
               // Initialization code
+        [self setBackgroundColor: [UIColor redColor]];
+        [self.contentView setBackgroundColor:[UIColor whiteColor]];
+        [self.contentView setFrame:CGRectMake(5.0f, 5.0f, 310.0f, 80.0f)];
+     
       /*
         self.opaque = NO;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
