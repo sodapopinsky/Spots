@@ -13,7 +13,7 @@
 #import "SPUtility.h"
 #import "SPLoadMoreCell.h"
 #import "AppDelegate.h"
-
+#import "TTTTimeIntervalFormatter.h"
 
 @interface SPTimelineViewController ()
 @property (nonatomic, assign) BOOL shouldReloadOnAppear;
@@ -88,6 +88,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidCommentOnPhoto:) name:SPPhotoDetailsViewControllerUserCommentedOnPhotoNotification object:nil];
     */
   
+    
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -287,11 +290,11 @@
    
 
    //[query includeKey:kSPUserProfilePicSmallKey];
-    
-   [query includeKey:kSPCheckInUserKey];
-   return query;
-  //  [query orderByDescending:@"createdAt"];
 
+   [query includeKey:kSPCheckInUserKey];
+  
+    [query orderByDescending:@"createdAt"];
+ return query;
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     //
@@ -342,8 +345,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     static NSString *CellIdentifier = @"Cell";
-
-    
+  
     if (indexPath.section == self.objects.count) {
         // this behavior is normally handled by PFQueryTableViewController, but we are using sections for each object and we must handle this ourselves
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
@@ -353,8 +355,30 @@
         
         if (cell == nil) {
             cell = [[SPActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
         }
+        PFObject *result = [self.objects objectAtIndex:indexPath.section];
+        PFObject *user = [result objectForKey:@"user"];
+        
+        [cell.userButton setTitle:[user objectForKey:kSPUserDisplayNameKey] forState:UIControlStateNormal];
+        [cell.placeButton setTitle:[result objectForKey:kSPCheckInPlaceNameKey] forState:UIControlStateNormal];
+        
+        TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+      //    NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
+        NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
+        NSString *timestamp = [timeIntervalFormatter stringForTimeInterval:timeInterval];
+        cell.timeLabel.text = timestamp;
+       
+        [cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
+        
+        //Reset widths to avoid having large touch area
+        NSDictionary *attributes = @{NSFontAttributeName: cell.userButton.titleLabel.font};
+        CGSize textSize = [cell.userButton.titleLabel.text sizeWithAttributes:attributes];
+        [cell.userButton setFrame:CGRectMake(cell.userButton.frame.origin.x, cell.userButton.frame.origin.y, textSize.width, cell.userButton.frame.size.height)];
+        
+        //Reset widths to avoid having large touch area
+        attributes = @{NSFontAttributeName: cell.placeButton.titleLabel.font};
+        textSize = [cell.placeButton.titleLabel.text sizeWithAttributes:attributes];
+        [cell.placeButton setFrame:CGRectMake(cell.placeButton.frame.origin.x, cell.placeButton.frame.origin.y, textSize.width + 10, cell.placeButton.frame.size.height)];
 
         return cell;
     }
@@ -372,6 +396,7 @@
         cell.hideSeparatorBottom = YES;
         cell.mainView.backgroundColor = [UIColor clearColor];
     }
+    
     return cell;
 }
 

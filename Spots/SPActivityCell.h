@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SPActivityCell : UITableViewCell
-
+@property (nonatomic, strong) UIView *commentView;
+@property (nonatomic, strong) UIButton *userButton, *placeButton;
+@property (nonatomic, strong) UIImageView* userImage;
+@property (nonatomic, strong) UILabel *timeLabel, *comments;
 @end

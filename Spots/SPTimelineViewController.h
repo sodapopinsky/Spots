@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SPTimelineHeaderView.h"
+@class SPActivityCell;
 @interface SPTimelineViewController : PFQueryTableViewController <SPTimelineHeaderViewDelegate>
 
 - (SPTimelineHeaderView *)dequeueReusableSectionHeaderView;

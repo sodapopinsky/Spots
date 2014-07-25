@@ -110,6 +110,7 @@
         [self.placeLabel setBackgroundColor:[UIColor clearColor]];
         
         self.timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
+       
         
         // timestamp
         self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 55.0f, 60.0f, 18.0f)];
