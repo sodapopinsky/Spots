@@ -111,7 +111,9 @@
             return;
         }
         for (PFObject *broadcastees in objects) {
+            if([broadcastees objectForKey:@"toUser"]){
             [currentBroadcastees addObject:[broadcastees objectForKey:@"toUser"]];
+            }
         }
    
         [numBroadcastees setText:[NSString stringWithFormat:@"%i",[currentBroadcastees count]]];
