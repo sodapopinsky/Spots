@@ -9,22 +9,23 @@
 #import "SPActivityCell.h"
 
 @implementation SPActivityCell
-@synthesize userButton, placeButton, userImage, timeLabel, commentView, comments;
+@synthesize userButton, placeButton, userImage, timeLabel, commentView, comments, userImageView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
 
-        [self.contentView setBackgroundColor:[UIColor whiteColor]];
- 
+        [self.contentView setBackgroundColor:kSPColorLightGray];
         
+        userImageView = [[SPProfileImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
+        [self.contentView addSubview:userImageView];
         userImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
         [userImage setImage:[UIImage imageNamed:@"scarjo"]];
         
         userImage.layer.cornerRadius = roundf(userImage.frame.size.width / 2);
         userImage.layer.masksToBounds = YES;
-        [self.contentView addSubview:userImage];
+        //[self.contentView addSubview:userImage];
  
         [[UIButton appearance].titleLabel setTextAlignment:NSTextAlignmentLeft];
         
@@ -37,6 +38,7 @@
         [userButton.titleLabel setTextAlignment:NSTextAlignmentLeft];
         [userButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
         [userButton setTitleColor:kSPColorBlue forState:UIControlStateNormal];
+        [userButton addTarget:self action:@selector(didTapUserButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:userButton];
         
         placeButton = [[UIButton alloc] initWithFrame:CGRectMake(85, 35, 220, 20)];
@@ -53,32 +55,17 @@
         
     
         commentView = [[UIView alloc] initWithFrame:CGRectMake(5, 80, 310, 40)];
-        [commentView setBackgroundColor:[UIColor grayColor]];
+        [commentView setBackgroundColor:[UIColor whiteColor]];
         
         comments = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
         [comments setFont:[UIFont systemFontOfSize:12.0f]];
-        [comments setTextColor:[UIColor whiteColor]];
+        [comments setTextColor:[UIColor grayColor]];
         [commentView addSubview:comments];
         commentView.layer.cornerRadius = 5.0f;
-        [self.contentView addSubview:commentView];
+     
         
         
-        //draw comment triangle
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path,NULL,0.0,0.0);
-        CGPathAddLineToPoint(path, NULL, 20.0f, 0.0f);
-        CGPathAddLineToPoint(path, NULL, 10.0f, -10.0f);
-        CGPathAddLineToPoint(path, NULL, 0.0f, 0.0f);
-        
-        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-        [shapeLayer setPath:path];
-        [shapeLayer setFillColor:[[UIColor grayColor] CGColor]];
-        [shapeLayer setStrokeColor:[[UIColor grayColor] CGColor]];
-        [shapeLayer setBounds:CGRectMake(0.0f, 0.0f, 160.0f, 480)];
-        [shapeLayer setAnchorPoint:CGPointMake(0.0f, 0.0f)];
-        [shapeLayer setPosition:CGPointMake(25.0f, 3.0f)];
-        [[[self commentView] layer] addSublayer:shapeLayer];
-        
+  
         
         
         
@@ -86,6 +73,18 @@
     }
     return self;
 }
+
+#pragma mark - Delegate methods
+
+/* Inform delegate that a user image or name was tapped */
+- (void)didTapUserButtonAction:(id)sender {
+    NSLog(@"tapparoo");
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cell:didTapUserButton:)]) {
+        [self.delegate cell:self didTapUserButton:self.user];
+    }
+ 
+}
+
 
 - (void)awakeFromNib
 {

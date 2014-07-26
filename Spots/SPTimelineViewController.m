@@ -7,7 +7,6 @@
 //
 
 #import "SPTimelineViewController.h"
-#import "SPActivityCell.h"
 #import "SPAccountViewController.h"
 //#import "SPPhotoDetailsViewController.h"
 #import "SPUtility.h"
@@ -326,6 +325,11 @@
         return 44.0f;
     }
     
+    PFObject *result = [self.objects objectAtIndex:indexPath.section];
+    NSString *comment =[result objectForKey:kSPCheckInCommentsKey];
+    if((comment.length) <= 0){
+        return 80.0f;
+    }
     return 130.0f;
 }
 
@@ -356,18 +360,52 @@
         if (cell == nil) {
             cell = [[SPActivityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
+        
+        [cell setDelegate:self];
         PFObject *result = [self.objects objectAtIndex:indexPath.section];
         PFObject *user = [result objectForKey:@"user"];
-        
+        cell.user = [result objectForKey:kSPCheckInUserKey];
         [cell.userButton setTitle:[user objectForKey:kSPUserDisplayNameKey] forState:UIControlStateNormal];
         [cell.placeButton setTitle:[result objectForKey:kSPCheckInPlaceNameKey] forState:UIControlStateNormal];
+
+
         
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
-      //    NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
+        //NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
         NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
         NSString *timestamp = [timeIntervalFormatter stringForTimeInterval:timeInterval];
         cell.timeLabel.text = timestamp;
        
+      //  NSLog(@"%@",[user objectForKey:kSPUserProfilePicMediumKey]);
+        
+        PFFile *profilePictureSmall = [user objectForKey:kSPUserProfilePicSmallKey];
+        [cell.userImageView setFile:profilePictureSmall];
+        
+   
+        
+        
+        NSString *comment =[result objectForKey:kSPCheckInCommentsKey];
+        if((comment.length) > 0){
+  
+            [cell.contentView addSubview:cell.commentView];
+            //draw comment triangle
+            CGMutablePathRef path = CGPathCreateMutable();
+            CGPathMoveToPoint(path,NULL,0.0,0.0);
+            CGPathAddLineToPoint(path, NULL, 20.0f, 0.0f);
+            CGPathAddLineToPoint(path, NULL, 10.0f, -10.0f);
+            CGPathAddLineToPoint(path, NULL, 0.0f, 0.0f);
+            
+            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+            [shapeLayer setPath:path];
+            [shapeLayer setFillColor:[[UIColor whiteColor] CGColor]];
+            [shapeLayer setStrokeColor:[[UIColor whiteColor] CGColor]];
+            [shapeLayer setBounds:CGRectMake(0.0f, 0.0f, 160.0f, 480)];
+            [shapeLayer setAnchorPoint:CGPointMake(0.0f, 0.0f)];
+            [shapeLayer setPosition:CGPointMake(25.0f, 3.0f)];
+            [[cell.commentView layer] addSublayer:shapeLayer];
+            
+        }
+        
         [cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
         
         //Reset widths to avoid having large touch area
@@ -382,6 +420,15 @@
 
         return cell;
     }
+}
+
+
+- (void)cell:(SPActivityCell *)cellView didTapUserButton:(PFUser *)user {
+  
+SPAccountViewController *accountViewController = [[SPAccountViewController alloc] initWithStyle:UITableViewStylePlain];
+    [accountViewController setUser:user];
+    [self.navigationController pushViewController:accountViewController animated:YES];
+    
 }
 
 

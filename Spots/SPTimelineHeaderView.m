@@ -150,6 +150,8 @@
     PFFile *profilePictureSmall = [user objectForKey:kSPUserProfilePicSmallKey];
     [self.avatarImageView setFile:profilePictureSmall];
     
+
+    
     NSString *authorName = [user objectForKey:kSPUserDisplayNameKey];
     [self.userButton setTitle:authorName forState:UIControlStateNormal];
     

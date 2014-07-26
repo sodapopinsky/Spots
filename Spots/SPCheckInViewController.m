@@ -204,6 +204,8 @@
     
 //[tableView deselectRowAtIndexPath:indexPath animated:YES];
     SPCheckinCommentsViewController *nextController = [[SPCheckinCommentsViewController alloc] initWithPlace:[places objectAtIndex:indexPath.row]];
+    NSLog(@"%@",[places objectAtIndex:indexPath.row]);
+    
     [self.navigationController pushViewController:nextController animated:YES];
 
 }

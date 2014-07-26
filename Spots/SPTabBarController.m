@@ -129,7 +129,7 @@
     
     UIImage* imageOfUnderlyingView = [self.view convertViewToImage];
     imageOfUnderlyingView = [imageOfUnderlyingView applyBlurWithRadius:20
-                                                             tintColor:[UIColor colorWithWhite:1.0 alpha:0.2]
+                                                             tintColor:[UIColor colorWithWhite:1.0 alpha:0.1]
                                                  saturationDeltaFactor:1.3
                                                              maskImage:nil];
     

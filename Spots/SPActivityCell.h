@@ -7,10 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPProfileImageView.h"
+
+
+@protocol SPActivityCellDelegate;
 
 @interface SPActivityCell : UITableViewCell
 @property (nonatomic, strong) UIView *commentView;
 @property (nonatomic, strong) UIButton *userButton, *placeButton;
 @property (nonatomic, strong) UIImageView* userImage;
 @property (nonatomic, strong) UILabel *timeLabel, *comments;
+@property (nonatomic, strong) SPProfileImageView *userImageView;
+@property (nonatomic,strong) PFUser *user;
+@property (nonatomic, strong) id delegate;
+
+@end
+
+@protocol SPActivityCellDelegate <NSObject>
+@optional
+
+/*!
+ Sent to the delegate when a user button is tapped
+ @param aUser the PFUser of the user that was tapped
+ */
+- (void)cell:(SPActivityCell *)cellView didTapUserButton:(PFUser *)aUser;
+
 @end

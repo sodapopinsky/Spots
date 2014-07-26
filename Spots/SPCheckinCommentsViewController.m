@@ -58,7 +58,7 @@
     
     numBroadcastees = [[UILabel alloc] initWithFrame:CGRectMake(40, 7, 30, 30)];
     [numBroadcastees setTextColor:[UIColor whiteColor]];
-    [numBroadcastees setText:@"1"];
+  
     
     
     UIImageView *broadcastingToIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 5, 46*1.3, 1.3*23)];
@@ -91,6 +91,7 @@
      [self.navigationController.view setFrame:CGRectMake(10, 30, 300,[[UIScreen mainScreen] bounds].size.height - 270)];
 }
 -(void)loadBroadcastingToBar{
+    
     if (self.broadcastingToQueryInProgress) {
         return;
     }
@@ -112,8 +113,8 @@
         for (PFObject *broadcastees in objects) {
             [currentBroadcastees addObject:[broadcastees objectForKey:@"toUser"]];
         }
-        
-       
+   
+        [numBroadcastees setText:[NSString stringWithFormat:@"%i",[currentBroadcastees count]]];
        
         NSInteger i;
         NSInteger numOfPics = numLikePics > currentBroadcastees.count ? currentBroadcastees.count : numLikePics;
@@ -129,6 +130,7 @@
         }
     
     }];
+     
 }
 
 
@@ -138,6 +140,9 @@
     if (self != nil)
     {
         place = placeObject;
+        NSLog(@"%@",place);
+        
+        
     }
     
     return self;

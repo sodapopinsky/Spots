@@ -26,6 +26,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         self.profileImageView = [[PFImageView alloc] initWithFrame:frame];
+   
         [self addSubview:self.profileImageView];
         
         self.profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -40,6 +41,8 @@
         }
         
         [self addSubview:self.borderImageview];
+        self.profileImageView.layer.cornerRadius = roundf(self.profileImageView .frame.size.width / 2);
+         self.profileImageView.layer.masksToBounds = YES;
     }
     return self;
 }
@@ -51,7 +54,7 @@
     [super layoutSubviews];
     [self bringSubviewToFront:self.borderImageview];
     
-    self.profileImageView.frame = CGRectMake( 1.0f, 0.0f, self.frame.size.width - 2.0f, self.frame.size.height - 2.0f);
+    self.profileImageView.frame = CGRectMake( 1.0f, 0.0f, self.frame.size.width, self.frame.size.height);
     self.borderImageview.frame = CGRectMake( 0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
     self.profileButton.frame = CGRectMake( 0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
 }
