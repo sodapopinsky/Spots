@@ -7,13 +7,13 @@
 //
 
 #import "SPActivityViewController.h"
-#import "SPSettingsActionSheetDelegate.h"
-#import "SPSettingsButtonItem.h"
+
+
 #import "MBProgressHUD.h"
 #import "SPFindFriendsViewController.h"
 
 @interface SPActivityViewController ()
-@property (nonatomic, strong) SPSettingsActionSheetDelegate *settingsActionSheetDelegate;
+
 @property (nonatomic, strong) UIView *blankTimelineView;
 @end
 

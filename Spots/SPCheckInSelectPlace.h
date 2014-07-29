@@ -2,7 +2,7 @@
 //  SPCheckInSelectPlace.h
 //  Spots
 //
-//  Created by Nicholas Spitale on 7/28/14.
+//  Created by Nicholas Spitale on 7/29/14.
 //  Copyright (c) 2014 NickSpitale. All rights reserved.
 //
 
@@ -11,11 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
-@interface SPCheckInSelectPlace : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate  >
 
+@interface SPCheckInSelectPlace: UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate  >
 {
     CLLocationManager *locationManager;
-       NSArray *places;
+    NSArray *places;
 }
 
 @property (nonatomic, retain) MKMapView *map;

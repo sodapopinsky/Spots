@@ -2,11 +2,12 @@
 //  SPCheckInSelectPlace.m
 //  Spots
 //
-//  Created by Nicholas Spitale on 7/28/14.
+//  Created by Nicholas Spitale on 7/29/14.
 //  Copyright (c) 2014 NickSpitale. All rights reserved.
 //
 
 #import "SPCheckInSelectPlace.h"
+#import "SPCheckInAddComments.h"
 
 @interface SPCheckInSelectPlace ()
 @property CLLocation *currentLocation;
@@ -19,16 +20,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        // Custom initialization
-      
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.distanceFilter = kCLDistanceFilterNone;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        
-
-        
-       
     }
     return self;
 }
@@ -37,6 +32,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *dismiss = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismiss)];
+    [self.navigationItem setTitle:@"@"];
+    [self.navigationItem setLeftBarButtonItem:dismiss];
+    
     map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 45, self.view.frame.size.width, 100)];
     map.delegate = self;
     [map setShowsUserLocation:YES];
@@ -67,7 +67,7 @@
     
     numSpotsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 20)];
     [numSpotsLabel setTextColor:[UIColor whiteColor]];
- 
+    
     
     UIImageView *goCustom = [[UIImageView alloc] initWithFrame:CGRectMake(295, 15, 29*.5,.5 * 57)];
     [goCustom setImage:[UIImage imageNamed:@"RightArrow"]];
@@ -86,7 +86,7 @@
     
     [self.view addSubview:self.tableView];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(cancelButtonAction)];
+    
     
 #if TARGET_IPHONE_SIMULATOR
     NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=30.0046095,-90.18063130000002&types=bar|food|night_club&radius=100&key=%@",kGOOGLE_API_KEY];
@@ -96,11 +96,16 @@
 #else
     [locationManager startUpdatingLocation];
 #endif
+
+    
 }
 
--(void)cancelButtonAction{
-    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+
+-(void)dismiss{
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
+
 
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views {
     MKCoordinateRegion region;
@@ -129,9 +134,9 @@
         
         NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&types=bar|food&radius=250&key=%@",currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,kGOOGLE_API_KEY];
         url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-          [self queryGooglePlaces:url];
-
-  
+        [self queryGooglePlaces:url];
+        
+        
         
     }
     [locationManager stopUpdatingLocation];
@@ -140,18 +145,9 @@
 
 
 -(void) queryGooglePlaces:(NSString*)url{
-    // Build the url string to send to Google. NOTE: The kGOOGLE_API_KEY is a constant that should contain your own API key that you obtain from Google. See this link for more info:
-    // https://developers.google.com/maps/documentation/places/#Authentication
-    //  NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=5000&types=food&sensor=true&key=%@", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, kGOOGLE_API_KEY];
-    
-    
-    
-    
-    
-    //Formulate the string as a URL object.
+
     NSURL *googleRequestURL=[NSURL URLWithString:url];
-    
-    // Retrieve the results of the URL.
+
     dispatch_async(kBgQueue, ^{
         NSData* data = [NSData dataWithContentsOfURL: googleRequestURL];
         [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
@@ -160,24 +156,16 @@
 }
 
 -(void)fetchedData:(NSData *)responseData {
-  //  [MBProgressHUD hideHUDForView:self.view animated:YES];
-    //parse out the json data
+
     NSError* error;
-   
+    
     NSDictionary* json = [NSJSONSerialization
                           JSONObjectWithData:responseData
                           
                           options:kNilOptions
                           error:&error];
-  
-    // NSLog(@"%@",json);
-    //The results from Google will be an array obtained from the NSDictionary object with the key "results".
+    
     places = [json objectForKey:@"results"];
-    
-    //Write out the data to the console.
-    //  NSLog(@"Google Data: %@",json);
-    
-    
     
     [self.tableView reloadData];
 }
@@ -186,19 +174,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
- 
-     [numSpotsLabel setText:[NSString stringWithFormat:@"We found %i spots we think you might be",[places count]]];
-    // Return the number of rows in the section.
-       return [places count];
-   
+    [numSpotsLabel setText:[NSString stringWithFormat:@"We found %i spots we think you might be",[places count]]];
+    return [places count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,12 +193,8 @@
         
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-
+    
     cell.textLabel.text = [[places objectAtIndex:indexPath.row] objectForKey:@"name"];
-    
-    
-    
-    
     
     NSDictionary *geometry = [[places objectAtIndex:indexPath.row] objectForKey:@"geometry"];
     NSDictionary *location = [geometry objectForKey:@"location"];
@@ -231,7 +209,7 @@
     NSLog(@"distance:%f",distance);
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%i meters",(int)distance];
-
+    
     
     return cell;
 }
@@ -242,13 +220,16 @@
     // [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
-    /*
-    SPCheckinCommentsViewController *nextController = [[SPCheckinCommentsViewController alloc] initWithPlace:[places objectAtIndex:indexPath.row]];
-    NSLog(@"%@",[places objectAtIndex:indexPath.row]);
     
-    [self.navigationController pushViewController:nextController animated:YES];
-    */
+     SPCheckInAddComments *nextController = [[SPCheckInAddComments alloc] initWithPlace:[places objectAtIndex:indexPath.row]];
+     NSLog(@"%@",[places objectAtIndex:indexPath.row]);
+     
+     [self.navigationController pushViewController:nextController animated:YES];
+    
 }
+
+
+
 
 
 
@@ -259,6 +240,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
 
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

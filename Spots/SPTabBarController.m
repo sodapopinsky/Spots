@@ -7,12 +7,11 @@
 //
 
 #import "SPTabBarController.h"
-#import "SPCheckInViewController.h"
+
 #import "UIImage+ImageEffects.h"
 #import "UIView+ConvertToImage.h"
-#import "SPCheckInContainer.h"
-#import "SPCheckInNavigationController.h"
 #import "SPCheckInSelectPlace.h"
+#import "SPCheckInNavigationController.h"
 
 @interface SPTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;

@@ -11,7 +11,6 @@
 		01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278AD8196F593500BC013A /* SPLogInViewController.m */; };
 		01278ADC196F5C3900BC013A /* SPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADB196F5C3900BC013A /* SPUtility.m */; };
 		01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADE196F5D1F00BC013A /* SPConstants.m */; };
-		0175D2C819873300007571A6 /* SPCheckInSelectPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175D2C719873300007571A6 /* SPCheckInSelectPlace.m */; };
 		01805FC9196EC853002E79F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FC8196EC853002E79F6 /* Foundation.framework */; };
 		01805FCB196EC853002E79F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCA196EC853002E79F6 /* CoreGraphics.framework */; };
 		01805FCD196EC853002E79F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCC196EC853002E79F6 /* UIKit.framework */; };
@@ -30,15 +29,12 @@
 		01806008196EC97F002E79F6 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01806007196EC97F002E79F6 /* FacebookSDK.framework */; };
 		0180600A196EC986002E79F6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01806009196EC986002E79F6 /* Parse.framework */; };
 		0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180600D196EC9A4002E79F6 /* MBProgressHUD.m */; };
-		018060121973590F002E79F6 /* SPSettingsActionSheetDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 018060111973590F002E79F6 /* SPSettingsActionSheetDelegate.m */; };
-		0180601519735A53002E79F6 /* SPSettingsButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180601419735A53002E79F6 /* SPSettingsButtonItem.m */; };
 		018060181973685B002E79F6 /* SPCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 018060171973685B002E79F6 /* SPCache.m */; };
 		0180601B1974D387002E79F6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180601A1974D387002E79F6 /* Reachability.m */; };
 		01A10FD21976B9810038CA65 /* SPEditPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A10FD11976B9810038CA65 /* SPEditPhotoViewController.m */; };
 		01A10FD61976BA790038CA65 /* SPPhotoDetailsFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A10FD51976BA790038CA65 /* SPPhotoDetailsFooterView.m */; };
 		01A10FD81976CAE20038CA65 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A10FD71976CAE20038CA65 /* MapKit.framework */; };
 		01A10FDA1976CAE80038CA65 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A10FD91976CAE80038CA65 /* CoreLocation.framework */; };
-		01A10FDE1976D0760038CA65 /* SPCheckInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */; };
 		01A5B1271982D0430015D78A /* SPActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5B1261982D0430015D78A /* SPActivityCell.m */; };
 		01A804F21985D795001EB184 /* SPEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A804F11985D795001EB184 /* SPEventsViewController.m */; };
 		01B7789119783F020010FB0F /* SPCheckinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B7789019783F020010FB0F /* SPCheckinCell.m */; };
@@ -55,10 +51,11 @@
 		01BF979119746DBE006C2613 /* SPAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF979019746DBE006C2613 /* SPAccountViewController.m */; };
 		01BF979419746E45006C2613 /* SPLoadMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF979319746E45006C2613 /* SPLoadMoreCell.m */; };
 		01C8AE79197DBC380046FDCF /* UIView+ConvertToImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE78197DBC380046FDCF /* UIView+ConvertToImage.m */; };
-		01C8AE7C197DC0EC0046FDCF /* SPCheckInContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */; };
 		01C8AE7F197DEBE70046FDCF /* SPCheckinTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */; };
 		01D45606198738FA00447ECB /* SPCheckInNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D45605198738FA00447ECB /* SPCheckInNavigationController.m */; };
 		01D456111987FE4200447ECB /* SPMoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456101987FE4200447ECB /* SPMoreNavigationController.m */; };
+		01D456141988048200447ECB /* SPCheckInSelectPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456131988048200447ECB /* SPCheckInSelectPlace.m */; };
+		01D456171988087A00447ECB /* SPCheckInAddComments.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456161988087A00447ECB /* SPCheckInAddComments.m */; };
 		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
 		01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED341971EF4F001A9388 /* SPActivityViewController.m */; };
 		01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED381971F088001A9388 /* SPDiscoverViewController.m */; };
@@ -83,8 +80,6 @@
 		01278ADB196F5C3900BC013A /* SPUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtility.m; sourceTree = "<group>"; };
 		01278ADD196F5D1F00BC013A /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		01278ADE196F5D1F00BC013A /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
-		0175D2C619873300007571A6 /* SPCheckInSelectPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInSelectPlace.h; sourceTree = "<group>"; };
-		0175D2C719873300007571A6 /* SPCheckInSelectPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInSelectPlace.m; sourceTree = "<group>"; };
 		01805FC5196EC853002E79F6 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01805FC8196EC853002E79F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01805FCA196EC853002E79F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -111,10 +106,6 @@
 		01806009196EC986002E79F6 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		0180600C196EC9A4002E79F6 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		0180600D196EC9A4002E79F6 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		018060101973590F002E79F6 /* SPSettingsActionSheetDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSettingsActionSheetDelegate.h; sourceTree = "<group>"; };
-		018060111973590F002E79F6 /* SPSettingsActionSheetDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSettingsActionSheetDelegate.m; sourceTree = "<group>"; };
-		0180601319735A53002E79F6 /* SPSettingsButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSettingsButtonItem.h; sourceTree = "<group>"; };
-		0180601419735A53002E79F6 /* SPSettingsButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSettingsButtonItem.m; sourceTree = "<group>"; };
 		018060161973685B002E79F6 /* SPCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCache.h; sourceTree = "<group>"; };
 		018060171973685B002E79F6 /* SPCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCache.m; sourceTree = "<group>"; };
 		018060191974D387002E79F6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -125,8 +116,6 @@
 		01A10FD51976BA790038CA65 /* SPPhotoDetailsFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPhotoDetailsFooterView.m; sourceTree = "<group>"; };
 		01A10FD71976CAE20038CA65 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		01A10FD91976CAE80038CA65 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		01A10FDC1976D0760038CA65 /* SPCheckInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInViewController.h; sourceTree = "<group>"; };
-		01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInViewController.m; sourceTree = "<group>"; };
 		01A5B1251982D0430015D78A /* SPActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityCell.h; sourceTree = "<group>"; };
 		01A5B1261982D0430015D78A /* SPActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPActivityCell.m; sourceTree = "<group>"; };
 		01A804F01985D795001EB184 /* SPEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPEventsViewController.h; sourceTree = "<group>"; };
@@ -159,14 +148,16 @@
 		01BF979319746E45006C2613 /* SPLoadMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPLoadMoreCell.m; sourceTree = "<group>"; };
 		01C8AE77197DBC380046FDCF /* UIView+ConvertToImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ConvertToImage.h"; sourceTree = "<group>"; };
 		01C8AE78197DBC380046FDCF /* UIView+ConvertToImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ConvertToImage.m"; sourceTree = "<group>"; };
-		01C8AE7A197DC0EC0046FDCF /* SPCheckInContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInContainer.h; sourceTree = "<group>"; };
-		01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInContainer.m; sourceTree = "<group>"; };
 		01C8AE7D197DEBE70046FDCF /* SPCheckinTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckinTVCell.h; sourceTree = "<group>"; };
 		01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckinTVCell.m; sourceTree = "<group>"; };
 		01D45604198738FA00447ECB /* SPCheckInNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInNavigationController.h; sourceTree = "<group>"; };
 		01D45605198738FA00447ECB /* SPCheckInNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInNavigationController.m; sourceTree = "<group>"; };
 		01D4560F1987FE4200447ECB /* SPMoreNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMoreNavigationController.h; sourceTree = "<group>"; };
 		01D456101987FE4200447ECB /* SPMoreNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMoreNavigationController.m; sourceTree = "<group>"; };
+		01D456121988048200447ECB /* SPCheckInSelectPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInSelectPlace.h; sourceTree = "<group>"; };
+		01D456131988048200447ECB /* SPCheckInSelectPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInSelectPlace.m; sourceTree = "<group>"; };
+		01D456151988087A00447ECB /* SPCheckInAddComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInAddComments.h; sourceTree = "<group>"; };
+		01D456161988087A00447ECB /* SPCheckInAddComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInAddComments.m; sourceTree = "<group>"; };
 		01E3ED301971ED35001A9388 /* SPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTabBarController.h; sourceTree = "<group>"; };
 		01E3ED311971ED35001A9388 /* SPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTabBarController.m; sourceTree = "<group>"; };
 		01E3ED331971EF4F001A9388 /* SPActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityViewController.h; sourceTree = "<group>"; };
@@ -211,7 +202,7 @@
 				01A804EF1985D77E001EB184 /* Events */,
 				01A10FDB1976CE5D0038CA65 /* Check In */,
 				01A10FCF1976B9430038CA65 /* Take Photo */,
-				0180600F197358F4002E79F6 /* Settings */,
+				0180600F197358F4002E79F6 /* FindFriends */,
 				01E3ED361971F071001A9388 /* Discover */,
 				01E3ED301971ED35001A9388 /* SPTabBarController.h */,
 				01E3ED311971ED35001A9388 /* SPTabBarController.m */,
@@ -321,8 +312,6 @@
 				01A10FD31976BA4F0038CA65 /* PhotoDetailsViews */,
 				01BD87CD19730D8800DAC965 /* UITableViewCells */,
 				01BD87C91972FC0500DAC965 /* TimelineViews */,
-				0180601319735A53002E79F6 /* SPSettingsButtonItem.h */,
-				0180601419735A53002E79F6 /* SPSettingsButtonItem.m */,
 				01BD87D119742D1600DAC965 /* SPProfileImageView.h */,
 				01BD87D219742D1600DAC965 /* SPProfileImageView.m */,
 			);
@@ -375,15 +364,13 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		0180600F197358F4002E79F6 /* Settings */ = {
+		0180600F197358F4002E79F6 /* FindFriends */ = {
 			isa = PBXGroup;
 			children = (
-				018060101973590F002E79F6 /* SPSettingsActionSheetDelegate.h */,
-				018060111973590F002E79F6 /* SPSettingsActionSheetDelegate.m */,
 				01BF4A881975C05F00AAA927 /* SPFindFriendsViewController.h */,
 				01BF4A891975C05F00AAA927 /* SPFindFriendsViewController.m */,
 			);
-			name = Settings;
+			name = FindFriends;
 			sourceTree = "<group>";
 		};
 		01A10FCF1976B9430038CA65 /* Take Photo */ = {
@@ -407,16 +394,14 @@
 		01A10FDB1976CE5D0038CA65 /* Check In */ = {
 			isa = PBXGroup;
 			children = (
-				01A10FDC1976D0760038CA65 /* SPCheckInViewController.h */,
-				01A10FDD1976D0760038CA65 /* SPCheckInViewController.m */,
 				01BCB1E01978166E006D7072 /* SPCheckinCommentsViewController.h */,
 				01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */,
-				01C8AE7A197DC0EC0046FDCF /* SPCheckInContainer.h */,
-				01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */,
-				0175D2C619873300007571A6 /* SPCheckInSelectPlace.h */,
-				0175D2C719873300007571A6 /* SPCheckInSelectPlace.m */,
 				01D45604198738FA00447ECB /* SPCheckInNavigationController.h */,
 				01D45605198738FA00447ECB /* SPCheckInNavigationController.m */,
+				01D456121988048200447ECB /* SPCheckInSelectPlace.h */,
+				01D456131988048200447ECB /* SPCheckInSelectPlace.m */,
+				01D456151988087A00447ECB /* SPCheckInAddComments.h */,
+				01D456161988087A00447ECB /* SPCheckInAddComments.m */,
 			);
 			name = "Check In";
 			sourceTree = "<group>";
@@ -632,8 +617,9 @@
 				01806001196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m in Sources */,
 				01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */,
 				01B7789119783F020010FB0F /* SPCheckinCell.m in Sources */,
-				018060121973590F002E79F6 /* SPSettingsActionSheetDelegate.m in Sources */,
 				018060181973685B002E79F6 /* SPCache.m in Sources */,
+				01D456171988087A00447ECB /* SPCheckInAddComments.m in Sources */,
+				01D456141988048200447ECB /* SPCheckInSelectPlace.m in Sources */,
 				0180601B1974D387002E79F6 /* Reachability.m in Sources */,
 				01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */,
 				01A5B1271982D0430015D78A /* SPActivityCell.m in Sources */,
@@ -647,12 +633,10 @@
 				01BF4A871975BF5C00AAA927 /* SPFindFriendsCell.m in Sources */,
 				01C8AE79197DBC380046FDCF /* UIView+ConvertToImage.m in Sources */,
 				01BF979419746E45006C2613 /* SPLoadMoreCell.m in Sources */,
-				01C8AE7C197DC0EC0046FDCF /* SPCheckInContainer.m in Sources */,
 				01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */,
 				01806000196EC8BC002E79F6 /* UIImage+ResizeAdditions.m in Sources */,
 				01A804F21985D795001EB184 /* SPEventsViewController.m in Sources */,
 				01BD87D319742D1600DAC965 /* SPProfileImageView.m in Sources */,
-				01A10FDE1976D0760038CA65 /* SPCheckInViewController.m in Sources */,
 				01BF4A8A1975C05F00AAA927 /* SPFindFriendsViewController.m in Sources */,
 				01278ADC196F5C3900BC013A /* SPUtility.m in Sources */,
 				01BD87D019730DA000DAC965 /* SPPhotoCell.m in Sources */,
@@ -662,10 +646,8 @@
 				01805FD9196EC853002E79F6 /* AppDelegate.m in Sources */,
 				01A10FD61976BA790038CA65 /* SPPhotoDetailsFooterView.m in Sources */,
 				01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */,
-				0175D2C819873300007571A6 /* SPCheckInSelectPlace.m in Sources */,
 				01805FD5196EC853002E79F6 /* main.m in Sources */,
 				01D456111987FE4200447ECB /* SPMoreNavigationController.m in Sources */,
-				0180601519735A53002E79F6 /* SPSettingsButtonItem.m in Sources */,
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,
 				01BD87CC1972FC4800DAC965 /* SPTimelineHeaderView.m in Sources */,
 				01BD87D719742E1400DAC965 /* TTTTimeIntervalFormatter.m in Sources */,
