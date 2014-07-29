@@ -13,6 +13,7 @@
 #import "SPCheckInSelectPlace.h"
 #import "SPCheckInNavigationController.h"
 
+
 @interface SPTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;
 
@@ -138,6 +139,8 @@
     SPCheckInSelectPlace *checkInSelectPlace = [[SPCheckInSelectPlace alloc] init];
     
     SPCheckInNavigationController *checkInNavigationController = [[SPCheckInNavigationController alloc] initWithRootViewController:checkInSelectPlace];
+   
+
     
    // SPCheckInContainer *checkInViewController = [[SPCheckInContainer alloc] initWithBackgroundImage:imageOfUnderlyingView];
   // checkInNavigationController = [[UINavigationController alloc] initWithRootViewController:checkInViewController];

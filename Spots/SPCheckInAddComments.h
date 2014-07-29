@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface SPCheckInAddComments : UIViewController <MKMapViewDelegate>
+@interface SPCheckInAddComments : UIViewController < MKMapViewDelegate,UITextViewDelegate>
 -(id)initWithPlace:(NSDictionary *)place;
 
 @property (nonatomic, retain) MKMapView *map;

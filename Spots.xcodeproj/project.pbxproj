@@ -56,6 +56,7 @@
 		01D456111987FE4200447ECB /* SPMoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456101987FE4200447ECB /* SPMoreNavigationController.m */; };
 		01D456141988048200447ECB /* SPCheckInSelectPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456131988048200447ECB /* SPCheckInSelectPlace.m */; };
 		01D456171988087A00447ECB /* SPCheckInAddComments.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456161988087A00447ECB /* SPCheckInAddComments.m */; };
+		01D4561A19883E9C00447ECB /* SPMapNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D4561919883E9C00447ECB /* SPMapNavigationBar.m */; };
 		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
 		01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED341971EF4F001A9388 /* SPActivityViewController.m */; };
 		01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED381971F088001A9388 /* SPDiscoverViewController.m */; };
@@ -158,6 +159,8 @@
 		01D456131988048200447ECB /* SPCheckInSelectPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInSelectPlace.m; sourceTree = "<group>"; };
 		01D456151988087A00447ECB /* SPCheckInAddComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInAddComments.h; sourceTree = "<group>"; };
 		01D456161988087A00447ECB /* SPCheckInAddComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInAddComments.m; sourceTree = "<group>"; };
+		01D4561819883E9C00447ECB /* SPMapNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMapNavigationBar.h; sourceTree = "<group>"; };
+		01D4561919883E9C00447ECB /* SPMapNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMapNavigationBar.m; sourceTree = "<group>"; };
 		01E3ED301971ED35001A9388 /* SPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTabBarController.h; sourceTree = "<group>"; };
 		01E3ED311971ED35001A9388 /* SPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTabBarController.m; sourceTree = "<group>"; };
 		01E3ED331971EF4F001A9388 /* SPActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityViewController.h; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 				01278ADE196F5D1F00BC013A /* SPConstants.m */,
 				018060161973685B002E79F6 /* SPCache.h */,
 				018060171973685B002E79F6 /* SPCache.m */,
+				01D4561819883E9C00447ECB /* SPMapNavigationBar.h */,
+				01D4561919883E9C00447ECB /* SPMapNavigationBar.m */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,
 				01BD87CC1972FC4800DAC965 /* SPTimelineHeaderView.m in Sources */,
 				01BD87D719742E1400DAC965 /* TTTTimeIntervalFormatter.m in Sources */,
+				01D4561A19883E9C00447ECB /* SPMapNavigationBar.m in Sources */,
 				01BA0A5E1979D37600E16A85 /* SPCheckInHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
