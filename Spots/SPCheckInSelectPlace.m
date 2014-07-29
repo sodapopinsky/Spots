@@ -20,11 +20,15 @@
     if (self) {
         // Custom initialization
         // Custom initialization
+      
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.distanceFilter = kCLDistanceFilterNone;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [locationManager startUpdatingLocation];
+        
+
+        
+       
     }
     return self;
 }
@@ -61,12 +65,12 @@
     [customPlace addSubview:buttonView];
     
     
-    numSpotsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 300, 200, 20)];
+    numSpotsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 200, 300, 20)];
     [numSpotsLabel setTextColor:[UIColor whiteColor]];
  
     
 
-
+    
     [numSpotsLabel setFont:[UIFont systemFontOfSize:12.0f]];
     
     [self.view addSubview:numSpotsLabel];
@@ -78,6 +82,15 @@
     self.tableView.dataSource = self;
     
     [self.view addSubview:self.tableView];
+    
+#if TARGET_IPHONE_SIMULATOR
+    NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=30.0046095,-90.18063130000002&types=bar|food|night_club&radius=100&key=%@",kGOOGLE_API_KEY];
+    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    currentLocation = [[CLLocation alloc] initWithLatitude:30.0046095 longitude:-90.18063130000002];
+    [self queryGooglePlaces:url];
+#else
+    [locationManager startUpdatingLocation];
+#endif
 }
 
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views {
@@ -109,7 +122,7 @@
         url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
           [self queryGooglePlaces:url];
 
-        NSLog(@"%@",url);
+  
         
     }
     [locationManager stopUpdatingLocation];
@@ -174,7 +187,6 @@
     
  
      [numSpotsLabel setText:[NSString stringWithFormat:@"We found %i spots we think you might be",[places count]]];
-  
     // Return the number of rows in the section.
        return [places count];
    

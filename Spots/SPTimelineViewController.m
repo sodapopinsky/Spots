@@ -14,6 +14,11 @@
 #import "AppDelegate.h"
 #import "TTTTimeIntervalFormatter.h"
 
+#import <TargetConditionals.h>
+
+
+
+
 @interface SPTimelineViewController ()
 @property (nonatomic, assign) BOOL shouldReloadOnAppear;
 @property (nonatomic, strong) NSMutableSet *reusableSectionHeaderViews;
