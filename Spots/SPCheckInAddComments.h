@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface SPCheckInAddComments : UIViewController < MKMapViewDelegate,UITextViewDelegate>
+@interface SPCheckInAddComments : UIViewController < UIImagePickerControllerDelegate, MKMapViewDelegate,UITextViewDelegate>
 -(id)initWithPlace:(NSDictionary *)place;
-
+@property (nonatomic, retain) UIButton *addPhoto;
 @property (nonatomic, retain) MKMapView *map;
 @end
