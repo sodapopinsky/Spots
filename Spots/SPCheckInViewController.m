@@ -19,7 +19,7 @@
 @end
 
 @implementation SPCheckInViewController
-@synthesize currentLocation,places,hud;
+@synthesize currentLocation,places,hud, map;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -82,7 +82,7 @@ NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/ap
     self.hud.labelText = NSLocalizedString(@"Loading", nil);
     self.hud.dimBackground = NO;
   
-   
+
 
    
     

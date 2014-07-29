@@ -11,6 +11,7 @@
 		01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278AD8196F593500BC013A /* SPLogInViewController.m */; };
 		01278ADC196F5C3900BC013A /* SPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADB196F5C3900BC013A /* SPUtility.m */; };
 		01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADE196F5D1F00BC013A /* SPConstants.m */; };
+		0175D2C819873300007571A6 /* SPCheckInSelectPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 0175D2C719873300007571A6 /* SPCheckInSelectPlace.m */; };
 		01805FC9196EC853002E79F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FC8196EC853002E79F6 /* Foundation.framework */; };
 		01805FCB196EC853002E79F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCA196EC853002E79F6 /* CoreGraphics.framework */; };
 		01805FCD196EC853002E79F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCC196EC853002E79F6 /* UIKit.framework */; };
@@ -56,6 +57,7 @@
 		01C8AE79197DBC380046FDCF /* UIView+ConvertToImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE78197DBC380046FDCF /* UIView+ConvertToImage.m */; };
 		01C8AE7C197DC0EC0046FDCF /* SPCheckInContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */; };
 		01C8AE7F197DEBE70046FDCF /* SPCheckinTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */; };
+		01D45606198738FA00447ECB /* SPCheckInNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D45605198738FA00447ECB /* SPCheckInNavigationController.m */; };
 		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
 		01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED341971EF4F001A9388 /* SPActivityViewController.m */; };
 		01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED381971F088001A9388 /* SPDiscoverViewController.m */; };
@@ -80,6 +82,8 @@
 		01278ADB196F5C3900BC013A /* SPUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtility.m; sourceTree = "<group>"; };
 		01278ADD196F5D1F00BC013A /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		01278ADE196F5D1F00BC013A /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
+		0175D2C619873300007571A6 /* SPCheckInSelectPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInSelectPlace.h; sourceTree = "<group>"; };
+		0175D2C719873300007571A6 /* SPCheckInSelectPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInSelectPlace.m; sourceTree = "<group>"; };
 		01805FC5196EC853002E79F6 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01805FC8196EC853002E79F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01805FCA196EC853002E79F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -158,6 +162,8 @@
 		01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInContainer.m; sourceTree = "<group>"; };
 		01C8AE7D197DEBE70046FDCF /* SPCheckinTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckinTVCell.h; sourceTree = "<group>"; };
 		01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckinTVCell.m; sourceTree = "<group>"; };
+		01D45604198738FA00447ECB /* SPCheckInNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInNavigationController.h; sourceTree = "<group>"; };
+		01D45605198738FA00447ECB /* SPCheckInNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInNavigationController.m; sourceTree = "<group>"; };
 		01E3ED301971ED35001A9388 /* SPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTabBarController.h; sourceTree = "<group>"; };
 		01E3ED311971ED35001A9388 /* SPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTabBarController.m; sourceTree = "<group>"; };
 		01E3ED331971EF4F001A9388 /* SPActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityViewController.h; sourceTree = "<group>"; };
@@ -403,6 +409,10 @@
 				01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */,
 				01C8AE7A197DC0EC0046FDCF /* SPCheckInContainer.h */,
 				01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */,
+				0175D2C619873300007571A6 /* SPCheckInSelectPlace.h */,
+				0175D2C719873300007571A6 /* SPCheckInSelectPlace.m */,
+				01D45604198738FA00447ECB /* SPCheckInNavigationController.h */,
+				01D45605198738FA00447ECB /* SPCheckInNavigationController.m */,
 			);
 			name = "Check In";
 			sourceTree = "<group>";
@@ -620,6 +630,7 @@
 				01C8AE7F197DEBE70046FDCF /* SPCheckinTVCell.m in Sources */,
 				01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */,
 				01278AD3196F558900BC013A /* SPWelcomeViewController.m in Sources */,
+				01D45606198738FA00447ECB /* SPCheckInNavigationController.m in Sources */,
 				01BF4A871975BF5C00AAA927 /* SPFindFriendsCell.m in Sources */,
 				01C8AE79197DBC380046FDCF /* UIView+ConvertToImage.m in Sources */,
 				01BF979419746E45006C2613 /* SPLoadMoreCell.m in Sources */,
@@ -638,6 +649,7 @@
 				01805FD9196EC853002E79F6 /* AppDelegate.m in Sources */,
 				01A10FD61976BA790038CA65 /* SPPhotoDetailsFooterView.m in Sources */,
 				01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */,
+				0175D2C819873300007571A6 /* SPCheckInSelectPlace.m in Sources */,
 				01805FD5196EC853002E79F6 /* main.m in Sources */,
 				0180601519735A53002E79F6 /* SPSettingsButtonItem.m in Sources */,
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "SPCheckInContainer.h"
 #import "SPCheckInViewController.h"
+#import "SPCheckInSelectPlace.h"
 
 @interface SPCheckInContainer ()
 @property (nonatomic, retain) UIImage* backgroundImage;
@@ -42,17 +43,17 @@
     
  
     
-    self.view.backgroundColor = [UIColor clearColor];
-    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    backView.image = backgroundImage;
-    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+    self.view.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
+  //  UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+  //  backView.image = backgroundImage;
+ //   backView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.3];
     
   //  [self.view addSubview:backView];
     
     SPCheckInViewController *c = [[SPCheckInViewController alloc] init];
-  
-
-    UINavigationController *myNav = [[UINavigationController alloc] initWithRootViewController:c];
+    SPCheckInSelectPlace  *selectPlaceVC =  [[SPCheckInSelectPlace alloc] init];
+                            
+    UINavigationController *myNav = [[UINavigationController alloc] initWithRootViewController:selectPlaceVC];
     [self addChildViewController:myNav];
 
     [myNav willMoveToParentViewController:self];

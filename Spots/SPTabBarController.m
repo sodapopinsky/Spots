@@ -11,15 +11,17 @@
 #import "UIImage+ImageEffects.h"
 #import "UIView+ConvertToImage.h"
 #import "SPCheckInContainer.h"
+#import "SPCheckInNavigationController.h"
+#import "SPCheckInSelectPlace.h"
 
 @interface SPTabBarController ()
 @property (nonatomic,strong) UINavigationController *navController;
-@property (nonatomic, strong) UINavigationController *checkInNavigationController;
+
 @end
 
 @implementation SPTabBarController
 @synthesize navController;
-@synthesize checkInNavigationController;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -134,20 +136,22 @@
                                                  saturationDeltaFactor:1.3
                                                              maskImage:nil];
     
-
+    SPCheckInSelectPlace *checkInSelectPlace = [[SPCheckInSelectPlace alloc] init];
     
-    SPCheckInContainer *checkInViewController = [[SPCheckInContainer alloc] initWithBackgroundImage:imageOfUnderlyingView];
+    SPCheckInNavigationController *checkInNavigationController = [[SPCheckInNavigationController alloc] initWithRootViewController:checkInSelectPlace];
+    
+   // SPCheckInContainer *checkInViewController = [[SPCheckInContainer alloc] initWithBackgroundImage:imageOfUnderlyingView];
   // checkInNavigationController = [[UINavigationController alloc] initWithRootViewController:checkInViewController];
  
   //  [checkInNavigationController.view setFrame:CGRectMake(10, 10, 300, 300)];
  //   [self presentViewController:checkInNavigationController animated:YES completion:nil];
 
-   [checkInViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+   [checkInNavigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
    [self.navController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
   //  [self.navController pushViewController:checkInNavigationController animated:NO];
     
-   [self presentViewController:checkInViewController animated:YES completion:nil];
+   [self presentViewController:checkInNavigationController animated:YES completion:nil];
     
     
 }

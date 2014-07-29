@@ -15,9 +15,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-     
+        [self.contentView setFrame:CGRectMake(self.contentView.frame.origin.x, self.contentView.frame.origin.y, self.contentView.frame.size.width, 80.0f)];
 
-        
+        [self.textLabel setFont:[UIFont systemFontOfSize:14.0f]];
+        [self.detailTextLabel setAlpha:0.8f];
     }
     return self;
 }

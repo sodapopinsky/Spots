@@ -16,7 +16,9 @@
 {
     CLLocationManager *locationManager;
     NSArray *places;
+   
 }
 
 @property (nonatomic, retain) NSArray *places;
+@property (nonatomic, retain) MKMapView *map;
 @end
