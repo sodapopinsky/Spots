@@ -13,10 +13,10 @@
 @protocol SPActivityCellDelegate;
 
 @interface SPActivityCell : UITableViewCell
-@property (nonatomic, strong) UIView *commentView;
+@property (nonatomic, strong) UIView *commentView, *innerView;
 @property (nonatomic, strong) UIButton *userButton, *placeButton;
 @property (nonatomic, strong) UIImageView* userImage;
-@property (nonatomic, strong) UILabel *timeLabel, *comments;
+@property (nonatomic, strong) UILabel *userLabel, *timeLabel, *comments;
 @property (nonatomic, strong) SPProfileImageView *userImageView;
 @property (nonatomic,strong) PFUser *user;
 @property (nonatomic, strong) id delegate;

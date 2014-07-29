@@ -230,10 +230,10 @@
 +(void)setNavigationBarTintColor:(UIViewController *)viewController{
     NSArray *ver = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
     if ([[ver objectAtIndex:0] intValue] >= 7) {
-        viewController.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:22.0f/255.0f green:124.0f/255.0f blue:177.0f/255.0f alpha:1.0f];
+        viewController.navigationController.navigationBar.barTintColor = kSPColorBlue;
        viewController.navigationController.navigationBar.translucent = NO;
     }else {
-       viewController.navigationController.navigationBar.tintColor = [UIColor colorWithRed:22.0f/255.0f green:124.0f/255.0f blue:177.0f/255.0f alpha:1.0f];
+       viewController.navigationController.navigationBar.tintColor = kSPColorBlue;
     }
 }
 

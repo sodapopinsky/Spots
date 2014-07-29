@@ -11,6 +11,9 @@
 
 #define kSPColorBlue [UIColor colorWithRed:7.0/255.0 green:123.0/255.0 blue:179.0/255.0 alpha:1.0]
 #define kSPColorLightGray [UIColor colorWithRed:221/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0]
+#define kSPColorOrange [UIColor colorWithRed:255/255.0 green:131.0/255.0 blue:0.0/255.0 alpha:1.0]
+#define kSPColorDarkGray [UIColor colorWithRed:68.0/255.0 green:68.0/255.0 blue:68.0/255.0 alpha:1.0]
+
 
 extern NSString *const kGOOGLE_API_KEY;
 

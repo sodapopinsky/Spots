@@ -6,18 +6,18 @@
 //  Copyright (c) 2014 NickSpitale. All rights reserved.
 //
 
-#import "SPHomeViewController.h"
+#import "SPActivityViewController.h"
 #import "SPSettingsActionSheetDelegate.h"
 #import "SPSettingsButtonItem.h"
 #import "MBProgressHUD.h"
 #import "SPFindFriendsViewController.h"
 
-@interface SPHomeViewController ()
+@interface SPActivityViewController ()
 @property (nonatomic, strong) SPSettingsActionSheetDelegate *settingsActionSheetDelegate;
 @property (nonatomic, strong) UIView *blankTimelineView;
 @end
 
-@implementation SPHomeViewController
+@implementation SPActivityViewController
 @synthesize firstLaunch;
 @synthesize blankTimelineView;
 
@@ -27,9 +27,9 @@
     [super viewDidLoad];
     
     [SPUtility setNavigationBarTintColor:self];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
-    
-    self.navigationItem.rightBarButtonItem = [[SPSettingsButtonItem alloc] initWithTarget:self action:@selector(settingsButtonAction:)];
+    self.navigationItem.title = @"Activity";
+  //  self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
+
     
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
    
@@ -71,14 +71,14 @@
 
 
 #pragma mark - ()
-
+/* [SP] only keeping for reference, can delete
 - (void)settingsButtonAction:(id)sender {
     self.settingsActionSheetDelegate = [[SPSettingsActionSheetDelegate alloc] initWithNavigationController:self.navigationController];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self.settingsActionSheetDelegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"My Profile",@"Find Friends",@"Log Out", nil];
     
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
 }
-
+*/
 - (void)inviteFriendsButtonAction:(id)sender {
     
 

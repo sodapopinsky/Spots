@@ -175,7 +175,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
             case NSHourCalendarUnit:
                 return singular ? NSLocalizedString(@"hour", @"Hour Unit (Singular)") : NSLocalizedString(@"hours", @"Hour Unit (Plural)");
             case NSMinuteCalendarUnit:
-                return singular ? NSLocalizedString(@"minute", @"Minute Unit (Singular)") : NSLocalizedString(@"minutes", @"Minute Unit (Plural)");
+                return singular ? NSLocalizedString(@"min", @"Minute Unit (Singular)") : NSLocalizedString(@"min", @"Minute Unit (Plural)");
             case NSSecondCalendarUnit:
                 return singular ? NSLocalizedString(@"second", @"Second Unit (Singular)") : NSLocalizedString(@"seconds", @"Second Unit (Plural)");
         }

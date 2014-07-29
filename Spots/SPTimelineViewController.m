@@ -73,10 +73,10 @@
     [super viewDidLoad];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[SP] This shouldnt be necessary, how to disable seperator line?
-    [self.tableView setSeparatorColor:[UIColor whiteColor]];
+    [self.tableView setSeparatorColor:[UIColor colorWithRed:211.0f/255.0f green:214.0f/255.0f blue:219.0f/255.0f alpha:1.0f]];
     
-    self.tableView.backgroundColor = [UIColor colorWithRed:221.0f/255.0f green:221.0f/255.0f  blue:221.0f/255.0f  alpha:1.0f];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.backgroundColor = [UIColor colorWithRed:211.0f/255.0f green:214.0f/255.0f blue:219.0f/255.0f alpha:1.0f];
+ 
    // [self.tableView setContentInset:UIEdgeInsetsMake(10.0f, 0.0f, 0.0f, 0.0f)];
     /*
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDidPublishPhoto:) name:SPTabBarControllerDidFinishEditingPhotoNotification object:nil];
@@ -324,13 +324,13 @@
         // Load More Section
         return 44.0f;
     }
-    
+      return 75.0f;
     PFObject *result = [self.objects objectAtIndex:indexPath.section];
     NSString *comment =[result objectForKey:kSPCheckInCommentsKey];
     if((comment.length) <= 0){
-        return 80.0f;
+        return 90.0f;
     }
-    return 130.0f;
+    return 140.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -354,7 +354,9 @@
         // this behavior is normally handled by PFQueryTableViewController, but we are using sections for each object and we must handle this ourselves
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
         return cell;
-    } else {
+    }
+    
+    else {
         SPActivityCell *cell = (SPActivityCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
         if (cell == nil) {
@@ -365,8 +367,8 @@
         PFObject *result = [self.objects objectAtIndex:indexPath.section];
         PFObject *user = [result objectForKey:@"user"];
         cell.user = [result objectForKey:kSPCheckInUserKey];
-        [cell.userButton setTitle:[user objectForKey:kSPUserDisplayNameKey] forState:UIControlStateNormal];
-        [cell.placeButton setTitle:[result objectForKey:kSPCheckInPlaceNameKey] forState:UIControlStateNormal];
+        [cell.userLabel setText:[user objectForKey:kSPUserDisplayNameKey]];
+        [cell.placeButton setTitle:[NSString stringWithFormat:@"@%@",[result objectForKey:kSPCheckInPlaceNameKey]] forState:UIControlStateNormal];
 
 
         
@@ -387,8 +389,11 @@
         NSString *comment =[result objectForKey:kSPCheckInCommentsKey];
         if((comment.length) > 0){
   
-            [cell.contentView addSubview:cell.commentView];
+        //    [cell.innerView addSubview:cell.commentView];
+        //    [cell.innerView setFrame:CGRectMake(cell.innerView.frame.origin.x, cell.innerView.frame.origin.y, cell.innerView.frame.size.width, 120.0f)];
+            
             //draw comment triangle
+            /*
             CGMutablePathRef path = CGPathCreateMutable();
             CGPathMoveToPoint(path,NULL,0.0,0.0);
             CGPathAddLineToPoint(path, NULL, 20.0f, 0.0f);
@@ -397,22 +402,29 @@
             
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             [shapeLayer setPath:path];
-            [shapeLayer setFillColor:[[UIColor whiteColor] CGColor]];
-            [shapeLayer setStrokeColor:[[UIColor whiteColor] CGColor]];
+            [shapeLayer setFillColor:[kSPColorLightGray CGColor]];
+            [shapeLayer setStrokeColor:[kSPColorLightGray CGColor]];
             [shapeLayer setBounds:CGRectMake(0.0f, 0.0f, 160.0f, 480)];
             [shapeLayer setAnchorPoint:CGPointMake(0.0f, 0.0f)];
             [shapeLayer setPosition:CGPointMake(25.0f, 3.0f)];
             [[cell.commentView layer] addSublayer:shapeLayer];
+            */
             
         }
-        
-        [cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
+        else{
+            [cell.commentView removeFromSuperview];
+        }
+     
+        //[cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
         
         //Reset widths to avoid having large touch area
+        /*
         NSDictionary *attributes = @{NSFontAttributeName: cell.userButton.titleLabel.font};
         CGSize textSize = [cell.userButton.titleLabel.text sizeWithAttributes:attributes];
         [cell.userButton setFrame:CGRectMake(cell.userButton.frame.origin.x, cell.userButton.frame.origin.y, textSize.width, cell.userButton.frame.size.height)];
-        
+        */
+           NSDictionary *attributes = @{NSFontAttributeName: cell.userButton.titleLabel.font};
+             CGSize textSize = [cell.userButton.titleLabel.text sizeWithAttributes:attributes];
         //Reset widths to avoid having large touch area
         attributes = @{NSFontAttributeName: cell.placeButton.titleLabel.font};
         textSize = [cell.placeButton.titleLabel.text sizeWithAttributes:attributes];

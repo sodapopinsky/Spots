@@ -45,9 +45,9 @@
     self.view.backgroundColor = [UIColor clearColor];
     UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
     backView.image = backgroundImage;
-    backView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.6];
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
     
-    [self.view addSubview:backView];
+  //  [self.view addSubview:backView];
     
     SPCheckInViewController *c = [[SPCheckInViewController alloc] init];
   

@@ -31,7 +31,7 @@
         locationManager.delegate = self;
         locationManager.distanceFilter = kCLDistanceFilterNone;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-      //  [locationManager startUpdatingLocation];
+        [locationManager startUpdatingLocation];
         
         
     }
@@ -56,9 +56,15 @@
    currentLocation = newLocation;
     
     if (currentLocation != nil) {
-       // NSString *txt = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-      
+  
+       
+NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&types=bar&rankby=distance&key=%@",currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,kGOOGLE_API_KEY];
+        
+    [self queryGooglePlaces:url];
+     
+        
     }
+    [locationManager stopUpdatingLocation];
     
 }
 - (void)viewDidLoad
@@ -76,7 +82,7 @@
     self.hud.labelText = NSLocalizedString(@"Loading", nil);
     self.hud.dimBackground = NO;
   
-    [self queryGooglePlaces];
+   
 
    
     
@@ -116,14 +122,14 @@
 
     
 }
--(void) queryGooglePlaces{
+-(void) queryGooglePlaces:(NSString*)url{
     // Build the url string to send to Google. NOTE: The kGOOGLE_API_KEY is a constant that should contain your own API key that you obtain from Google. See this link for more info:
     // https://developers.google.com/maps/documentation/places/#Authentication
   //  NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&radius=5000&types=food&sensor=true&key=%@", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, kGOOGLE_API_KEY];
     
 
     
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=30.0046095,-90.18063130000002&radius=5000&types=food&sensor=true&key=%@", kGOOGLE_API_KEY];
+  
  
     //Formulate the string as a URL object.
     NSURL *googleRequestURL=[NSURL URLWithString:url];
@@ -150,7 +156,7 @@
    // NSLog(@"%@",json);
     //The results from Google will be an array obtained from the NSDictionary object with the key "results".
    places = [json objectForKey:@"results"];
-    
+  
     //Write out the data to the console.
  //  NSLog(@"Google Data: %@", places);
  
@@ -188,10 +194,25 @@
   //  [cell.contentView addSubview:cell.placeName];
     // Populate the cell with the appropriate name based on the indexPath
     cell.textLabel.text = [[places objectAtIndex:indexPath.row] objectForKey:@"name"];
- [cell.imageView setImage:[UIImage imageNamed:@"SpotIcon"]];
-    cell.imageView.layer.cornerRadius = 5.0f;
-    [cell.imageView setBackgroundColor:[UIColor colorWithRed:0.0f/255.0f green:124.0f/255.0f blue:179.0f/255.0f alpha:1.0f]];
-    cell.detailTextLabel.text = @"5 miles";
+    
+ 
+  
+
+   
+    NSDictionary *geometry = [[places objectAtIndex:indexPath.row] objectForKey:@"geometry"];
+    NSDictionary *location = [geometry objectForKey:@"location"];
+    NSLog(@"%@",geometry);
+
+    CLLocationDegrees latitude = [[location objectForKey:@"lat"] doubleValue];
+     CLLocationDegrees longitude = [[location objectForKey:@"lng"] doubleValue];
+    NSLog(@"latitude of place:%f",[[geometry objectForKey:@"lat"] doubleValue]);
+    NSLog(@"latitude of me:%f",currentLocation.coordinate.latitude);
+    CLLocation *loc =  [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    CLLocationDistance distance = round([loc getDistanceFrom:currentLocation]);
+    NSLog(@"distance:%f",distance);
+ 
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%i meters",(int)distance];
+
     return cell;
 }
 -(void)viewWillAppear:(BOOL)animated{

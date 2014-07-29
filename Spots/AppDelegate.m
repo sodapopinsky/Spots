@@ -10,9 +10,10 @@
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 #import "SPWelcomeViewController.h"
-#import "SPHomeViewController.h"
+#import "SPActivityViewController.h"
 #import "SPLogInViewController.h"
 #import "SPDiscoverViewController.h"
+#import "SPEventsViewController.h"
 
 
 @interface AppDelegate () {
@@ -21,8 +22,9 @@
 }
 
 @property (nonatomic, strong) SPWelcomeViewController *welcomeViewController;
-@property (nonatomic, strong) SPHomeViewController *homeViewController;
+@property (nonatomic, strong) SPActivityViewController *homeViewController;
 @property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
+@property (nonatomic, strong) SPEventsViewController *eventsViewController;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
 
@@ -224,38 +226,59 @@
 - (void)presentTabBarController {
     
     self.tabBarController = [[SPTabBarController alloc] init];
-    self.homeViewController = [[SPHomeViewController alloc] initWithStyle:UITableViewStylePlain];
+    
+    self.homeViewController = [[SPActivityViewController alloc] initWithStyle:UITableViewStylePlain];
     self.discoverViewController = [[SPDiscoverViewController alloc] init];
+    self.eventsViewController = [[SPEventsViewController alloc] init];
     
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
     
       UINavigationController *emptyNavigationController = [[UINavigationController alloc] init];
-     [SPUtility addBottomDropShadowToNavigationBarForNavigationController:emptyNavigationController];
+      UINavigationController *emptyNavigationControllerMore = [[UINavigationController alloc] init];
     
      UINavigationController *discoverNavigationController = [[UINavigationController alloc] initWithRootViewController:self.discoverViewController];
     
-    [SPUtility addBottomDropShadowToNavigationBarForNavigationController:homeNavigationController];
+    UINavigationController *eventsNavigationController = [[UINavigationController alloc] initWithRootViewController:self.eventsViewController];
     
-    UITabBarItem *homeTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"HomeIcon.png"] selectedImage:[UIImage imageNamed:@"HomeSelected.png"]];
+    
+  
+    
+    UITabBarItem *homeTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ActivityTabBarIcon.png"] selectedImage:[UIImage imageNamed:@"ActivityTabBarIcon.png"]];
+    /*
     [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
     [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
-    
+    */
 
 
     
     [homeNavigationController setTabBarItem:homeTabBarItem];
     
-    UITabBarItem *discoverTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"SearchIcon"] selectedImage:[UIImage imageNamed:@"SearchSelected"]];
+    UITabBarItem *discoverTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"SpotsTabBarIcon"] selectedImage:[UIImage imageNamed:@"SpotsTabBarIcon"]];
+    
     [discoverTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
     [discoverTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
     
     [discoverNavigationController setTabBarItem:discoverTabBarItem];
     
-    self.tabBarController.tabBar.barTintColor =  [UIColor colorWithRed:20.0f/255.0f green:126.0f/255.0f blue:187.0f/255.0f alpha:1.000];
     
     
+    UITabBarItem *eventsTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"EventsTabBarIcon"] selectedImage:[UIImage imageNamed:@"EventsTabBarIcon"]];
+    [eventsTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
+    [eventsTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
+    
+    [eventsNavigationController setTabBarItem:eventsTabBarItem];
+
+    
+    UITabBarItem *moreTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"MoreTabBarIcon"] selectedImage:[UIImage imageNamed:@"MoreTabBarIcon"]];
+    [moreTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
+    [moreTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
+    
+    [emptyNavigationControllerMore setTabBarItem:moreTabBarItem];
+
+    tabBarController.tabBar.tintColor = kSPColorBlue;
+   
     self.tabBarController.delegate = self;
-    self.tabBarController.viewControllers = @[ homeNavigationController, emptyNavigationController, discoverNavigationController];
+    self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController, emptyNavigationController, eventsNavigationController,emptyNavigationControllerMore];
   
     [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
     
