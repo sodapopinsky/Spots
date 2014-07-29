@@ -58,6 +58,7 @@
 		01C8AE7C197DC0EC0046FDCF /* SPCheckInContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE7B197DC0EC0046FDCF /* SPCheckInContainer.m */; };
 		01C8AE7F197DEBE70046FDCF /* SPCheckinTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */; };
 		01D45606198738FA00447ECB /* SPCheckInNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D45605198738FA00447ECB /* SPCheckInNavigationController.m */; };
+		01D456111987FE4200447ECB /* SPMoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456101987FE4200447ECB /* SPMoreNavigationController.m */; };
 		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
 		01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED341971EF4F001A9388 /* SPActivityViewController.m */; };
 		01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED381971F088001A9388 /* SPDiscoverViewController.m */; };
@@ -164,6 +165,8 @@
 		01C8AE7E197DEBE70046FDCF /* SPCheckinTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckinTVCell.m; sourceTree = "<group>"; };
 		01D45604198738FA00447ECB /* SPCheckInNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCheckInNavigationController.h; sourceTree = "<group>"; };
 		01D45605198738FA00447ECB /* SPCheckInNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInNavigationController.m; sourceTree = "<group>"; };
+		01D4560F1987FE4200447ECB /* SPMoreNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMoreNavigationController.h; sourceTree = "<group>"; };
+		01D456101987FE4200447ECB /* SPMoreNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMoreNavigationController.m; sourceTree = "<group>"; };
 		01E3ED301971ED35001A9388 /* SPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTabBarController.h; sourceTree = "<group>"; };
 		01E3ED311971ED35001A9388 /* SPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTabBarController.m; sourceTree = "<group>"; };
 		01E3ED331971EF4F001A9388 /* SPActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityViewController.h; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 		01278ACC196F54B200BC013A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01D4560E1987FE1E00447ECB /* More */,
 				01A804F31986AB33001EB184 /* Account */,
 				01A804EF1985D77E001EB184 /* Events */,
 				01A10FDB1976CE5D0038CA65 /* Check In */,
@@ -498,6 +502,15 @@
 			name = SPBaseTextCell;
 			sourceTree = "<group>";
 		};
+		01D4560E1987FE1E00447ECB /* More */ = {
+			isa = PBXGroup;
+			children = (
+				01D4560F1987FE4200447ECB /* SPMoreNavigationController.h */,
+				01D456101987FE4200447ECB /* SPMoreNavigationController.m */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
 		01E3ED2F1971ED1D001A9388 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +664,7 @@
 				01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */,
 				0175D2C819873300007571A6 /* SPCheckInSelectPlace.m in Sources */,
 				01805FD5196EC853002E79F6 /* main.m in Sources */,
+				01D456111987FE4200447ECB /* SPMoreNavigationController.m in Sources */,
 				0180601519735A53002E79F6 /* SPSettingsButtonItem.m in Sources */,
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,
 				01BD87CC1972FC4800DAC965 /* SPTimelineHeaderView.m in Sources */,

@@ -14,7 +14,7 @@
 #import "SPLogInViewController.h"
 #import "SPDiscoverViewController.h"
 #import "SPEventsViewController.h"
-
+#import "SPMoreNavigationController.h"
 
 @interface AppDelegate () {
     NSMutableData *_data;
@@ -25,6 +25,7 @@
 @property (nonatomic, strong) SPActivityViewController *homeViewController;
 @property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
 @property (nonatomic, strong) SPEventsViewController *eventsViewController;
+@property (nonatomic, strong) SPMoreNavigationController *moreNavigationController;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
 
@@ -43,15 +44,11 @@
 @synthesize window;
 @synthesize navController;
 @synthesize tabBarController;
-
-
 @synthesize homeViewController;
 @synthesize welcomeViewController;
-
+@synthesize moreNavigationController;
 @synthesize hud;
 @synthesize autoFollowTimer;
-
-
 @synthesize internetReach;
 @synthesize wifiReach;
 
@@ -61,8 +58,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    
-    
+
     // ****************************************************************************
     // Parse initialization
     [Parse setApplicationId:@"GitsOrpE6s6v4RB30Xrkfjr9LazUrORIZrHcqDGb"
@@ -138,8 +134,6 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor],NSForegroundColorAttributeName,
                                                           nil]];
-
-    [[UISearchBar appearance] setTintColor:[UIColor colorWithRed:32.0f/255.0f green:19.0f/255.0f blue:16.0f/255.0f alpha:1.0f]];
 }
 
 
@@ -147,18 +141,14 @@
     // clear cache
     [[SPCache sharedCache] clear];
     
-    
-    
-    
-    
      //clear NSUserDefaults
    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSPUserDefaultsCacheFacebookFriendsKey];
    // [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSPUserDefaultsActivityFeedViewControllerLastRefreshKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Unsubscribe from push notifications by removing the user association from the current installation.
-//    [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
-  //  [[PFInstallation currentInstallation] saveInBackground];
+ //   [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
+//    [[PFInstallation currentInstallation] saveInBackground];
     
     // Clear all caches
     [PFQuery clearAllCachedResults];
@@ -230,11 +220,12 @@
     self.homeViewController = [[SPActivityViewController alloc] initWithStyle:UITableViewStylePlain];
     self.discoverViewController = [[SPDiscoverViewController alloc] init];
     self.eventsViewController = [[SPEventsViewController alloc] init];
+    moreNavigationController = [[SPMoreNavigationController alloc] init];
     
     UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
     
       UINavigationController *emptyNavigationController = [[UINavigationController alloc] init];
-      UINavigationController *emptyNavigationControllerMore = [[UINavigationController alloc] init];
+
     
      UINavigationController *discoverNavigationController = [[UINavigationController alloc] initWithRootViewController:self.discoverViewController];
     
@@ -267,18 +258,20 @@
     [eventsTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
     
     [eventsNavigationController setTabBarItem:eventsTabBarItem];
-
+    
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    NSLog(@"bunduru: %@",bundleIdentifier);
     
     UITabBarItem *moreTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"MoreTabBarIcon"] selectedImage:[UIImage imageNamed:@"MoreTabBarIcon"]];
     [moreTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
     [moreTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
     
-    [emptyNavigationControllerMore setTabBarItem:moreTabBarItem];
+    [moreNavigationController setTabBarItem:moreTabBarItem];
 
     tabBarController.tabBar.tintColor = kSPColorBlue;
    
     self.tabBarController.delegate = self;
-    self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController, emptyNavigationController, eventsNavigationController,emptyNavigationControllerMore];
+    self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController, emptyNavigationController, eventsNavigationController,moreNavigationController];
   
     [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
     
@@ -304,7 +297,6 @@
     [MBProgressHUD hideHUDForView:self.homeViewController.view animated:YES];
     [self.homeViewController loadObjects];
 }
-
 
 
 
