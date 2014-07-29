@@ -51,11 +51,11 @@
     UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, customPlace.frame.size.width, 55)];
     [buttonView setBackgroundColor:kSPColorLightGray];
     
-    UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 200, 20)];
-    [lbl1 setText:@"Custom Place"];
-    [lbl1 setFont:[UIFont systemFontOfSize:16.0f]];
+    UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 7, 200, 20)];
+    [lbl1 setText:@"Add Custom Place"];
+    [lbl1 setFont:[UIFont boldSystemFontOfSize:16.0f]];
     
-    UILabel *lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, 200, 20)];
+    UILabel *lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, 200, 20)];
     [lbl2 setText:@"Ex: Greg's New House"];
     [lbl2 setFont:[UIFont systemFontOfSize:13.0f]];
     
@@ -69,7 +69,10 @@
     [numSpotsLabel setTextColor:[UIColor whiteColor]];
  
     
-
+    UIImageView *goCustom = [[UIImageView alloc] initWithFrame:CGRectMake(295, 15, 29*.5,.5 * 57)];
+    [goCustom setImage:[UIImage imageNamed:@"RightArrow"]];
+    [customPlace addSubview:goCustom];
+    
     
     [numSpotsLabel setFont:[UIFont systemFontOfSize:12.0f]];
     
@@ -83,6 +86,8 @@
     
     [self.view addSubview:self.tableView];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(cancelButtonAction)];
+    
 #if TARGET_IPHONE_SIMULATOR
     NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=30.0046095,-90.18063130000002&types=bar|food|night_club&radius=100&key=%@",kGOOGLE_API_KEY];
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -91,6 +96,10 @@
 #else
     [locationManager startUpdatingLocation];
 #endif
+}
+
+-(void)cancelButtonAction{
+    [self.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views {
@@ -250,15 +259,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
