@@ -51,9 +51,9 @@
     
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cameraButton.frame = CGRectMake(128.0f, 0.0f,64.0f, self.tabBar.bounds.size.height);
-    [cameraButton setBackgroundColor:kSPColorOrange];
-    [cameraButton setImage:[UIImage imageNamed:@"CameraTabBarIcon.png"] forState:UIControlStateNormal];
-    [cameraButton setImage:[UIImage imageNamed:@"CameraTabBarIconSelected.png"] forState:UIControlStateHighlighted];
+    [cameraButton setBackgroundColor:kSPColorBlue];
+    [cameraButton setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateNormal];
+    [cameraButton setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateHighlighted];
     [cameraButton addTarget:self action:@selector(photoCaptureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.tabBar addSubview:cameraButton];
     

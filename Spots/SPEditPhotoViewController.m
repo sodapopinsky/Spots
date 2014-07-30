@@ -11,7 +11,7 @@
 
 @interface SPEditPhotoViewController ()
 
-@property (nonatomic, strong) UIImage *image;
+
 @property (nonatomic, strong) PFFile *photoFile;
 @property (nonatomic, strong) PFFile *thumbnailFile;
 @property (nonatomic, strong) UISwitch *isSpotshot;
@@ -81,14 +81,27 @@
 
 
 /* Inform delegate that a user image or name was tapped */
-- (void)testFunction{
+- (void)userImage:(UIImage *)image {
 
-    if (self.delegate && [self.delegate respondsToSelector:@selector(testFunction)]) {
-        [self.delegate testFunction];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(useImage:)]) {
+        
+        
+        [self.delegate useImage:self.image];
     }
+    
+     [self.navigationController popViewControllerAnimated:NO];
     
 }
 
+-(void)deletePhoto{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(useImage:)]) {
+        [self.delegate useImage:nil];
+    }
+    
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -124,9 +137,9 @@
     
     
     [btnUse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnUse setTitle:@"Use Photo" forState:UIControlStateNormal];
+    [btnUse setTitle:@"Use Photos" forState:UIControlStateNormal];
     btnUse.layer.cornerRadius = 5.0f;
-    [btnUse addTarget:self action:@selector(testFunction) forControlEvents:UIControlEventTouchUpInside];
+    [btnUse addTarget:self action:@selector(userImage:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnUse];
     
     
@@ -172,13 +185,8 @@
 }
 
 
--(void)deletePhoto{
-    [self.navigationController popViewControllerAnimated:NO];
-}
 
--(void)usePhoto{
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 #pragma mark - ()
 

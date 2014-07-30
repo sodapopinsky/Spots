@@ -33,11 +33,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:kSPColorLightGray];
+
+    
+    
     UIBarButtonItem *dismiss = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismiss)];
-    [self.navigationItem setTitle:@"@"];
+
+    [self setTitle:@"Select a Spot"];
+     self.navigationController.navigationBarHidden = NO;
     [self.navigationItem setLeftBarButtonItem:dismiss];
     
-    map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 45, self.view.frame.size.width, 100)];
+    map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 145)];
     map.delegate = self;
     [map setShowsUserLocation:YES];
     
@@ -112,7 +117,7 @@
     region = MKCoordinateRegionMakeWithDistance(locationManager.location.coordinate,1000,1000);
     
     
-    [mv setRegion:region animated:YES];
+    [mv setRegion:region animated:NO];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -231,7 +236,9 @@
 
 
 
-
+-(void)viewWillAppear:(BOOL)animated   {
+    self.navigationController.navigationBarHidden = NO;
+}
 
 
 - (void)didReceiveMemoryWarning

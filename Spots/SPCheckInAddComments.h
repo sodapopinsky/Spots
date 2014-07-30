@@ -17,6 +17,6 @@
 
 @property (nonatomic, retain) UIButton *addPhoto;
 @property (nonatomic, retain) MKMapView *map;
-
+@property (nonatomic, retain) SPEditPhotoViewController *editPhotoViewController;
 @end
 

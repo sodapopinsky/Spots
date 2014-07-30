@@ -14,10 +14,11 @@
 @interface SPCheckInAddComments ()
 @property (nonatomic, retain) NSDictionary* place;
 @property (nonatomic, strong) UITextView *comments;
+@property (nonatomic) BOOL imageIsSet, isSpotshot;
 @end
 
 @implementation SPCheckInAddComments
-@synthesize place, map, comments, addPhoto;
+@synthesize place, map, comments, addPhoto, editPhotoViewController, imageIsSet, isSpotshot;
 
 -(id)initWithPlace:(NSDictionary *)placeObject
 {
@@ -54,6 +55,9 @@
     [self.view addSubview:map];
      [map setShowsUserLocation:NO];
     [map setUserInteractionEnabled:YES];
+    
+    imageIsSet = NO;
+    
     NSDictionary *geometry = [place objectForKey:@"geometry"];
     NSDictionary *location = [geometry objectForKey:@"location"];
     
@@ -121,15 +125,13 @@
      [selectVisibility setFrame:CGRectMake(295, 7, 29*.5,.5 * 57)];
 
     [buttonView addSubview:selectVisibility];
-  
-   
-    
+
     
     UIView *userAvatarContainer = [[UIView alloc] initWithFrame:CGRectMake(10,150, 60, 60)];
     [userAvatarContainer setBackgroundColor:[UIColor blackColor]];
     [userAvatarContainer setAlpha:0.35f];
     userAvatarContainer.layer.cornerRadius = userAvatarContainer.frame.size.width / 2;
-    // [addPhoto addTarget:self action:@selector(shouldStartCameraController) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:userAvatarContainer];
     
     UIImageView *userAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(userAvatarContainer.frame.origin.x + 5, userAvatarContainer.frame.origin.y + 5, userAvatarContainer.frame.size.width - 10, userAvatarContainer.frame.size.width - 10)];
@@ -143,8 +145,7 @@
     comments = [[UITextView alloc] initWithFrame:CGRectMake(85, 145, 215, 75)];
     [comments setBackgroundColor:[UIColor clearColor]];
     [comments setFont:[UIFont systemFontOfSize:15.0f]];
-   // comments.layer.borderColor = kSPColorDarkGray.CGColor;
-//    comments.layer.cornerRadius = 3.0f;
+
     
    [comments becomeFirstResponder];
     
@@ -169,8 +170,8 @@
     
     
     
-
-    
+    editPhotoViewController  = [[SPEditPhotoViewController alloc] init];
+    editPhotoViewController.delegate = self;
 }
 
 -(void)goSelectVisibility{
@@ -196,7 +197,7 @@
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]
         && [[UIImagePickerController availableMediaTypesForSourceType:
              UIImagePickerControllerSourceTypeCamera] containsObject:(NSString *)kUTTypeImage]) {
-        
+     
         cameraUI.mediaTypes = [NSArray arrayWithObject:(NSString *) kUTTypeImage];
         cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
         
@@ -213,9 +214,12 @@
     cameraUI.allowsEditing = YES;
     cameraUI.showsCameraControls = YES;
     cameraUI.delegate = self;
-
+    if(imageIsSet){
+         [self.navigationController pushViewController:editPhotoViewController animated:YES];
+    }
+    else{
     [self presentViewController:cameraUI animated:YES completion:nil];
-    
+    }
     return YES;
 }
 
@@ -228,23 +232,28 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [self dismissViewControllerAnimated:NO completion:nil];
     
+    
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-   // [addPhoto setImage:image forState:UIControlStateNormal];
-    SPEditPhotoViewController *viewController = [[SPEditPhotoViewController alloc] initWithImage:image];
-    viewController.delegate = self;
+    editPhotoViewController.image = image;
+
+   [self.navigationController pushViewController:editPhotoViewController animated:YES];
     
- //   [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    
-  // [self.navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-   [self.navigationController pushViewController:viewController animated:YES];
-    
-   // [self presentViewController:viewController animated:YES completion:nil];
+
 }
 
 
--(void)testFunction{
+- (void)useImage:(UIImage *)image{
     
     
+    if(image){
+         imageIsSet = YES;
+        [addPhoto setImage:image forState:UIControlStateNormal];
+        
+    }
+    else{
+        imageIsSet = NO;
+        [addPhoto setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateNormal];
+    }
 }
 
 @end

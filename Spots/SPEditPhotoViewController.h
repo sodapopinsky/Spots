@@ -10,9 +10,10 @@
 
 - (id)initWithImage:(UIImage *)aImage;
 @property (nonatomic, strong) id delegate;
+@property (nonatomic, strong) UIImage *image;
 @end
 
 @protocol SPEditPhotoDelegate <NSObject>
--(void)testFunction;
+-(void)useImage:(UIImage *)image;
 @optional
 @end
