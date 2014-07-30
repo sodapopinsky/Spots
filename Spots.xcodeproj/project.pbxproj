@@ -57,6 +57,8 @@
 		01D456141988048200447ECB /* SPCheckInSelectPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456131988048200447ECB /* SPCheckInSelectPlace.m */; };
 		01D456171988087A00447ECB /* SPCheckInAddComments.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D456161988087A00447ECB /* SPCheckInAddComments.m */; };
 		01D4561A19883E9C00447ECB /* SPMapNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D4561919883E9C00447ECB /* SPMapNavigationBar.m */; };
+		01D4561D19886E4000447ECB /* MapPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D4561C19886E4000447ECB /* MapPoint.m */; };
+		01D456201988719500447ECB /* SPSelectVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D4561F1988719500447ECB /* SPSelectVisibility.m */; };
 		01E3ED321971ED35001A9388 /* SPTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED311971ED35001A9388 /* SPTabBarController.m */; };
 		01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED341971EF4F001A9388 /* SPActivityViewController.m */; };
 		01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E3ED381971F088001A9388 /* SPDiscoverViewController.m */; };
@@ -161,6 +163,10 @@
 		01D456161988087A00447ECB /* SPCheckInAddComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCheckInAddComments.m; sourceTree = "<group>"; };
 		01D4561819883E9C00447ECB /* SPMapNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMapNavigationBar.h; sourceTree = "<group>"; };
 		01D4561919883E9C00447ECB /* SPMapNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMapNavigationBar.m; sourceTree = "<group>"; };
+		01D4561B19886E4000447ECB /* MapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPoint.h; sourceTree = "<group>"; };
+		01D4561C19886E4000447ECB /* MapPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPoint.m; sourceTree = "<group>"; };
+		01D4561E1988719500447ECB /* SPSelectVisibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSelectVisibility.h; sourceTree = "<group>"; };
+		01D4561F1988719500447ECB /* SPSelectVisibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSelectVisibility.m; sourceTree = "<group>"; };
 		01E3ED301971ED35001A9388 /* SPTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTabBarController.h; sourceTree = "<group>"; };
 		01E3ED311971ED35001A9388 /* SPTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTabBarController.m; sourceTree = "<group>"; };
 		01E3ED331971EF4F001A9388 /* SPActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPActivityViewController.h; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 				01E3ED311971ED35001A9388 /* SPTabBarController.m */,
 				01E3ED2F1971ED1D001A9388 /* Activity */,
 				01278ACD196F54D800BC013A /* Login */,
+				01D4561E1988719500447ECB /* SPSelectVisibility.h */,
+				01D4561F1988719500447ECB /* SPSelectVisibility.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -277,6 +285,8 @@
 				018060171973685B002E79F6 /* SPCache.m */,
 				01D4561819883E9C00447ECB /* SPMapNavigationBar.h */,
 				01D4561919883E9C00447ECB /* SPMapNavigationBar.m */,
+				01D4561B19886E4000447ECB /* MapPoint.h */,
+				01D4561C19886E4000447ECB /* MapPoint.m */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -623,6 +633,7 @@
 				01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */,
 				01B7789119783F020010FB0F /* SPCheckinCell.m in Sources */,
 				018060181973685B002E79F6 /* SPCache.m in Sources */,
+				01D456201988719500447ECB /* SPSelectVisibility.m in Sources */,
 				01D456171988087A00447ECB /* SPCheckInAddComments.m in Sources */,
 				01D456141988048200447ECB /* SPCheckInSelectPlace.m in Sources */,
 				0180601B1974D387002E79F6 /* Reachability.m in Sources */,
@@ -648,6 +659,7 @@
 				01BF979119746DBE006C2613 /* SPAccountViewController.m in Sources */,
 				01A10FD21976B9810038CA65 /* SPEditPhotoViewController.m in Sources */,
 				01BCB1E21978166E006D7072 /* SPCheckinCommentsViewController.m in Sources */,
+				01D4561D19886E4000447ECB /* MapPoint.m in Sources */,
 				01805FD9196EC853002E79F6 /* AppDelegate.m in Sources */,
 				01A10FD61976BA790038CA65 /* SPPhotoDetailsFooterView.m in Sources */,
 				01E3ED391971F088001A9388 /* SPDiscoverViewController.m in Sources */,

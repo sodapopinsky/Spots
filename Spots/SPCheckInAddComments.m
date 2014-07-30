@@ -8,7 +8,7 @@
 
 #import "SPCheckInAddComments.h"
 #import "SPEditPhotoViewController.h"
-
+#import "SPSelectVisibility.h"
 @interface SPCheckInAddComments ()
 @property (nonatomic, retain) NSDictionary* place;
 @property (nonatomic, strong) UITextView *comments;
@@ -31,6 +31,10 @@
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    
+    self.navigationController.navigationBarHidden = YES;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,8 +49,8 @@
     map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 135)];
     map.delegate = self;
     [self.view addSubview:map];
-     [map setShowsUserLocation:YES];
- 
+     [map setShowsUserLocation:NO];
+    [map setUserInteractionEnabled:YES];
     NSDictionary *geometry = [place objectForKey:@"geometry"];
     NSDictionary *location = [geometry objectForKey:@"location"];
     
@@ -58,13 +62,22 @@
     
     CLLocationCoordinate2D placeCoord;
     // Set the lat and long.
+    
     placeCoord.latitude=latitude;
     placeCoord.longitude=longitude;
-    region = MKCoordinateRegionMakeWithDistance(placeCoord,1000,1000);
+
+    MapPoint *placeObject = [[MapPoint alloc] initWithName:@"" address:@"" coordinate:placeCoord];
+    [map addAnnotation:placeObject];
+   
+    placeCoord.latitude=latitude - .00065;
+    placeCoord.longitude=longitude + .005;
+
+   
+    region = MKCoordinateRegionMakeWithDistance(placeCoord,600,600);
     
     [map setRegion:region animated:YES];
     
-
+ 
   
 
     UIView *addPhotoContainer = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 90, 10, 80, 80)];
@@ -88,10 +101,10 @@
 
    
     
-    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, 95,320, 40)];
+    UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 95,320, 40)];
     [buttonView setBackgroundColor:[UIColor whiteColor]];
     [buttonView setAlpha:0.9f];
-    
+     [buttonView addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
     UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 20)];
     [lbl1 setText:@"Visible to 7"];
     [lbl1 setFont:[UIFont systemFontOfSize:16.0f]];
@@ -100,9 +113,12 @@
 
     [self.view addSubview:buttonView];
     
-    UIImageView *goCustom = [[UIImageView alloc] initWithFrame:CGRectMake(295, 5, 29*.5,.5 * 57)];
-    [goCustom setImage:[UIImage imageNamed:@"RightArrow"]];
-    [buttonView addSubview:goCustom];
+    UIButton *selectVisibility = [UIButton buttonWithType:UIButtonTypeCustom];
+    [selectVisibility setImage:[UIImage imageNamed:@"RightArrow"] forState:UIControlStateNormal];
+    [selectVisibility addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
+     [selectVisibility setFrame:CGRectMake(295, 5, 29*.5,.5 * 57)];
+
+    [buttonView addSubview:selectVisibility];
   
    
     
@@ -139,6 +155,10 @@
     
 }
 
+-(void)goSelectVisibility{
+    SPSelectVisibility *controller = [[SPSelectVisibility alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 -(void)dismiss{
     [self.navigationController popViewControllerAnimated:YES];
 }
