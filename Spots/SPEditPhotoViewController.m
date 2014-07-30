@@ -7,28 +7,26 @@
 //
 
 #import "SPEditPhotoViewController.h"
-#import "SPPhotoDetailsFooterView.h"
 #import "UIImage+ResizeAdditions.h"
 
 @interface SPEditPhotoViewController ()
-@property (nonatomic, strong) UIScrollView *scrollView;
+
 @property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UITextField *commentTextField;
 @property (nonatomic, strong) PFFile *photoFile;
 @property (nonatomic, strong) PFFile *thumbnailFile;
+@property (nonatomic, strong) UISwitch *isSpotshot;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier fileUploadBackgroundTaskId;
 @property (nonatomic, assign) UIBackgroundTaskIdentifier photoPostBackgroundTaskId;
 @end
 
 @implementation SPEditPhotoViewController
-@synthesize scrollView;
+
 @synthesize image;
-@synthesize commentTextField;
 @synthesize photoFile;
 @synthesize thumbnailFile;
 @synthesize fileUploadBackgroundTaskId;
 @synthesize photoPostBackgroundTaskId;
-
+@synthesize isSpotshot;
 #pragma mark - NSObject
 
 - (void)dealloc {
@@ -60,12 +58,80 @@
 #pragma mark - UIViewController
 
 - (void)loadView {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    self.scrollView.delegate = self;
-   
-    self.scrollView.backgroundColor =  [UIColor colorWithRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0f];
-    self.view = self.scrollView;
+
+
+    UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0f, 42.0f, 280.0f, 280.0f)];
+    [photoImageView setBackgroundColor:[UIColor blackColor]];
+    [photoImageView setImage:self.image];
+    [photoImageView setContentMode:UIViewContentModeScaleAspectFit];
     
+      self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    
+    
+    CALayer *layer = photoImageView.layer;
+    layer.masksToBounds = NO;
+    layer.shadowRadius = 3.0f;
+    layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    layer.shadowOpacity = 0.5f;
+    layer.shouldRasterize = YES;
+    
+    [self.view addSubview:photoImageView];
+    
+}
+
+
+/* Inform delegate that a user image or name was tapped */
+- (void)testFunction{
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(testFunction)]) {
+        [self.delegate testFunction];
+    }
+    
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view setBackgroundColor:kSPColorLightGray];
+    self.navigationController.navigationBarHidden = YES;
+    
+    isSpotshot = [[UISwitch alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 80, 320, 20, 20)];
+    [self.view addSubview:isSpotshot];
+    
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 340, 250, 20)];
+    [lbl setText:@"Make this a Spotshot"];
+    [self.view addSubview:lbl];
+    
+    /*
+    UILabel *sub = [[UILabel alloc] initWithFrame:CGRectMake(20, 370, 250, 20)];
+    [sub setText:@"Spotshots let everyone see what's going on"];
+    [sub setFont:[UIFont systemFontOfSize:13.0f]];
+    [sub setTextColor:kSPColorLightGray];
+    [self.view addSubview:sub];
+    */
+    
+    UIButton *btnDelete = [[UIButton alloc] initWithFrame:CGRectMake(20, 370,280, 30)];
+    [btnDelete setBackgroundColor:kSPColorDarkGray];
+    [btnDelete setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDelete setTitle:@"Delete" forState:UIControlStateNormal];
+    btnDelete.layer.cornerRadius = 5.0f;
+    [btnDelete addTarget:self action:@selector(deletePhoto) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnDelete];
+    
+    
+    UIButton *btnUse = [[UIButton alloc] initWithFrame:CGRectMake(20, 410,280, 30)];
+    [btnUse setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:24.0f/255.0f alpha:1.0f]];
+    
+    
+    [btnUse setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnUse setTitle:@"Use Photo" forState:UIControlStateNormal];
+    btnUse.layer.cornerRadius = 5.0f;
+    [btnUse addTarget:self action:@selector(testFunction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btnUse];
+    
+    
+    
+    /*
     UIImageView *photoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20.0f, 42.0f, 280.0f, 280.0f)];
     [photoImageView setBackgroundColor:[UIColor blackColor]];
     [photoImageView setImage:self.image];
@@ -78,32 +144,23 @@
     layer.shadowOpacity = 0.5f;
     layer.shouldRasterize = YES;
     
-    [self.scrollView addSubview:photoImageView];
-    
-    CGRect footerRect = [SPPhotoDetailsFooterView rectForView];
-    footerRect.origin.y = photoImageView.frame.origin.y + photoImageView.frame.size.height;
-    
-    SPPhotoDetailsFooterView *footerView = [[SPPhotoDetailsFooterView alloc] initWithFrame:footerRect];
-    self.commentTextField = footerView.commentField;
-    self.commentTextField.delegate = self;
-    [self.scrollView addSubview:footerView];
-    
-    [self.scrollView setContentSize:CGSizeMake(self.scrollView.bounds.size.width, photoImageView.frame.origin.y + photoImageView.frame.size.height + footerView.frame.size.height)];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+    [self.view addSubview:photoImageView];
     
     [self.navigationItem setHidesBackButton:YES];
-    
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonAction:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Publish" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonAction:)];
+    [self.view setBackgroundColor:kSPColorLightGray];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+*/
+    /*
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelButtonAction:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Publish" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonAction:)];
+    */
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [self shouldUploadImage:self.image];
+  //  [self shouldUploadImage:self.image];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -114,12 +171,14 @@
     return YES;
 }
 
-#pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.commentTextField resignFirstResponder];
+-(void)deletePhoto{
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
+-(void)usePhoto{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - ()
 
@@ -157,6 +216,7 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)note {
+    /*
     CGRect keyboardFrameEnd = [[note.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGSize scrollViewContentSize = self.scrollView.bounds.size;
     scrollViewContentSize.height += keyboardFrameEnd.size.height;
@@ -167,21 +227,24 @@
     scrollViewContentOffset.y = scrollViewContentOffset.y + keyboardFrameEnd.size.height*3.0f - [UIScreen mainScreen].bounds.size.height;
     
     [self.scrollView setContentOffset:scrollViewContentOffset animated:YES];
+     */
 }
 
 - (void)keyboardWillHide:(NSNotification *)note {
+    /*
     CGRect keyboardFrameEnd = [[note.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGSize scrollViewContentSize = self.scrollView.bounds.size;
     scrollViewContentSize.height -= keyboardFrameEnd.size.height;
     [UIView animateWithDuration:0.200f animations:^{
         [self.scrollView setContentSize:scrollViewContentSize];
     }];
+     */
 }
 
 
 - (void)doneButtonAction:(id)sender {
     
-    
+    /*
     NSDictionary *userInfo = [NSDictionary dictionary];
     NSString *trimmedComment = [self.commentTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     if (trimmedComment.length != 0) {
@@ -254,6 +317,7 @@
     
     // Dismiss this screen
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+     */
 }
 
 - (void)cancelButtonAction:(id)sender {

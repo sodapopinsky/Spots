@@ -132,7 +132,7 @@
     if (currentLocation != nil) {
         
         
-        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&types=bar|food&radius=250&key=%@",currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,kGOOGLE_API_KEY];
+        NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/json?location=%f,%f&types=bar|food&radius=750&key=%@",currentLocation.coordinate.latitude, currentLocation.coordinate.longitude,kGOOGLE_API_KEY];
         url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [self queryGooglePlaces:url];
         

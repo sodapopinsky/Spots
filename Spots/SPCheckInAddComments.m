@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 NickSpitale. All rights reserved.
 //
 
+
 #import "SPCheckInAddComments.h"
-#import "SPEditPhotoViewController.h"
 #import "SPSelectVisibility.h"
+
+
 @interface SPCheckInAddComments ()
 @property (nonatomic, retain) NSDictionary* place;
 @property (nonatomic, strong) UITextView *comments;
@@ -227,17 +229,22 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    [addPhoto setImage:image forState:UIControlStateNormal];
- //   SPEditPhotoViewController *viewController = [[SPEditPhotoViewController alloc] initWithImage:image];
+   // [addPhoto setImage:image forState:UIControlStateNormal];
+    SPEditPhotoViewController *viewController = [[SPEditPhotoViewController alloc] initWithImage:image];
+    viewController.delegate = self;
+    
  //   [viewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
   // [self.navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-  // [self.navigationController pushViewController:viewController animated:NO];
+   [self.navigationController pushViewController:viewController animated:YES];
     
    // [self presentViewController:viewController animated:YES completion:nil];
 }
 
 
-
+-(void)testFunction{
+    
+    
+}
 
 @end
