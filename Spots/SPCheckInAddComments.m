@@ -92,7 +92,7 @@
     [addPhoto setFrame:CGRectMake(addPhotoContainer.frame.origin.x + 5, addPhotoContainer.frame.origin.y + 5, addPhotoContainer.frame.size.width - 10, addPhotoContainer.frame.size.width - 10)];
     [addPhoto setBackgroundColor:[UIColor clearColor]];
 
-    [addPhoto setImage:[UIImage imageNamed:@"ButtonCamera"] forState:UIControlStateNormal];
+    [addPhoto setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateNormal];
     
     [addPhoto addTarget:self action:@selector(shouldStartCameraController) forControlEvents:UIControlEventTouchUpInside];
     
