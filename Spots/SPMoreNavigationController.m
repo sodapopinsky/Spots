@@ -8,13 +8,13 @@
 
 #import "SPMoreNavigationController.h"
 #import "AppDelegate.h"
-
+#import "SPMoreActionSheetDelegate.h"
 @interface SPMoreNavigationController ()
-
+@property SPMoreActionSheetDelegate *actionSheetDelegate;
 @end
 
 @implementation SPMoreNavigationController
-
+@synthesize actionSheetDelegate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,7 +40,13 @@
 }
 
 -(void)logOut{
-      [(AppDelegate *)[[UIApplication sharedApplication] delegate] logOut];
+    
+    self.actionSheetDelegate = [[SPMoreActionSheetDelegate alloc] initWithNavigationController:self.navigationController];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self.actionSheetDelegate cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"My Profile",@"Find Friends",@"Log Out", nil];
+    
+    [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    /*
+      [(AppDelegate *)[[UIApplication sharedApplication] delegate] logOut];*/
 }
 - (void)didReceiveMemoryWarning
 {

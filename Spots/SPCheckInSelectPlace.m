@@ -37,6 +37,7 @@
     
     
     UIBarButtonItem *dismiss = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismiss)];
+    [dismiss setTintColor:kSPColorBlue];
 
     [self setTitle:@"Select a Spot"];
      self.navigationController.navigationBarHidden = NO;

@@ -130,12 +130,11 @@
 
     //The appearance class customizes the appearance of all instances of a class!!
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-
+    [[UIBarButtonItem appearance] setTintColor:kSPColorBlue];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           kSPColorBlue,NSForegroundColorAttributeName,
                                                           nil]];
-
-    
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
 }
 
 
