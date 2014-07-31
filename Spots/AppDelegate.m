@@ -112,8 +112,8 @@
 - (void)presentLoginViewControllerAnimated:(BOOL)animated {
     
     SPLogInViewController *loginViewController = [[SPLogInViewController alloc] init];
-    
-    [loginViewController setDelegate:self];
+    loginViewController.delegate = self;
+   // [loginViewController setDelegate:self];
     loginViewController.fields = PFLogInFieldsFacebook;
     loginViewController.facebookPermissions = @[ @"user_about_me" ];
     
@@ -144,19 +144,26 @@
     
      //clear NSUserDefaults
    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSPUserDefaultsCacheFacebookFriendsKey];
-   // [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSPUserDefaultsActivityFeedViewControllerLastRefreshKey];
+   // [[NSUserDefaults standardUserDefaults]   removeObjectForKey:kSPUserDefaultsActivityFeedViewControllerLastRefreshKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // Unsubscribe from push notifications by removing the user association from the current installation.
  //   [[PFInstallation currentInstallation] removeObjectForKey:kPAPInstallationUserKey];
 //    [[PFInstallation currentInstallation] saveInBackground];
     
+    NSLog(@"name: %@",[[PFUser currentUser] objectForKey:kSPUserDisplayNameKey]);;
+    
     // Clear all caches
     [PFQuery clearAllCachedResults];
     
-    // Log out
-    [PFUser logOut];
+    [[PFFacebookUtils session] closeAndClearTokenInformation];
+    [[PFFacebookUtils session] close];
+    [[FBSession activeSession] closeAndClearTokenInformation];
+    [[FBSession activeSession] close];
     
+    [FBSession setActiveSession:nil];
+    [PFUser logOut];
+        NSLog(@"nameafter: %@",[[PFUser currentUser] objectForKey:kSPUserDisplayNameKey]);;
     // clear out cached data, view controllers, etc
     [self.navController popToRootViewControllerAnimated:NO];
     
@@ -185,9 +192,12 @@
     
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error) {
+            
             [self facebookRequestDidLoad:result];
+            
         } else {
             [self facebookRequestDidFailWithError:error];
+            
         }
     }];
     
@@ -195,6 +205,8 @@
 }
 
 - (void)presentLoginViewController {
+    
+    
     [self presentLoginViewControllerAnimated:YES];
 }
 
@@ -430,6 +442,7 @@
 }
 
 - (void)facebookRequestDidFailWithError:(NSError *)error {
+    
     NSLog(@"Facebook error: %@", error);
     
     if ([PFUser currentUser]) {
@@ -474,5 +487,28 @@
         [self.homeViewController loadObjects];
     }
 }
+
+
+- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password{
+    
+    
+    return NO;
+    
+}
+
+/*! @name Responding to Actions */
+/// Sent to the delegate when a PFUser is logged in.
+
+
+/// Sent to the delegate when the log in attempt fails.
+- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error{
+    
+}
+
+/// Sent to the delegate when the log in screen is dismissed.
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController{
+    
+}
+
 
 @end

@@ -8,7 +8,7 @@
 
 
 #import "SPCheckInAddComments.h"
-#import "SPSelectVisibility.h"
+#import "SPCheckInSelectVisibility.h"
 
 
 @interface SPCheckInAddComments ()
@@ -106,25 +106,6 @@
     
 
    
-    
-    UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 95,320, 45)];
-    [buttonView setBackgroundColor:[UIColor whiteColor]];
-    [buttonView setAlpha:0.9f];
-     [buttonView addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 200, 20)];
-    [lbl1 setText:@"Visible to 7"];
-    [lbl1 setFont:[UIFont systemFontOfSize:16.0f]];
-    [lbl1 setAlpha:0.8f];
-    [buttonView addSubview:lbl1];
-
-    [self.view addSubview:buttonView];
-    
-    UIButton *selectVisibility = [UIButton buttonWithType:UIButtonTypeCustom];
-    [selectVisibility setImage:[UIImage imageNamed:@"RightArrow"] forState:UIControlStateNormal];
-    [selectVisibility addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
-     [selectVisibility setFrame:CGRectMake(295, 7, 29*.5,.5 * 57)];
-
-    [buttonView addSubview:selectVisibility];
 
     
     UIView *userAvatarContainer = [[UIView alloc] initWithFrame:CGRectMake(10,150, 60, 60)];
@@ -174,15 +155,13 @@
     editPhotoViewController.delegate = self;
 }
 
--(void)goSelectVisibility{
-    SPSelectVisibility *controller = [[SPSelectVisibility alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
-}
+
 -(void)dismiss{
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)doCheckin{
-    
+    SPCheckInSelectVisibility *controller = [[SPCheckInSelectVisibility alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 
