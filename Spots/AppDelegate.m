@@ -88,6 +88,8 @@
 }
 
 
+
+
 - (void)monitorReachability {
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
     
@@ -184,6 +186,8 @@
     }
     
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        
+        
         if (!error) {
             [self facebookRequestDidLoad:result];
         } else {
@@ -430,6 +434,8 @@
 }
 
 - (void)facebookRequestDidFailWithError:(NSError *)error {
+    
+    
     NSLog(@"Facebook error: %@", error);
     
     if ([PFUser currentUser]) {
@@ -473,6 +479,30 @@
         // In this case, they'd see the empty timeline placeholder and have no way of refreshing the timeline unless they followed someone.
         [self.homeViewController loadObjects];
     }
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
+}
+
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    /*
+     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+     */
+    
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    /*
+     Called when the application is about to terminate.
+     Save data if appropriate.
+     See also applicationDidEnterBackground:.
+     */
+    [[PFFacebookUtils session] close];
 }
 
 @end
