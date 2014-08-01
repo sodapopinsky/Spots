@@ -48,6 +48,7 @@
 		01BD87D019730DA000DAC965 /* SPPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87CF19730DA000DAC965 /* SPPhotoCell.m */; };
 		01BD87D319742D1600DAC965 /* SPProfileImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87D219742D1600DAC965 /* SPProfileImageView.m */; };
 		01BD87D719742E1400DAC965 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD87D619742E1400DAC965 /* TTTTimeIntervalFormatter.m */; };
+		01BD9A37198BD9F400B1656C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BD9A36198BD9F400B1656C /* LoginViewController.m */; };
 		01BF4A801975BBC600AAA927 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4A7F1975BBC600AAA927 /* UIImage+ImageEffects.m */; };
 		01BF4A871975BF5C00AAA927 /* SPFindFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4A861975BF5C00AAA927 /* SPFindFriendsCell.m */; };
 		01BF4A8A1975C05F00AAA927 /* SPFindFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BF4A891975C05F00AAA927 /* SPFindFriendsViewController.m */; };
@@ -147,6 +148,8 @@
 		01BD87D219742D1600DAC965 /* SPProfileImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPProfileImageView.m; sourceTree = "<group>"; };
 		01BD87D519742E1400DAC965 /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
 		01BD87D619742E1400DAC965 /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
+		01BD9A35198BD9F400B1656C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		01BD9A36198BD9F400B1656C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		01BF4A7E1975BBC600AAA927 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		01BF4A7F1975BBC600AAA927 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		01BF4A851975BF5C00AAA927 /* SPFindFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPFindFriendsCell.h; sourceTree = "<group>"; };
@@ -275,6 +278,8 @@
 		01805FCE196EC853002E79F6 /* Spots */ = {
 			isa = PBXGroup;
 			children = (
+				01BD9A35198BD9F400B1656C /* LoginViewController.h */,
+				01BD9A36198BD9F400B1656C /* LoginViewController.m */,
 				01278ACC196F54B200BC013A /* Controllers */,
 				01806002196EC905002E79F6 /* Vendor */,
 				01805FF8196EC8AA002E79F6 /* Categories */,
@@ -659,6 +664,7 @@
 				01D45606198738FA00447ECB /* SPCheckInNavigationController.m in Sources */,
 				01BF4A871975BF5C00AAA927 /* SPFindFriendsCell.m in Sources */,
 				01A13E25000000EA00BD3ABA /* SPCheckInSelectVisibility.m in Sources */,
+				01BD9A37198BD9F400B1656C /* LoginViewController.m in Sources */,
 				01C8AE79197DBC380046FDCF /* UIView+ConvertToImage.m in Sources */,
 				01BF979419746E45006C2613 /* SPLoadMoreCell.m in Sources */,
 				01E3ED351971EF4F001A9388 /* SPActivityViewController.m in Sources */,

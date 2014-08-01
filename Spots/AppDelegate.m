@@ -16,6 +16,9 @@
 #import "SPEventsViewController.h"
 #import "SPMoreNavigationController.h"
 
+
+#import "LoginViewController.h"
+
 @interface AppDelegate () {
     NSMutableData *_data;
     BOOL firstLaunch;
@@ -61,8 +64,8 @@
 
     // ****************************************************************************
     // Parse initialization
-    [Parse setApplicationId:@"GitsOrpE6s6v4RB30Xrkfjr9LazUrORIZrHcqDGb"
-                  clientKey:@"KWZI2125IsHodVq7WlNHukaguohs5uk8QiBrJ6U8"];
+    [Parse setApplicationId:@"dLnu4A52nFlJ1QylhtoQccoE3k6nxmhLalrPG8gj"
+                  clientKey:@"Q4aMr2SAzzOlkenghGhguEQYT7TWGOzV8laKjNQS"];
     
     [PFFacebookUtils initializeFacebook];
     // ****************************************************************************
@@ -81,7 +84,8 @@
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
     self.navController.navigationBarHidden = YES;
     
-    self.window.rootViewController = self.navController;
+  //  self.window.rootViewController = self.navController;
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     
     [self.window makeKeyAndVisible];
     return YES;
