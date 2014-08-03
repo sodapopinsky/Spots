@@ -26,9 +26,20 @@
 {
     [super viewDidLoad];
     
-  //  [SPUtility setNavigationBarTintColor:self];
-    self.navigationItem.title = @"Activity";
-  //  self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LogoNavigationBar.png"]];
+    [SPUtility setNavigationBarTintColor:self];
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
+    
+      UISegmentedControl *titleViewControl = [[UISegmentedControl alloc] initWithItems:@[@"All",@"Following",@"Spots"]];
+    [titleViewControl setWidth:60.0f forSegmentAtIndex:0];
+    [titleViewControl setWidth:80.0f forSegmentAtIndex:1];
+    [titleViewControl setWidth:73.0f forSegmentAtIndex:2];
+    self.navigationItem.titleView = titleViewControl;
+    
+    [titleViewControl addTarget:self
+                         action:@selector(action:)
+               forControlEvents:UIControlEventValueChanged];
+    
+    
 
     
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
@@ -40,7 +51,14 @@
     //[self.blankTimelineView addSubview:button];
 }
 
-
+-(void)action:(id)sender{
+   
+    UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
+    NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
+    
+    NSLog(@"%i",selectedSegment);
+    
+}
 
 #pragma mark - PFQueryTableViewController
 
@@ -85,5 +103,7 @@
     SPFindFriendsViewController *detailViewController = [[SPFindFriendsViewController alloc] init];
 [self.navigationController pushViewController:detailViewController animated:YES];
 }
+
+
 
 @end

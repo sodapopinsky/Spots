@@ -29,13 +29,13 @@
     [[self tabBar] setBackgroundImage:[UIImage imageNamed:@"BackgroundTabBar.png"]];
         [[self tabBar] setSelectionIndicatorImage:[UIImage imageNamed:@"BackgroundTabBarItemSelected.png"]];
      */
-    self.tabBar.tintColor = [UIColor whiteColor];
+    self.tabBar.tintColor = [UIColor colorWithRed:176.0f/255.0f green:176.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     
-    /*
+    
      // iOS 7 style
-     self.tabBar.tintColor = [UIColor colorWithRed:139.0f/255.0f green:111.0f/255.0f blue:95.0f/255.0f alpha:1.0f];
-     self.tabBar.barTintColor = [UIColor colorWithRed:77.0f/255.0f green:49.0f/255.0f blue:37.0f/255.0f alpha:1.0f];
-     */
+    self.tabBar.tintColor = [UIColor redColor];
+     self.tabBar.barTintColor = [UIColor colorWithRed:176.0f/255.0f green:176.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
+     
     
     self.navController = [[UINavigationController alloc] init];
    
@@ -53,11 +53,13 @@
     
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cameraButton.frame = CGRectMake(128.0f, 0.0f,64.0f, self.tabBar.bounds.size.height);
-    [cameraButton setBackgroundColor:kSPColorBlue];
-    [cameraButton setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateNormal];
-    [cameraButton setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateHighlighted];
+    UIImageView *checkin = [[UIImageView alloc] initWithFrame:CGRectMake(128.0f, 0.0f,64.0f, self.tabBar.bounds.size.height)];
+                            
+    [cameraButton.imageView setFrame:CGRectMake(0, 0, 64, self.tabBar.bounds.size.height)];
+    [checkin setImage:[UIImage imageNamed:@"CheckinTab"]];
+    [cameraButton setImage:[UIImage imageNamed:@"CheckinTab"] forState:UIControlStateHighlighted];
     [cameraButton addTarget:self action:@selector(photoCaptureButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tabBar addSubview:cameraButton];
+    [self.tabBar addSubview:checkin];
     
     UISwipeGestureRecognizer *swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     [swipeUpGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionUp];

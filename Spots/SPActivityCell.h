@@ -14,9 +14,9 @@
 
 @interface SPActivityCell : UITableViewCell
 @property (nonatomic, strong) UIView *commentView, *innerView;
-@property (nonatomic, strong) UIButton *userButton, *placeButton;
+@property (nonatomic, strong) UIButton *userButton, *placeButton, *mapButton;
 @property (nonatomic, strong) UIImageView* userImage;
-@property (nonatomic, strong) UILabel *userLabel, *timeLabel, *comments;
+@property (nonatomic, strong) UILabel *userLabel, *timeLabel, *comments, *distanceLabel;
 @property (nonatomic, strong) SPProfileImageView *userImageView;
 @property (nonatomic,strong) PFUser *user;
 @property (nonatomic, strong) id delegate;

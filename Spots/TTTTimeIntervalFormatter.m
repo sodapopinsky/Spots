@@ -79,7 +79,7 @@ static inline NSCalendarUnit NSCalendarUnitFromString(NSString *string) {
         return nil;
     }
     
-    self.pastDeicticExpression = NSLocalizedString(@"ago", @"Past Deictic Expression");
+    self.pastDeicticExpression = NSLocalizedString(@"", @"Past Deictic Expression");
     self.presentDeicticExpression = NSLocalizedString(@"just now", @"Present Deictic Expression");
     self.futureDeicticExpression = NSLocalizedString(@"from now", @"Future Deictic Expression");
     

@@ -58,7 +58,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-
+    UIImage *whiteBackground = [UIImage imageNamed:@"whiteBackground"];
+   
+    
+    [[UITabBar appearance] setSelectionIndicatorImage:whiteBackground];
     // ****************************************************************************
     // Parse initialization
     [Parse setApplicationId:@"GitsOrpE6s6v4RB30Xrkfjr9LazUrORIZrHcqDGb"
@@ -128,7 +131,7 @@
 
 - (void)setupAppearance {
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     //The appearance class customizes the appearance of all instances of a class!!
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -136,7 +139,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           kSPColorBlue,NSForegroundColorAttributeName,
                                                           nil]];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+  //  [[UITabBar appearance] setTintColor:[UIColor colorWithRed:176.0f/255.0f green:176.0f/255.0f blue:176.0f/255.0f alpha:1.0f]];
 }
 
 
@@ -240,6 +243,7 @@
   
     
     UITabBarItem *homeTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ActivityTabBarIcon.png"] selectedImage:[UIImage imageNamed:@"ActivityTabBarIcon.png"]];
+
     /*
     [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
     [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];

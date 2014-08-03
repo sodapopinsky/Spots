@@ -76,6 +76,9 @@
     // PFQueryTableViewController reads this in viewDidLoad -- would prefer to throw this in init, but didn't work
 
     [super viewDidLoad];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     //[SP] This shouldnt be necessary, how to disable seperator line?
     [self.tableView setSeparatorColor:[UIColor colorWithRed:211.0f/255.0f green:214.0f/255.0f blue:219.0f/255.0f alpha:1.0f]];
@@ -329,7 +332,7 @@
         // Load More Section
         return 44.0f;
     }
-      return 75.0f;
+      return 115.0f;
     PFObject *result = [self.objects objectAtIndex:indexPath.section];
     NSString *comment =[result objectForKey:kSPCheckInCommentsKey];
     if((comment.length) <= 0){
@@ -373,9 +376,9 @@
         PFObject *user = [result objectForKey:@"user"];
         cell.user = [result objectForKey:kSPCheckInUserKey];
         [cell.userLabel setText:[user objectForKey:kSPUserDisplayNameKey]];
-        [cell.placeButton setTitle:[NSString stringWithFormat:@"@%@",[result objectForKey:kSPCheckInPlaceNameKey]] forState:UIControlStateNormal];
+   //     [cell.placeButton setTitle:[NSString stringWithFormat:@"%@",[result objectForKey:kSPCheckInPlaceNameKey]] forState:UIControlStateNormal];
 
-
+ [cell.placeButton setTitle:@"Grits Bar" forState:UIControlStateNormal];
         
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
         //NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
@@ -417,7 +420,7 @@
             
         }
         else{
-            [cell.commentView removeFromSuperview];
+           // [cell.commentView removeFromSuperview];
         }
      
         //[cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
@@ -465,7 +468,9 @@ SPAccountViewController *accountViewController = [[SPAccountViewController alloc
 }
 
 
-
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 #pragma mark - PAPPhotoTimelineViewController
 /*
 - (SPTimelineHeaderView *)dequeueReusableSectionHeaderView {

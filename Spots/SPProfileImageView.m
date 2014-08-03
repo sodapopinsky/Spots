@@ -8,12 +8,12 @@
 #import "SPProfileImageView.h"
 
 @interface SPProfileImageView ()
-@property (nonatomic, strong) UIImageView *borderImageview;
+
 @end
 
 @implementation SPProfileImageView
 
-@synthesize borderImageview;
+
 @synthesize profileImageView;
 @synthesize profileButton;
 
@@ -32,15 +32,10 @@
         self.profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:self.profileButton];
         
-        if (frame.size.width < 35.0f) {
-            self.borderImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShadowProfilePicture-29.png"]];
-        } else if (frame.size.width < 43.0f) {
-            self.borderImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShadowProfilePicture-35.png"]];
-        } else {
-            self.borderImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShadowProfilePicture-43.png"]];
-        }
-        
-        [self addSubview:self.borderImageview];
+  
+
+        [profileImageView.layer setBorderColor: [kSPColorGray CGColor]];
+        [profileImageView.layer setBorderWidth: 3.0];
         self.profileImageView.layer.cornerRadius = roundf(self.profileImageView .frame.size.width / 2);
          self.profileImageView.layer.masksToBounds = YES;
     }
@@ -52,10 +47,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self bringSubviewToFront:self.borderImageview];
+
     
     self.profileImageView.frame = CGRectMake( 1.0f, 0.0f, self.frame.size.width, self.frame.size.height);
-    self.borderImageview.frame = CGRectMake( 0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
+
     self.profileButton.frame = CGRectMake( 0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
 }
 
