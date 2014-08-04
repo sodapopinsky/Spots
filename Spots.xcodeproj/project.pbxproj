@@ -11,6 +11,9 @@
 		01278AD9196F593500BC013A /* SPLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278AD8196F593500BC013A /* SPLogInViewController.m */; };
 		01278ADC196F5C3900BC013A /* SPUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADB196F5C3900BC013A /* SPUtility.m */; };
 		01278ADF196F5D1F00BC013A /* SPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 01278ADE196F5D1F00BC013A /* SPConstants.m */; };
+		01600043198FE7A900F0DBC3 /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0160003E198FE7A900F0DBC3 /* IISideController.m */; };
+		01600044198FE7A900F0DBC3 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01600040198FE7A900F0DBC3 /* IIViewDeckController.m */; };
+		01600045198FE7A900F0DBC3 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01600042198FE7A900F0DBC3 /* IIWrapController.m */; };
 		01805FC9196EC853002E79F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FC8196EC853002E79F6 /* Foundation.framework */; };
 		01805FCB196EC853002E79F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCA196EC853002E79F6 /* CoreGraphics.framework */; };
 		01805FCD196EC853002E79F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCC196EC853002E79F6 /* UIKit.framework */; };
@@ -84,6 +87,12 @@
 		01278ADB196F5C3900BC013A /* SPUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtility.m; sourceTree = "<group>"; };
 		01278ADD196F5D1F00BC013A /* SPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPConstants.h; sourceTree = "<group>"; };
 		01278ADE196F5D1F00BC013A /* SPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPConstants.m; sourceTree = "<group>"; };
+		0160003D198FE7A900F0DBC3 /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
+		0160003E198FE7A900F0DBC3 /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
+		0160003F198FE7A900F0DBC3 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		01600040198FE7A900F0DBC3 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		01600041198FE7A900F0DBC3 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		01600042198FE7A900F0DBC3 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
 		01805FC5196EC853002E79F6 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01805FC8196EC853002E79F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01805FCA196EC853002E79F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -239,6 +248,19 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		0160003C198FE79A00F0DBC3 /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				0160003D198FE7A900F0DBC3 /* IISideController.h */,
+				0160003E198FE7A900F0DBC3 /* IISideController.m */,
+				0160003F198FE7A900F0DBC3 /* IIViewDeckController.h */,
+				01600040198FE7A900F0DBC3 /* IIViewDeckController.m */,
+				01600041198FE7A900F0DBC3 /* IIWrapController.h */,
+				01600042198FE7A900F0DBC3 /* IIWrapController.m */,
+			);
+			name = ViewDeck;
+			sourceTree = "<group>";
+		};
 		01805FBC196EC853002E79F6 = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +378,7 @@
 		01806002196EC905002E79F6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0160003C198FE79A00F0DBC3 /* ViewDeck */,
 				01BF4A7D1975BBA700AAA927 /* UIImage+ImageEffects */,
 				01BD87D419742DFE00DAC965 /* TTTTimeIntervalFormatter */,
 				0180600B196EC996002E79F6 /* MBProgressHUD */,
@@ -635,6 +658,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01806001196EC8BC002E79F6 /* UIImage+RoundedCornerAdditions.m in Sources */,
+				01600044198FE7A900F0DBC3 /* IIViewDeckController.m in Sources */,
 				01805FFF196EC8BC002E79F6 /* UIImage+AlphaAdditions.m in Sources */,
 				01B7789119783F020010FB0F /* SPCheckinCell.m in Sources */,
 				018060181973685B002E79F6 /* SPCache.m in Sources */,
@@ -659,6 +683,7 @@
 				01806000196EC8BC002E79F6 /* UIImage+ResizeAdditions.m in Sources */,
 				01A804F21985D795001EB184 /* SPEventsViewController.m in Sources */,
 				01BD87D319742D1600DAC965 /* SPProfileImageView.m in Sources */,
+				01600043198FE7A900F0DBC3 /* IISideController.m in Sources */,
 				01BF4A8A1975C05F00AAA927 /* SPFindFriendsViewController.m in Sources */,
 				01278ADC196F5C3900BC013A /* SPUtility.m in Sources */,
 				01BD87D019730DA000DAC965 /* SPPhotoCell.m in Sources */,
@@ -673,6 +698,7 @@
 				01D456111987FE4200447ECB /* SPMoreNavigationController.m in Sources */,
 				0180600E196EC9A4002E79F6 /* MBProgressHUD.m in Sources */,
 				01BD87CC1972FC4800DAC965 /* SPTimelineHeaderView.m in Sources */,
+				01600045198FE7A900F0DBC3 /* IIWrapController.m in Sources */,
 				01BD87D719742E1400DAC965 /* TTTTimeIntervalFormatter.m in Sources */,
 				01D4561A19883E9C00447ECB /* SPMapNavigationBar.m in Sources */,
 				01BA0A5E1979D37600E16A85 /* SPCheckInHeaderView.m in Sources */,

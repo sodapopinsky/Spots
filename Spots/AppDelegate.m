@@ -15,6 +15,7 @@
 #import "SPDiscoverViewController.h"
 #import "SPEventsViewController.h"
 #import "SPMoreNavigationController.h"
+#import "IIViewDeckController.h"
 
 @interface AppDelegate () {
     NSMutableData *_data;
@@ -43,7 +44,6 @@
 
 @synthesize window;
 @synthesize navController;
-@synthesize tabBarController;
 @synthesize homeViewController;
 @synthesize welcomeViewController;
 @synthesize moreNavigationController;
@@ -51,17 +51,15 @@
 @synthesize autoFollowTimer;
 @synthesize internetReach;
 @synthesize wifiReach;
-
+@synthesize deckController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    UIImage *whiteBackground = [UIImage imageNamed:@"whiteBackground"];
-   
     
-    [[UITabBar appearance] setSelectionIndicatorImage:whiteBackground];
+   
     // ****************************************************************************
     // Parse initialization
     [Parse setApplicationId:@"GitsOrpE6s6v4RB30Xrkfjr9LazUrORIZrHcqDGb"
@@ -76,15 +74,19 @@
     [defaultACL setPublicReadAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
+
+    
     [self setupAppearance];
     
     [self monitorReachability];
     
     self.welcomeViewController = [[SPWelcomeViewController alloc] init];
-    self.navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
-    self.navController.navigationBarHidden = YES;
     
-    self.window.rootViewController = self.navController;
+    navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
+    
+    self.navController.navigationBarHidden = NO;
+        deckController = [self generateControllerStack];
+    self.window.rootViewController = deckController;
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -92,6 +94,22 @@
 
 
 
+- (IIViewDeckController*)generateControllerStack {
+    UIViewController* leftController = [[UIViewController alloc] init];
+    [leftController.view setBackgroundColor:[UIColor redColor]];
+    UIViewController* rightController =  [[UIViewController alloc] init];
+    [leftController.view setBackgroundColor:[UIColor greenColor]];
+    
+    UINavigationController *centerController = navController;
+   
+    IIViewDeckController* thisDeckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerController
+                                                                                    leftViewController:leftController
+                                                                                   rightViewController:rightController];
+   thisDeckController.rightSize = 100;
+    
+    [thisDeckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
+    return thisDeckController;
+}
 
 - (void)monitorReachability {
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
@@ -139,7 +157,6 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           kSPColorBlue,NSForegroundColorAttributeName,
                                                           nil]];
-  //  [[UITabBar appearance] setTintColor:[UIColor colorWithRed:176.0f/255.0f green:176.0f/255.0f blue:176.0f/255.0f alpha:1.0f]];
 }
 
 
@@ -222,8 +239,9 @@
 
 
 - (void)presentTabBarController {
-    
-    self.tabBarController = [[SPTabBarController alloc] init];
+homeViewController = [[SPActivityViewController alloc] init];
+    [homeViewController.view setBackgroundColor:[UIColor blueColor]];
+
     
     self.homeViewController = [[SPActivityViewController alloc] initWithStyle:UITableViewStylePlain];
     self.discoverViewController = [[SPDiscoverViewController alloc] init];
@@ -239,8 +257,7 @@
     
     UINavigationController *eventsNavigationController = [[UINavigationController alloc] initWithRootViewController:self.eventsViewController];
     
-    
-  
+    self.window.rootViewController = deckController;
     
     UITabBarItem *homeTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ActivityTabBarIcon.png"] selectedImage:[UIImage imageNamed:@"ActivityTabBarIcon.png"]];
 
@@ -249,7 +266,7 @@
     [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
     */
 
-
+/*
     
     [homeNavigationController setTabBarItem:homeTabBarItem];
     
@@ -281,8 +298,8 @@
    
     self.tabBarController.delegate = self;
     self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController, emptyNavigationController, eventsNavigationController,moreNavigationController];
-  
-    [self.navController setViewControllers:@[ self.welcomeViewController, self.tabBarController ] animated:NO];
+  */
+    [self.navController setViewControllers:@[ self.welcomeViewController, homeViewController ] animated:NO];
     
 
      

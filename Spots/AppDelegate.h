@@ -8,12 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "SPTabBarController.h"
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate,NSURLConnectionDataDelegate, PFLogInViewControllerDelegate>
+
+@class IIViewDeckController;
+@interface AppDelegate : UIResponder <UIApplicationDelegate,NSURLConnectionDataDelegate, PFLogInViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (nonatomic, strong) SPTabBarController *tabBarController;
+
 @property (nonatomic, strong) UINavigationController *navController;
+@property (retain, nonatomic) UIViewController *leftController;
+@property (nonatomic, retain) IIViewDeckController* deckController;
+
+- (IIViewDeckController*)generateControllerStack;
 @property (nonatomic, readonly) int networkStatus;
 - (void)presentTabBarController;
 - (void)presentLoginViewController;
