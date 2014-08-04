@@ -25,18 +25,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+ 
     [SPUtility setNavigationBarTintColor:self];
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     
+    
+  
+
+   
+    
+    
       UISegmentedControl *titleViewControl = [[UISegmentedControl alloc] initWithItems:@[@"All",@"Following",@"Spots"]];
+    
+    
+ 
     [titleViewControl setWidth:60.0f forSegmentAtIndex:0];
     [titleViewControl setWidth:80.0f forSegmentAtIndex:1];
     [titleViewControl setWidth:73.0f forSegmentAtIndex:2];
-    self.navigationItem.titleView = titleViewControl;
-    
+ //  self.navigationItem.titleView = titleViewControl;
+    [self.navigationItem setTitle:@"Activity"];
+    [self.navigationItem.titleView setTintColor:[UIColor whiteColor]];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    [lbl setText:@"Activity"];
+    [lbl setTextColor:[UIColor whiteColor]];
+    [self.navigationItem setTitleView:lbl];
     [titleViewControl addTarget:self
-                         action:@selector(action:)
+                    action:@selector(action:)
                forControlEvents:UIControlEventValueChanged];
     
     
@@ -45,10 +60,10 @@
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake( 33.0f, 96.0f, 253.0f, 173.0f);
+
     [button setBackgroundImage:[UIImage imageNamed:@"HomeTimelineBlank.png"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(inviteFriendsButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    //[self.blankTimelineView addSubview:button];
+    [self.blankTimelineView addSubview:button];
 }
 
 -(void)action:(id)sender{
@@ -63,6 +78,7 @@
 #pragma mark - PFQueryTableViewController
 
 - (void)objectsDidLoad:(NSError *)error {
+    
     [super objectsDidLoad:error];
     
     if(self.objects.count == 0){

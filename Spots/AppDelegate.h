@@ -19,6 +19,7 @@
 @property (retain, nonatomic) UIViewController *leftController;
 @property (nonatomic, retain) IIViewDeckController* deckController;
 
+
 - (IIViewDeckController*)generateControllerStack;
 @property (nonatomic, readonly) int networkStatus;
 - (void)presentTabBarController;

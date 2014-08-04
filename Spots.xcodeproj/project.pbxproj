@@ -14,6 +14,7 @@
 		01600043198FE7A900F0DBC3 /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0160003E198FE7A900F0DBC3 /* IISideController.m */; };
 		01600044198FE7A900F0DBC3 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01600040198FE7A900F0DBC3 /* IIViewDeckController.m */; };
 		01600045198FE7A900F0DBC3 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01600042198FE7A900F0DBC3 /* IIWrapController.m */; };
+		016000481990413100F0DBC3 /* SPLeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016000471990413100F0DBC3 /* SPLeftMenuViewController.m */; };
 		01805FC9196EC853002E79F6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FC8196EC853002E79F6 /* Foundation.framework */; };
 		01805FCB196EC853002E79F6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCA196EC853002E79F6 /* CoreGraphics.framework */; };
 		01805FCD196EC853002E79F6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01805FCC196EC853002E79F6 /* UIKit.framework */; };
@@ -93,6 +94,8 @@
 		01600040198FE7A900F0DBC3 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		01600041198FE7A900F0DBC3 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
 		01600042198FE7A900F0DBC3 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		016000461990413100F0DBC3 /* SPLeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPLeftMenuViewController.h; sourceTree = "<group>"; };
+		016000471990413100F0DBC3 /* SPLeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPLeftMenuViewController.m; sourceTree = "<group>"; };
 		01805FC5196EC853002E79F6 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01805FC8196EC853002E79F6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01805FCA196EC853002E79F6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -233,6 +236,8 @@
 				01278ACD196F54D800BC013A /* Login */,
 				01D4561E1988719500447ECB /* SPSelectVisibility.h */,
 				01D4561F1988719500447ECB /* SPSelectVisibility.m */,
+				016000461990413100F0DBC3 /* SPLeftMenuViewController.h */,
+				016000471990413100F0DBC3 /* SPLeftMenuViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -686,6 +691,7 @@
 				01600043198FE7A900F0DBC3 /* IISideController.m in Sources */,
 				01BF4A8A1975C05F00AAA927 /* SPFindFriendsViewController.m in Sources */,
 				01278ADC196F5C3900BC013A /* SPUtility.m in Sources */,
+				016000481990413100F0DBC3 /* SPLeftMenuViewController.m in Sources */,
 				01BD87D019730DA000DAC965 /* SPPhotoCell.m in Sources */,
 				01BF979119746DBE006C2613 /* SPAccountViewController.m in Sources */,
 				01A10FD21976B9810038CA65 /* SPEditPhotoViewController.m in Sources */,

@@ -16,12 +16,15 @@
 #import "SPEventsViewController.h"
 #import "SPMoreNavigationController.h"
 #import "IIViewDeckController.h"
-
+#import "SPLeftMenuViewController.h"
+#import "SPCheckInSelectPlace.h"
+#import "SPCheckInNavigationController.h"
 @interface AppDelegate () {
     NSMutableData *_data;
     BOOL firstLaunch;
 }
 
+@property (nonatomic, retain) SPLeftMenuViewController *leftMenu;
 @property (nonatomic, strong) SPWelcomeViewController *welcomeViewController;
 @property (nonatomic, strong) SPActivityViewController *homeViewController;
 @property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
@@ -52,7 +55,7 @@
 @synthesize internetReach;
 @synthesize wifiReach;
 @synthesize deckController;
-
+@synthesize leftMenu;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -82,11 +85,14 @@
     
     self.welcomeViewController = [[SPWelcomeViewController alloc] init];
     
-    navController = [[UINavigationController alloc] initWithRootViewController:self.welcomeViewController];
+    leftMenu = [[SPLeftMenuViewController alloc] init];
+   
+    deckController = [self generateControllerStack];
     
-    self.navController.navigationBarHidden = NO;
-        deckController = [self generateControllerStack];
+    
+    
     self.window.rootViewController = deckController;
+ 
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -95,22 +101,39 @@
 
 
 - (IIViewDeckController*)generateControllerStack {
-    UIViewController* leftController = [[UIViewController alloc] init];
-    [leftController.view setBackgroundColor:[UIColor redColor]];
-    UIViewController* rightController =  [[UIViewController alloc] init];
-    [leftController.view setBackgroundColor:[UIColor greenColor]];
-    
-    UINavigationController *centerController = navController;
    
+    UIViewController* rightController =  [[UIViewController alloc] init];
+    [leftMenu.view setBackgroundColor:kSPColorDarkGray];
+    homeViewController = [[SPActivityViewController alloc] init];
+
+    UINavigationController *centerController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+ 
+  
+       homeViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
+    
+       UIImage *img = [[UIImage imageNamed:@"CheckIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+     homeViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleBordered target:self action:@selector(goRight)];
+    
     IIViewDeckController* thisDeckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerController
-                                                                                    leftViewController:leftController
+                                                                                    leftViewController:leftMenu
                                                                                    rightViewController:rightController];
    thisDeckController.rightSize = 100;
     
     [thisDeckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
     return thisDeckController;
 }
+-(void)goRight{
 
+    SPCheckInSelectPlace *checkInSelectPlace = [[SPCheckInSelectPlace alloc] init];
+    SPCheckInNavigationController *checkInNavigationController = [[SPCheckInNavigationController alloc] initWithRootViewController:checkInSelectPlace];
+
+
+    
+    [deckController presentViewController:checkInNavigationController animated:YES completion:nil];
+    
+    
+}
 - (void)monitorReachability {
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
     
@@ -153,7 +176,7 @@
 
     //The appearance class customizes the appearance of all instances of a class!!
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UIBarButtonItem appearance] setTintColor:kSPColorBlue];
+  //  [[UIBarButtonItem appearance] setTintColor:kSPColorBlue];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           kSPColorBlue,NSForegroundColorAttributeName,
                                                           nil]];
@@ -239,68 +262,10 @@
 
 
 - (void)presentTabBarController {
-homeViewController = [[SPActivityViewController alloc] init];
-    [homeViewController.view setBackgroundColor:[UIColor blueColor]];
 
-    
-    self.homeViewController = [[SPActivityViewController alloc] initWithStyle:UITableViewStylePlain];
-    self.discoverViewController = [[SPDiscoverViewController alloc] init];
-    self.eventsViewController = [[SPEventsViewController alloc] init];
-    moreNavigationController = [[SPMoreNavigationController alloc] init];
-    
-    UINavigationController *homeNavigationController = [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
-    
-      UINavigationController *emptyNavigationController = [[UINavigationController alloc] init];
-
-    
-     UINavigationController *discoverNavigationController = [[UINavigationController alloc] initWithRootViewController:self.discoverViewController];
-    
-    UINavigationController *eventsNavigationController = [[UINavigationController alloc] initWithRootViewController:self.eventsViewController];
-    
     self.window.rootViewController = deckController;
     
-    UITabBarItem *homeTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"ActivityTabBarIcon.png"] selectedImage:[UIImage imageNamed:@"ActivityTabBarIcon.png"]];
 
-    /*
-    [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
-    [homeTabBarItem setTitleTextAttributes: @{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
-    */
-
-/*
-    
-    [homeNavigationController setTabBarItem:homeTabBarItem];
-    
-    UITabBarItem *discoverTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"SpotsTabBarIcon"] selectedImage:[UIImage imageNamed:@"SpotsTabBarIcon"]];
-    
-    [discoverTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
-    [discoverTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
-    
-    [discoverNavigationController setTabBarItem:discoverTabBarItem];
-    
-    
-    
-    UITabBarItem *eventsTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"EventsTabBarIcon"] selectedImage:[UIImage imageNamed:@"EventsTabBarIcon"]];
-    [eventsTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
-    [eventsTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
-    
-    [eventsNavigationController setTabBarItem:eventsTabBarItem];
-    
-    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    NSLog(@"bunduru: %@",bundleIdentifier);
-    
-    UITabBarItem *moreTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:[UIImage imageNamed:@"MoreTabBarIcon"] selectedImage:[UIImage imageNamed:@"MoreTabBarIcon"]];
-    [moreTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateNormal];
-    [moreTabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] } forState:UIControlStateSelected];
-    
-    [moreNavigationController setTabBarItem:moreTabBarItem];
-
-    tabBarController.tabBar.tintColor = kSPColorBlue;
-   
-    self.tabBarController.delegate = self;
-    self.tabBarController.viewControllers = @[ homeNavigationController, discoverNavigationController, emptyNavigationController, eventsNavigationController,moreNavigationController];
-  */
-    [self.navController setViewControllers:@[ self.welcomeViewController, homeViewController ] animated:NO];
-    
 
      
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
