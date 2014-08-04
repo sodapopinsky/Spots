@@ -103,7 +103,7 @@
 - (IIViewDeckController*)generateControllerStack {
    
     UIViewController* rightController =  [[UIViewController alloc] init];
-    [leftMenu.view setBackgroundColor:kSPColorDarkGray];
+
     homeViewController = [[SPActivityViewController alloc] init];
 
     UINavigationController *centerController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
