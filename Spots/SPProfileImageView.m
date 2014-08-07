@@ -38,6 +38,7 @@
         [profileImageView.layer setBorderWidth: 3.0];
         self.profileImageView.layer.cornerRadius = roundf(self.profileImageView .frame.size.width / 2);
          self.profileImageView.layer.masksToBounds = YES;
+            self.profileImageView.image = [UIImage imageNamed:@"AvatarPlaceholder.png"];
     }
     return self;
 }

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPProfileImageView.h"
 
 @interface SPLeftMenuViewController : UIViewController
-
+@property (nonatomic, retain) SPProfileImageView *profileImageView;
 @end

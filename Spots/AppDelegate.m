@@ -19,6 +19,7 @@
 #import "SPLeftMenuViewController.h"
 #import "SPCheckInSelectPlace.h"
 #import "SPCheckInNavigationController.h"
+
 @interface AppDelegate () {
     NSMutableData *_data;
     BOOL firstLaunch;
@@ -77,7 +78,7 @@
     [defaultACL setPublicReadAccess:YES];
     [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
-
+ 
     
     [self setupAppearance];
     
@@ -93,8 +94,9 @@
     
     self.window.rootViewController = deckController;
  
-    
+ 
     [self.window makeKeyAndVisible];
+     
     return YES;
 }
 
@@ -162,8 +164,10 @@
     [loginViewController setDelegate:self];
     loginViewController.fields = PFLogInFieldsFacebook;
     loginViewController.facebookPermissions = @[ @"user_about_me" ];
+ 
+    [deckController presentViewController:loginViewController animated:YES completion:nil];
     
-    [self.welcomeViewController presentViewController:loginViewController animated:NO completion:nil];
+  //  [self.welcomeViewController presentViewController:loginViewController animated:NO completion:nil];
     
 }
 
@@ -171,12 +175,11 @@
 #pragma mark - ()
 
 - (void)setupAppearance {
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    //The appearance class customizes the appearance of all instances of a class!!
+  
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-  //  [[UIBarButtonItem appearance] setTintColor:kSPColorBlue];
+
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           kSPColorBlue,NSForegroundColorAttributeName,
                                                           nil]];
@@ -203,8 +206,8 @@
     [PFUser logOut];
     
     // clear out cached data, view controllers, etc
-    [self.navController popToRootViewControllerAnimated:NO];
-    
+   
+    [deckController toggleLeftView];
     [self presentLoginViewController];
     
     self.homeViewController = nil;
@@ -263,6 +266,12 @@
 
 - (void)presentTabBarController {
 
+    leftMenu = [[SPLeftMenuViewController alloc] init];
+    
+    deckController = [self generateControllerStack];
+    
+
+    
     self.window.rootViewController = deckController;
     
 
