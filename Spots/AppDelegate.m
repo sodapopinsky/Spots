@@ -19,6 +19,7 @@
 #import "SPLeftMenuViewController.h"
 #import "SPCheckInSelectPlace.h"
 #import "SPCheckInNavigationController.h"
+#import "SPWelcome.h"
 
 @interface AppDelegate () {
     NSMutableData *_data;
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) SPMoreNavigationController *moreNavigationController;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
+@property (nonatomic, strong) SPWelcome *welcomeVC;
 
 
 @property (nonatomic, strong) Reachability *internetReach;
@@ -57,6 +59,7 @@
 @synthesize wifiReach;
 @synthesize deckController;
 @synthesize leftMenu;
+@synthesize welcomeVC;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -84,46 +87,66 @@
     
     [self monitorReachability];
     
-    self.welcomeViewController = [[SPWelcomeViewController alloc] init];
     
-    leftMenu = [[SPLeftMenuViewController alloc] init];
-   
-    deckController = [self generateControllerStack];
-    
-    
-    
+    deckController = [[IIViewDeckController alloc] init];
+
+    if (![PFUser currentUser]) {
+      [self generateLogin];
+    }
+    else{
+        
+        
+      [self generateUserStack];
+    }
+
     self.window.rootViewController = deckController;
- 
- 
     [self.window makeKeyAndVisible];
-     
     return YES;
 }
 
-
-
-- (IIViewDeckController*)generateControllerStack {
+-(void)generateLogin{
+    SPLogInViewController *loginViewController = [[SPLogInViewController alloc] init];
+    
+    [loginViewController setDelegate:self];
+    loginViewController.fields = PFLogInFieldsFacebook;
+    loginViewController.facebookPermissions = @[ @"user_about_me" ];
+    
+    [deckController.centerController.view setBackgroundColor:[UIColor greenColor]];
+    deckController.centerController = loginViewController;
+    [deckController setCenterController:loginViewController];
+ 
    
+}
+
+- (void)generateUserStack {
+    
+     leftMenu = [[SPLeftMenuViewController alloc] init];
+    [deckController setCenterController:leftMenu];
+    /*
+   leftMenu = [[SPLeftMenuViewController alloc] init];
+
     UIViewController* rightController =  [[UIViewController alloc] init];
 
     homeViewController = [[SPActivityViewController alloc] init];
 
     UINavigationController *centerController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
- 
-  
-       homeViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
+
+    [welcomeViewController.view setBackgroundColor:[UIColor redColor]];
+    homeViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
     
        UIImage *img = [[UIImage imageNamed:@"CheckIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
      homeViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleBordered target:self action:@selector(goRight)];
-    
+    welcomeVC = [[SPWelcome alloc] init];
+    [welcomeVC.view setBackgroundColor:[UIColor redColor]];
+
     IIViewDeckController* thisDeckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerController
                                                                                     leftViewController:leftMenu
                                                                                    rightViewController:rightController];
    thisDeckController.rightSize = 100;
     
     [thisDeckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
-    return thisDeckController;
+ */
 }
 -(void)goRight{
 
@@ -164,10 +187,14 @@
     [loginViewController setDelegate:self];
     loginViewController.fields = PFLogInFieldsFacebook;
     loginViewController.facebookPermissions = @[ @"user_about_me" ];
- 
-    [deckController presentViewController:loginViewController animated:YES completion:nil];
-    
-  //  [self.welcomeViewController presentViewController:loginViewController animated:NO completion:nil];
+
+    [deckController.centerController.view setBackgroundColor:[UIColor greenColor]];
+    deckController.centerController = loginViewController;
+   // [deckController setCenterController:loginViewController];
+    //[deckController.centerController presentViewController:loginViewController animated:YES completion:nil];
+  //  [deckController presentViewController:loginViewController animated:YES completion:nil];
+   // deckController.centerController = welcomeViewController;
+  //  [deckController presentViewController:loginViewController animated:NO completion:nil];
     
 }
 
@@ -207,11 +234,16 @@
     
     // clear out cached data, view controllers, etc
    
-    [deckController toggleLeftView];
-    [self presentLoginViewController];
+    [self generateLogin];
     
-    self.homeViewController = nil;
-    self.discoverViewController = nil;
+    
+   // [self.navController popToRootViewControllerAnimated:NO];
+   // self.window.rootViewController = welcomeViewController;
+  //  [self presentLoginViewController];
+    
+   // self.homeViewController = nil;
+
+    
 }
 
 
@@ -256,7 +288,7 @@
         
         [self presentTabBarController];
         
-        [self.navController dismissViewControllerAnimated:YES completion:nil];
+     //   [self.navController dismissViewControllerAnimated:YES completion:nil];
         return YES;
     }
     return NO;
@@ -267,14 +299,17 @@
 - (void)presentTabBarController {
 
     leftMenu = [[SPLeftMenuViewController alloc] init];
+    [self generateUserStack];
+  //  [deckController setCenterController:leftMenu];
+  //  deckController = [self generateUserStack];
     
-    deckController = [self generateControllerStack];
+
+    
+  //  self.window.rootViewController = deckController;
     
 
     
-    self.window.rootViewController = deckController;
     
-
 
      
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|

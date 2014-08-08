@@ -17,15 +17,18 @@
 
 #pragma mark - UIViewController
 - (void)loadView {
-    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-    [backgroundImageView setImage:[UIImage imageNamed:@"Default.png"]];
-    self.view = backgroundImageView;
-}
 
+  
+}
+-(void)viewDidLoad{
+        [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor greenColor]];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // If not logged in, present login view controller
+    /*
     if (![PFUser currentUser]) {
         [(AppDelegate*)[[UIApplication sharedApplication] delegate] presentLoginViewControllerAnimated:NO];
         return;
@@ -33,7 +36,7 @@
     
     // Present Anypic UI
     [(AppDelegate*)[[UIApplication sharedApplication] delegate] presentTabBarController];
-    
+    */
     // Refresh current user with server side data -- checks if user is still valid and so on
  [[PFUser currentUser] refreshInBackgroundWithTarget:self selector:@selector(refreshCurrentUserCallbackWithResult:error:)];
 }

@@ -20,7 +20,7 @@
 @property (nonatomic, retain) IIViewDeckController* deckController;
 
 
-- (IIViewDeckController*)generateControllerStack;
+- (void)generateUserStack;
 @property (nonatomic, readonly) int networkStatus;
 - (void)presentTabBarController;
 - (void)presentLoginViewController;
