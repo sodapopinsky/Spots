@@ -22,9 +22,9 @@
 
 - (void)generateUserStack;
 @property (nonatomic, readonly) int networkStatus;
-- (void)presentTabBarController;
+- (void)proceedToMainInterface;
 - (void)presentLoginViewController;
-- (void)presentLoginViewControllerAnimated:(BOOL)animated;
+//- (void)presentLoginViewControllerAnimated:(BOOL)animated;
 - (void)facebookRequestDidLoad:(id)result;
 - (void)facebookRequestDidFailWithError:(NSError *)error;
 

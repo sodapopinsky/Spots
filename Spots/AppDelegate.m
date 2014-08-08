@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "Reachability.h"
 #import "MBProgressHUD.h"
-#import "SPWelcomeViewController.h"
 #import "SPActivityViewController.h"
 #import "SPLogInViewController.h"
 #import "SPDiscoverViewController.h"
@@ -19,7 +18,7 @@
 #import "SPLeftMenuViewController.h"
 #import "SPCheckInSelectPlace.h"
 #import "SPCheckInNavigationController.h"
-#import "SPWelcome.h"
+
 
 @interface AppDelegate () {
     NSMutableData *_data;
@@ -27,14 +26,12 @@
 }
 
 @property (nonatomic, retain) SPLeftMenuViewController *leftMenu;
-@property (nonatomic, strong) SPWelcomeViewController *welcomeViewController;
 @property (nonatomic, strong) SPActivityViewController *homeViewController;
 @property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
 @property (nonatomic, strong) SPEventsViewController *eventsViewController;
 @property (nonatomic, strong) SPMoreNavigationController *moreNavigationController;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
-@property (nonatomic, strong) SPWelcome *welcomeVC;
 
 
 @property (nonatomic, strong) Reachability *internetReach;
@@ -51,7 +48,7 @@
 @synthesize window;
 @synthesize navController;
 @synthesize homeViewController;
-@synthesize welcomeViewController;
+
 @synthesize moreNavigationController;
 @synthesize hud;
 @synthesize autoFollowTimer;
@@ -59,14 +56,13 @@
 @synthesize wifiReach;
 @synthesize deckController;
 @synthesize leftMenu;
-@synthesize welcomeVC;
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    
-    
-   
+
     // ****************************************************************************
     // Parse initialization
     [Parse setApplicationId:@"GitsOrpE6s6v4RB30Xrkfjr9LazUrORIZrHcqDGb"
@@ -94,9 +90,8 @@
       [self generateLogin];
     }
     else{
-        
-        
       [self generateUserStack];
+      [[PFUser currentUser] refreshInBackgroundWithTarget:self selector:@selector(refreshCurrentUserCallbackWithResult:error:)];
     }
 
     self.window.rootViewController = deckController;
@@ -111,40 +106,28 @@
     loginViewController.fields = PFLogInFieldsFacebook;
     loginViewController.facebookPermissions = @[ @"user_about_me" ];
     
-    [deckController.centerController.view setBackgroundColor:[UIColor greenColor]];
-    deckController.centerController = loginViewController;
+    [deckController setLeftController:nil];
     [deckController setCenterController:loginViewController];
- 
-   
+
 }
 
 - (void)generateUserStack {
     
-     leftMenu = [[SPLeftMenuViewController alloc] init];
-    [deckController setCenterController:leftMenu];
+     homeViewController = [[SPActivityViewController alloc] init];
+     UINavigationController *centerController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    
+     homeViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
+    
+     UIImage *img = [[UIImage imageNamed:@"CheckIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    homeViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleBordered target:self action:@selector(goRight)];
+    
+    leftMenu = [[SPLeftMenuViewController alloc] init];
+    [deckController setCenterController:centerController];
+    [deckController setLeftController:leftMenu];
+  
     /*
-   leftMenu = [[SPLeftMenuViewController alloc] init];
-
-    UIViewController* rightController =  [[UIViewController alloc] init];
-
-    homeViewController = [[SPActivityViewController alloc] init];
-
-    UINavigationController *centerController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-
-    [welcomeViewController.view setBackgroundColor:[UIColor redColor]];
-    homeViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
-    
-       UIImage *img = [[UIImage imageNamed:@"CheckIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    
-     homeViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleBordered target:self action:@selector(goRight)];
-    welcomeVC = [[SPWelcome alloc] init];
-    [welcomeVC.view setBackgroundColor:[UIColor redColor]];
-
-    IIViewDeckController* thisDeckController =  [[IIViewDeckController alloc] initWithCenterViewController:centerController
-                                                                                    leftViewController:leftMenu
-                                                                                   rightViewController:rightController];
    thisDeckController.rightSize = 100;
-    
     [thisDeckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
  */
 }
@@ -153,11 +136,8 @@
     SPCheckInSelectPlace *checkInSelectPlace = [[SPCheckInSelectPlace alloc] init];
     SPCheckInNavigationController *checkInNavigationController = [[SPCheckInNavigationController alloc] initWithRootViewController:checkInSelectPlace];
 
-
-    
     [deckController presentViewController:checkInNavigationController animated:YES completion:nil];
-    
-    
+
 }
 - (void)monitorReachability {
     Reachability *hostReach = [Reachability reachabilityWithHostname:@"api.parse.com"];
@@ -179,7 +159,7 @@
     [hostReach startNotifier];
 }
 
-
+/*
 - (void)presentLoginViewControllerAnimated:(BOOL)animated {
     
     SPLogInViewController *loginViewController = [[SPLogInViewController alloc] init];
@@ -190,14 +170,8 @@
 
     [deckController.centerController.view setBackgroundColor:[UIColor greenColor]];
     deckController.centerController = loginViewController;
-   // [deckController setCenterController:loginViewController];
-    //[deckController.centerController presentViewController:loginViewController animated:YES completion:nil];
-  //  [deckController presentViewController:loginViewController animated:YES completion:nil];
-   // deckController.centerController = welcomeViewController;
-  //  [deckController presentViewController:loginViewController animated:NO completion:nil];
-    
 }
-
+*/
 
 #pragma mark - ()
 
@@ -233,17 +207,10 @@
     [PFUser logOut];
     
     // clear out cached data, view controllers, etc
-   
+    [deckController toggleLeftView];
     [self generateLogin];
     
-    
-   // [self.navController popToRootViewControllerAnimated:NO];
-   // self.window.rootViewController = welcomeViewController;
-  //  [self presentLoginViewController];
-    
-   // self.homeViewController = nil;
-
-    
+    self.homeViewController = nil;
 }
 
 
@@ -277,7 +244,9 @@
 }
 
 - (void)presentLoginViewController {
-    [self presentLoginViewControllerAnimated:YES];
+    
+    
+  //  [self presentLoginViewControllerAnimated:YES];
 }
 
 
@@ -286,9 +255,8 @@
     if ([SPUtility userHasValidFacebookData:[PFUser currentUser]]) {
         [MBProgressHUD hideHUDForView:self.navController.presentedViewController.view animated:YES];
         
-        [self presentTabBarController];
+        [self proceedToMainInterface];
         
-     //   [self.navController dismissViewControllerAnimated:YES completion:nil];
         return YES;
     }
     return NO;
@@ -296,28 +264,18 @@
 
 
 
-- (void)presentTabBarController {
+- (void)proceedToMainInterface {
 
     leftMenu = [[SPLeftMenuViewController alloc] init];
+    
     [self generateUserStack];
-  //  [deckController setCenterController:leftMenu];
-  //  deckController = [self generateUserStack];
     
-
-    
-  //  self.window.rootViewController = deckController;
-    
-
-    
-    
-
-     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
      UIRemoteNotificationTypeAlert|
      UIRemoteNotificationTypeSound];
   
-    
     NSLog(@"Downloading user's profile picture");
+    
     // Download user's profile picture
     NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", [[PFUser currentUser] objectForKey:kSPUserFacebookIDKey]]];
     NSURLRequest *profilePictureURLRequest = [NSURLRequest requestWithURL:profilePictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f]; // Facebook profile picture cache policy: Expires in 2 weeks
@@ -534,5 +492,52 @@
      */
     [[PFFacebookUtils session] close];
 }
+
+#pragma mark - ()
+
+- (void)refreshCurrentUserCallbackWithResult:(PFObject *)refreshedObject error:(NSError *)error {
+    
+    // A kPFErrorObjectNotFound error on currentUser refresh signals a deleted user
+    if (error && error.code == kPFErrorObjectNotFound) {
+        NSLog(@"User does not exist.");
+        [(AppDelegate*)[[UIApplication sharedApplication] delegate] logOut];
+        return;
+    }
+    
+    // Check if user is missing a Facebook ID
+    if ([SPUtility userHasValidFacebookData:[PFUser currentUser]]) {
+        // User has Facebook ID.
+        
+        // refresh Facebook friends on each launch
+        [FBRequestConnection startForMyFriendsWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(facebookRequestDidLoad:)]) {
+                    [[UIApplication sharedApplication].delegate performSelector:@selector(facebookRequestDidLoad:) withObject:result];
+                }
+            } else {
+                if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(facebookRequestDidFailWithError:)]) {
+                    [[UIApplication sharedApplication].delegate performSelector:@selector(facebookRequestDidFailWithError:) withObject:error];
+                }
+            }
+        }];
+    } else {
+        NSLog(@"Current user is missing their Facebook ID");
+        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+            if (!error) {
+                
+                if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(facebookRequestDidLoad:)]) {
+                    [[UIApplication sharedApplication].delegate performSelector:@selector(facebookRequestDidLoad:) withObject:result];
+                }
+            } else {
+                if ([[UIApplication sharedApplication].delegate respondsToSelector:@selector(facebookRequestDidFailWithError:)]) {
+                    [[UIApplication sharedApplication].delegate performSelector:@selector(facebookRequestDidFailWithError:) withObject:error];
+                }
+            }
+        }];
+    }
+    
+}
+
+
 
 @end

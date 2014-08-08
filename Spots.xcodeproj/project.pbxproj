@@ -248,12 +248,8 @@
 		01278ACD196F54D800BC013A /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				01278AD1196F558900BC013A /* SPWelcomeViewController.h */,
-				01278AD2196F558900BC013A /* SPWelcomeViewController.m */,
 				01278AD7196F593500BC013A /* SPLogInViewController.h */,
 				01278AD8196F593500BC013A /* SPLogInViewController.m */,
-				0160004C1994326500F0DBC3 /* SPWelcome.h */,
-				0160004D1994326500F0DBC3 /* SPWelcome.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -269,6 +265,17 @@
 				01600042198FE7A900F0DBC3 /* IIWrapController.m */,
 			);
 			name = ViewDeck;
+			sourceTree = "<group>";
+		};
+		0160004F19947B6B00F0DBC3 /* NotUsing */ = {
+			isa = PBXGroup;
+			children = (
+				0160004C1994326500F0DBC3 /* SPWelcome.h */,
+				0160004D1994326500F0DBC3 /* SPWelcome.m */,
+				01278AD1196F558900BC013A /* SPWelcomeViewController.h */,
+				01278AD2196F558900BC013A /* SPWelcomeViewController.m */,
+			);
+			name = NotUsing;
 			sourceTree = "<group>";
 		};
 		01805FBC196EC853002E79F6 = {
@@ -306,6 +313,7 @@
 		01805FCE196EC853002E79F6 /* Spots */ = {
 			isa = PBXGroup;
 			children = (
+				0160004F19947B6B00F0DBC3 /* NotUsing */,
 				01278ACC196F54B200BC013A /* Controllers */,
 				01806002196EC905002E79F6 /* Vendor */,
 				01805FF8196EC8AA002E79F6 /* Categories */,
