@@ -9,7 +9,7 @@
 
 #import "SPCheckInAddComments.h"
 #import "SPSelectVisibility.h"
-
+#import "SPProfileImageView.h"
 
 @interface SPCheckInAddComments ()
 @property (nonatomic, retain) NSDictionary* place;
@@ -31,26 +31,25 @@
     return self;
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
+
 -(void)viewWillAppear:(BOOL)animated{
     
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBarHidden = NO;
+  
     [comments becomeFirstResponder];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+ //   self.navigationController.navigationBar.topItem.title = @"";
+  //  [[UIApplication sharedApplication] setStatusBarHidden:YES
+            //                                withAnimation:UIStatusBarAnimationFade];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES
-                                            withAnimation:UIStatusBarAnimationFade];
-    
- self.navigationController.navigationBarHidden = YES;
+// self.navigationController.navigationBarHidden = NO;
 
     [self setTitle:[place objectForKey:@"name"]];
-    [self.view setBackgroundColor:kSPColorLightGray];
-    map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 135)];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 75)];
     map.delegate = self;
     [self.view addSubview:map];
      [map setShowsUserLocation:NO];
@@ -76,8 +75,8 @@
     MapPoint *placeObject = [[MapPoint alloc] initWithName:@"" address:@"" coordinate:placeCoord];
     [map addAnnotation:placeObject];
    
-    placeCoord.latitude=latitude - .00065;
-    placeCoord.longitude=longitude + .005;
+    placeCoord.latitude=latitude;
+    placeCoord.longitude=longitude;
 
    
     region = MKCoordinateRegionMakeWithDistance(placeCoord,600,600);
@@ -87,87 +86,53 @@
  
   
 
-    UIView *addPhotoContainer = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 95,0, 95, 95)];
-    [addPhotoContainer setBackgroundColor:[UIColor blackColor]];
-    [addPhotoContainer setAlpha:0.65f];
 
-   // [addPhoto addTarget:self action:@selector(shouldStartCameraController) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:addPhotoContainer];
-    
-    addPhoto = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addPhoto setFrame:CGRectMake(addPhotoContainer.frame.origin.x + 5, addPhotoContainer.frame.origin.y + 5, addPhotoContainer.frame.size.width - 10, addPhotoContainer.frame.size.width - 10)];
-    [addPhoto setBackgroundColor:[UIColor clearColor]];
 
-    [addPhoto setImage:[UIImage imageNamed:@"CameraAdd"] forState:UIControlStateNormal];
     
-    [addPhoto addTarget:self action:@selector(shouldStartCameraController) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:addPhoto];
+
     
 
    
-    
-    UIButton *buttonView = [[UIButton alloc] initWithFrame:CGRectMake(0, 95,320, 45)];
-    [buttonView setBackgroundColor:[UIColor whiteColor]];
-    [buttonView setAlpha:0.9f];
-     [buttonView addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *lbl1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 13, 200, 20)];
-    [lbl1 setText:@"Visible to 7"];
-    [lbl1 setFont:[UIFont systemFontOfSize:16.0f]];
-    [lbl1 setAlpha:0.8f];
-    [buttonView addSubview:lbl1];
-
-    [self.view addSubview:buttonView];
-    
-    UIButton *selectVisibility = [UIButton buttonWithType:UIButtonTypeCustom];
-    [selectVisibility setImage:[UIImage imageNamed:@"RightArrow"] forState:UIControlStateNormal];
-    [selectVisibility addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
-     [selectVisibility setFrame:CGRectMake(295, 7, 29*.5,.5 * 57)];
-
-    [buttonView addSubview:selectVisibility];
-
-    
-    UIView *userAvatarContainer = [[UIView alloc] initWithFrame:CGRectMake(10,150, 60, 60)];
-    [userAvatarContainer setBackgroundColor:[UIColor blackColor]];
-    [userAvatarContainer setAlpha:0.35f];
-    userAvatarContainer.layer.cornerRadius = userAvatarContainer.frame.size.width / 2;
-
-    [self.view addSubview:userAvatarContainer];
-    
-    UIImageView *userAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(userAvatarContainer.frame.origin.x + 5, userAvatarContainer.frame.origin.y + 5, userAvatarContainer.frame.size.width - 10, userAvatarContainer.frame.size.width - 10)];
-    [userAvatar setBackgroundColor:[UIColor clearColor]];
-    userAvatar.layer.masksToBounds = YES;
-    userAvatar.layer.cornerRadius = userAvatar.frame.size.width / 2;
-    [userAvatar setImage:[UIImage imageNamed:@"AvatarPlaceholder"]];
+    SPProfileImageView *userAvatar = [[SPProfileImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 50, 100, 40, 40)];
+    PFFile *imageFile = [[PFUser currentUser] objectForKey:kSPUserProfilePicSmallKey];
+    [userAvatar setFile:imageFile];
     [self.view addSubview:userAvatar];
+
     
     
-    comments = [[UITextView alloc] initWithFrame:CGRectMake(85, 145, 215, 75)];
+    comments = [[UITextView alloc] initWithFrame:CGRectMake(10, 90, 215, 65)];
     [comments setBackgroundColor:[UIColor clearColor]];
     [comments setFont:[UIFont systemFontOfSize:15.0f]];
-
+    [comments setText:@"What's Up?"];
+    [comments setTextColor:kSPColorDarkGray];
     
-   [comments becomeFirstResponder];
+    [comments becomeFirstResponder];
     
     [self.view addSubview:comments];
-    UIButton *btnDoCheckIn = [[UIButton alloc] initWithFrame:CGRectMake(175, 228, 135, 30)];
-    [btnDoCheckIn setBackgroundColor:[UIColor colorWithRed:255.0f/255.0f green:150.0f/255.0f blue:24.0f/255.0f alpha:1.0f]];
     
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(5,156, self.view.bounds.size.width - 10, 1)];
+    lineView.backgroundColor = kSPColorDarkGray;
+    [self.view addSubview:lineView];
     
+    UIButton *btnDoCheckIn = [[UIButton alloc] initWithFrame:CGRectMake(190, 163, 120, 30)];
+    [btnDoCheckIn setBackgroundColor:kSPColorBlue];
     [btnDoCheckIn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnDoCheckIn setTitle:@"Check In" forState:UIControlStateNormal];
+    [btnDoCheckIn setTitle:@"Next" forState:UIControlStateNormal];
     btnDoCheckIn.layer.cornerRadius = 5.0f;
-    [btnDoCheckIn addTarget:self action:@selector(doCheckin) forControlEvents:UIControlEventTouchUpInside];
+    [btnDoCheckIn addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnDoCheckIn];
     
-     UIButton *cancel = [[UIButton alloc] initWithFrame:CGRectMake(10, 228, 135, 30)];
-    [cancel  setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [cancel setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancel setBackgroundColor:kSPColorDarkGray];
-    cancel.layer.cornerRadius = 5.0f;
-    [cancel addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:cancel];
     
+    
+    addPhoto = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addPhoto setFrame:CGRectMake(5, 155, 50*1.5, 29*1.5)];
+    [addPhoto setBackgroundColor:[UIColor clearColor]];
+    [addPhoto setContentMode:UIViewContentModeScaleAspectFill];
+    [addPhoto setImage:[UIImage imageNamed:@"CameraDark"] forState:UIControlStateNormal];
+    
+    [addPhoto addTarget:self action:@selector(shouldStartCameraController) forControlEvents:UIControlEventTouchUpInside];
+    
+     [self.view addSubview:addPhoto];
     
     
     editPhotoViewController  = [[SPEditPhotoViewController alloc] init];
@@ -181,9 +146,7 @@
 -(void)dismiss{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)doCheckin{
-    
-}
+
 
 
 - (BOOL)shouldStartCameraController {

@@ -30,11 +30,7 @@
     [SPUtility setNavigationBarTintColor:self];
     [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     
-    
   
-
-   
-    
     
       UISegmentedControl *titleViewControl = [[UISegmentedControl alloc] initWithItems:@[@"All",@"Following",@"Spots"]];
     
@@ -60,8 +56,13 @@
     self.blankTimelineView = [[UIView alloc] initWithFrame:self.tableView.bounds];
    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-
-    [button setBackgroundImage:[UIImage imageNamed:@"HomeTimelineBlank.png"] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(30, 100, 240, 75)];
+    UIImageView *imgview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 250, 75)];
+    imgview.contentMode  = UIViewContentModeScaleAspectFit;
+    [imgview setImage:[UIImage imageNamed:@"HomeTimelineBlank.png"]];
+    [button addSubview:imgview];
+ 
+    
     [button addTarget:self action:@selector(inviteFriendsButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.blankTimelineView addSubview:button];
 }

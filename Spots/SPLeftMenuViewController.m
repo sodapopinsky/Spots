@@ -30,6 +30,10 @@
     profileImageView = [[SPProfileImageView alloc] initWithFrame:CGRectMake(90, 50, 95, 95)];
     [self.view addSubview:profileImageView];
     
+    if([PFUser currentUser]){
+    PFFile *imageFile = [[PFUser currentUser] objectForKey:kSPUserProfilePicMediumKey];
+    [profileImageView setFile:imageFile];
+    }
     UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 260, 30)];
     [name setTextColor:[UIColor whiteColor]];
     [name setFont:[UIFont boldSystemFontOfSize:17.0f]];
@@ -38,7 +42,7 @@
     [self.view addSubview:name];
     
     UIButton *btnActivity = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImageView *activityImageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 34, 36)];
+    UIImageView *activityImageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
     UIImage *activity = [UIImage imageNamed:@"sidebarIconActivity"];
     [activityImageview setImage:activity];
     activityImageview.contentMode = UIViewContentModeScaleAspectFit;
@@ -46,8 +50,9 @@
   
     [btnActivity setFrame:CGRectMake(0, 200, 300, 60)];
     [btnActivity setBackgroundColor:[UIColor blackColor]];
-    
+    [btnActivity addTarget:self action:@selector(goActivity) forControlEvents:UIControlEventTouchUpInside];
     UILabel *lblActivity = [[UILabel alloc] initWithFrame:CGRectMake(60, 13, 100, 35)];
+    
     [lblActivity setText:@"Activity"];
     [lblActivity setTextColor:[UIColor whiteColor]];
     [lblActivity setFont:[UIFont systemFontOfSize:16.0f]];
@@ -57,14 +62,15 @@
     
     
     UIButton *btnSpots = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImageView *spotsImageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 29, 32)];
+    UIImageView *spotsImageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 28, 28)];
     UIImage *spots = [UIImage imageNamed:@"sidebarIconSpots"];
+    spotsImageview.contentMode = UIViewContentModeScaleAspectFit;
     [spotsImageview setImage:spots];
     [btnSpots addSubview:spotsImageview];
     
     [btnSpots setFrame:CGRectMake(0, 261, 300, 60)];
     [btnSpots setBackgroundColor:[UIColor blackColor]];
-    
+    [btnSpots addTarget:self action:@selector(goSpots) forControlEvents:UIControlEventTouchUpInside];
     UILabel *lblspots = [[UILabel alloc] initWithFrame:CGRectMake(60, 13, 100, 35)];
     [lblspots setText:@"Spots"];
     [lblspots setTextColor:[UIColor whiteColor]];
@@ -74,7 +80,8 @@
     
     
     UIButton *btnlogOut = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImageView *logOutImageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 33)];
+    UIImageView *logOutImageview = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 28, 28)];
+    logOutImageview.contentMode = UIViewContentModeScaleAspectFit;
     UIImage *logOut = [UIImage imageNamed:@"sidebarIconLogOut"];
     [logOutImageview setImage:logOut];
     [btnlogOut addSubview:logOutImageview];
@@ -92,6 +99,15 @@
     
     
     // Do any additional setup after loading the view.
+}
+
+-(void)goActivity{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] goActivity];
+    
+}
+-(void)goSpots{
+    [(AppDelegate *)[[UIApplication sharedApplication] delegate] goSpots];
+    
 }
 -(void)logOut{
        [(AppDelegate *)[[UIApplication sharedApplication] delegate] logOut];

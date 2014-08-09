@@ -16,10 +16,13 @@
 
 
 @property (nonatomic, strong) UINavigationController *navController;
+@property (nonatomic, strong) UINavigationController *activityNavigationController;
+@property (nonatomic, strong) UINavigationController *spotsNavigationController;
 @property (retain, nonatomic) UIViewController *leftController;
 @property (nonatomic, retain) IIViewDeckController* deckController;
 
-
+-(void)goActivity;
+-(void)goSpots;
 - (void)generateUserStack;
 @property (nonatomic, readonly) int networkStatus;
 - (void)proceedToMainInterface;

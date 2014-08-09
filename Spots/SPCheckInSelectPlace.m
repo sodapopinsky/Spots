@@ -31,18 +31,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:kSPColorLightGray];
 
-    
+    [SPUtility setNavigationBarTintColor:self];
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
     
     UIBarButtonItem *dismiss = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(dismiss)];
-    [dismiss setTintColor:kSPColorBlue];
+   // [dismiss setTintColor:kSPColorBlue];
 
-    [self setTitle:@"Select a Spot"];
-     self.navigationController.navigationBarHidden = NO;
-    [self.navigationItem setLeftBarButtonItem:dismiss];
+    UIBarButtonItem *btn =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
+    [[self navigationItem] setBackBarButtonItem:btn];
     
+    [self setTitle:@"Select a Spot"];
+   
+    [self.navigationItem setLeftBarButtonItem:dismiss];
     map = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 145)];
     map.delegate = self;
     [map setShowsUserLocation:YES];
@@ -105,7 +113,9 @@
 
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+      [self setTitle:@"Select a Spot"];
+}
 
 -(void)dismiss{
     
@@ -237,9 +247,7 @@
 
 
 
--(void)viewWillAppear:(BOOL)animated   {
-    self.navigationController.navigationBarHidden = NO;
-}
+
 
 
 - (void)didReceiveMemoryWarning

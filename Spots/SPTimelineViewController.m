@@ -376,9 +376,9 @@
         PFObject *user = [result objectForKey:@"user"];
         cell.user = [result objectForKey:kSPCheckInUserKey];
         [cell.userLabel setText:[user objectForKey:kSPUserDisplayNameKey]];
-   //     [cell.placeButton setTitle:[NSString stringWithFormat:@"%@",[result objectForKey:kSPCheckInPlaceNameKey]] forState:UIControlStateNormal];
+        [cell.placeButton setTitle:[NSString stringWithFormat:@"%@",[result objectForKey:kSPCheckInPlaceNameKey]] forState:UIControlStateNormal];
 
- [cell.placeButton setTitle:@"Grits Bar" forState:UIControlStateNormal];
+ 
         
         TTTTimeIntervalFormatter *timeIntervalFormatter = [[TTTTimeIntervalFormatter alloc] init];
         //NSTimeInterval timeInterval = [[result createdAt] timeIntervalSinceNow];
@@ -423,7 +423,7 @@
            // [cell.commentView removeFromSuperview];
         }
      
-        //[cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
+        [cell.comments setText:[result objectForKey:kSPCheckInCommentsKey]];
         
         //Reset widths to avoid having large touch area
         /*

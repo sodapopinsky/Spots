@@ -11,9 +11,7 @@
 #import "MBProgressHUD.h"
 #import "SPActivityViewController.h"
 #import "SPLogInViewController.h"
-#import "SPDiscoverViewController.h"
-#import "SPEventsViewController.h"
-#import "SPMoreNavigationController.h"
+#import "SPSpotsViewController.h"
 #import "IIViewDeckController.h"
 #import "SPLeftMenuViewController.h"
 #import "SPCheckInSelectPlace.h"
@@ -27,9 +25,8 @@
 
 @property (nonatomic, retain) SPLeftMenuViewController *leftMenu;
 @property (nonatomic, strong) SPActivityViewController *homeViewController;
-@property (nonatomic, strong) SPDiscoverViewController *discoverViewController;
-@property (nonatomic, strong) SPEventsViewController *eventsViewController;
-@property (nonatomic, strong) SPMoreNavigationController *moreNavigationController;
+@property (nonatomic, strong) SPSpotsViewController *spotsViewController;
+
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) NSTimer *autoFollowTimer;
 
@@ -48,15 +45,15 @@
 @synthesize window;
 @synthesize navController;
 @synthesize homeViewController;
-
-@synthesize moreNavigationController;
+@synthesize activityNavigationController;
+@synthesize spotsViewController;
 @synthesize hud;
 @synthesize autoFollowTimer;
 @synthesize internetReach;
 @synthesize wifiReach;
 @synthesize deckController;
 @synthesize leftMenu;
-
+@synthesize spotsNavigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -114,7 +111,7 @@
 - (void)generateUserStack {
     
      homeViewController = [[SPActivityViewController alloc] init];
-     UINavigationController *centerController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+     activityNavigationController = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     
      homeViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
     
@@ -123,13 +120,27 @@
     homeViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStyleBordered target:self action:@selector(goRight)];
     
     leftMenu = [[SPLeftMenuViewController alloc] init];
-    [deckController setCenterController:centerController];
+    [deckController setCenterController:activityNavigationController];
     [deckController setLeftController:leftMenu];
   
     /*
    thisDeckController.rightSize = 100;
     [thisDeckController disablePanOverViewsOfClass:NSClassFromString(@"_UITableViewHeaderFooterContentView")];
  */
+}
+-(void)goActivity{
+    [deckController setCenterController:activityNavigationController];
+    [deckController toggleLeftView];
+}
+-(void)goSpots{
+    if(!spotsNavigationController){
+        SPSpotsViewController *root = [[SPSpotsViewController alloc] init];
+        [root.view setBackgroundColor:[UIColor redColor]];
+         root.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"] style:UIBarButtonItemStyleBordered target:deckController action:@selector(toggleLeftView)];
+        spotsNavigationController = [[UINavigationController alloc] initWithRootViewController:root];
+    }
+    [deckController setCenterController:spotsNavigationController];
+    [deckController toggleLeftView];
 }
 -(void)goRight{
 
@@ -181,9 +192,9 @@
   
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          kSPColorBlue,NSForegroundColorAttributeName,
-                                                          nil]];
+ //   [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                           //               kSPColorBlue,NSForegroundColorAttributeName,
+                                             //             nil]];
 }
 
 
