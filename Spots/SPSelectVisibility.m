@@ -7,7 +7,7 @@
 //
 
 #import "SPSelectVisibility.h"
-
+#import "SPSelectVisibilityCell.h"
 @interface SPSelectVisibility ()
 
 @end
@@ -52,6 +52,9 @@
     [btnContainer addSubview:btnDoCheckIn];
     // Do any additional setup after loading the view.
     
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, 320, btnContainer.frame.origin.y - 40) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
     
 }
 
@@ -60,6 +63,38 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - UITableView
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+        // Load More Section
+        return 60.0f;
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    static NSString *CellIdentifier = @"Cell";
+    
+        SPSelectVisibilityCell *cell = (SPSelectVisibilityCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[SPSelectVisibilityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+      
+        return cell;
+    }
+    return cell;
+}
+
+
 
 /*
 #pragma mark - Navigation

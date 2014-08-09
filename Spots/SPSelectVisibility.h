@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPSelectVisibility : UIViewController
-
+@interface SPSelectVisibility : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, retain) UITableView *tableView;
 @end
