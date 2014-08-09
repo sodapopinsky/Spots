@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SPTimelineHeaderView.h"
 #import "SPActivityCell.h"
 
-@interface SPTimelineViewController : PFQueryTableViewController <SPTimelineHeaderViewDelegate,SPActivityCellDelegate>
+@interface SPTimelineViewController : PFQueryTableViewController <SPActivityCellDelegate>
 
 
 

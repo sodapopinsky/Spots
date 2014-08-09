@@ -228,14 +228,10 @@
 			isa = PBXGroup;
 			children = (
 				01600050199590AB00F0DBC3 /* Spots */,
-				01BBD96D1989D1C8004D1533 /* SPMoreActionSheetDelegate.h */,
-				01BBD96E1989D1C8004D1533 /* SPMoreActionSheetDelegate.m */,
 				01A804F31986AB33001EB184 /* Account */,
 				01A10FDB1976CE5D0038CA65 /* Check In */,
 				01A10FCF1976B9430038CA65 /* Take Photo */,
 				0180600F197358F4002E79F6 /* FindFriends */,
-				01E3ED301971ED35001A9388 /* SPTabBarController.h */,
-				01E3ED311971ED35001A9388 /* SPTabBarController.m */,
 				01E3ED2F1971ED1D001A9388 /* Activity */,
 				01278ACD196F54D800BC013A /* Login */,
 				016000461990413100F0DBC3 /* SPLeftMenuViewController.h */,
@@ -269,6 +265,20 @@
 		0160004F19947B6B00F0DBC3 /* NotUsing */ = {
 			isa = PBXGroup;
 			children = (
+				01BD87CE19730DA000DAC965 /* SPPhotoCell.h */,
+				01BD87CF19730DA000DAC965 /* SPPhotoCell.m */,
+				01BD87CA1972FC4800DAC965 /* SPTimelineHeaderView.h */,
+				01BD87CB1972FC4800DAC965 /* SPTimelineHeaderView.m */,
+				01A10FD41976BA790038CA65 /* SPPhotoDetailsFooterView.h */,
+				01A10FD51976BA790038CA65 /* SPPhotoDetailsFooterView.m */,
+				01BA0A5C1979D37600E16A85 /* SPCheckInHeaderView.h */,
+				01BA0A5D1979D37600E16A85 /* SPCheckInHeaderView.m */,
+				01E3ED301971ED35001A9388 /* SPTabBarController.h */,
+				01E3ED311971ED35001A9388 /* SPTabBarController.m */,
+				01D4561819883E9C00447ECB /* SPMapNavigationBar.h */,
+				01D4561919883E9C00447ECB /* SPMapNavigationBar.m */,
+				01BBD96D1989D1C8004D1533 /* SPMoreActionSheetDelegate.h */,
+				01BBD96E1989D1C8004D1533 /* SPMoreActionSheetDelegate.m */,
 				01BCB1E01978166E006D7072 /* SPCheckinCommentsViewController.h */,
 				01BCB1E11978166E006D7072 /* SPCheckinCommentsViewController.m */,
 				01D4560F1987FE4200447ECB /* SPMoreNavigationController.h */,
@@ -344,8 +354,6 @@
 				01278ADE196F5D1F00BC013A /* SPConstants.m */,
 				018060161973685B002E79F6 /* SPCache.h */,
 				018060171973685B002E79F6 /* SPCache.m */,
-				01D4561819883E9C00447ECB /* SPMapNavigationBar.h */,
-				01D4561919883E9C00447ECB /* SPMapNavigationBar.m */,
 				01D4561B19886E4000447ECB /* MapPoint.h */,
 				01D4561C19886E4000447ECB /* MapPoint.m */,
 			);
@@ -384,10 +392,7 @@
 		01805FF7196EC8A2002E79F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				01BA0A5B1979D34900E16A85 /* CheckInHeaderView */,
-				01A10FD31976BA4F0038CA65 /* PhotoDetailsViews */,
 				01BD87CD19730D8800DAC965 /* UITableViewCells */,
-				01BD87C91972FC0500DAC965 /* TimelineViews */,
 				01BD87D119742D1600DAC965 /* SPProfileImageView.h */,
 				01BD87D219742D1600DAC965 /* SPProfileImageView.m */,
 			);
@@ -459,15 +464,6 @@
 			name = "Take Photo";
 			sourceTree = "<group>";
 		};
-		01A10FD31976BA4F0038CA65 /* PhotoDetailsViews */ = {
-			isa = PBXGroup;
-			children = (
-				01A10FD41976BA790038CA65 /* SPPhotoDetailsFooterView.h */,
-				01A10FD51976BA790038CA65 /* SPPhotoDetailsFooterView.m */,
-			);
-			name = PhotoDetailsViews;
-			sourceTree = "<group>";
-		};
 		01A10FDB1976CE5D0038CA65 /* Check In */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,30 +488,10 @@
 			name = Account;
 			sourceTree = "<group>";
 		};
-		01BA0A5B1979D34900E16A85 /* CheckInHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				01BA0A5C1979D37600E16A85 /* SPCheckInHeaderView.h */,
-				01BA0A5D1979D37600E16A85 /* SPCheckInHeaderView.m */,
-			);
-			name = CheckInHeaderView;
-			sourceTree = "<group>";
-		};
-		01BD87C91972FC0500DAC965 /* TimelineViews */ = {
-			isa = PBXGroup;
-			children = (
-				01BD87CA1972FC4800DAC965 /* SPTimelineHeaderView.h */,
-				01BD87CB1972FC4800DAC965 /* SPTimelineHeaderView.m */,
-			);
-			name = TimelineViews;
-			sourceTree = "<group>";
-		};
 		01BD87CD19730D8800DAC965 /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				01BF4A811975BE9600AAA927 /* SPBaseTextCell */,
-				01BD87CE19730DA000DAC965 /* SPPhotoCell.h */,
-				01BD87CF19730DA000DAC965 /* SPPhotoCell.m */,
 				01BF979219746E45006C2613 /* SPLoadMoreCell.h */,
 				01BF979319746E45006C2613 /* SPLoadMoreCell.m */,
 				01B7788F19783F020010FB0F /* SPCheckinCell.h */,

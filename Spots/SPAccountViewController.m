@@ -7,7 +7,6 @@
 //
 
 #import "SPAccountViewController.h"
-#import "SPPhotoCell.h"
 #import "TTTTimeIntervalFormatter.h"
 #import "SPLoadMoreCell.h"
 

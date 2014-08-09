@@ -28,9 +28,31 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:NO
                                             withAnimation:UIStatusBarAnimationFade];
+    [self setTitle:@"Visibility"];
+    [self.view setBackgroundColor:kSPColorLightGray];
     
-    self.navigationController.navigationBarHidden = NO;
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300, 20)];
+    [lbl setText:@"Select who you want to see this"];
+    [lbl setFont:[UIFont systemFontOfSize:14.0f]];
+    [lbl setAlpha:.8f];
+    [self.view addSubview:lbl];
+ 
+    UIView *btnContainer = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 113, self.view.frame.size.width, 50)];
+    [btnContainer setBackgroundColor:kSPColorDarkGray];
+    [self.view addSubview:btnContainer];
+    
+    
+    UIButton *btnDoCheckIn = [[UIButton alloc] initWithFrame:CGRectMake(60, 7, 200, 36)];
+    [btnDoCheckIn setBackgroundColor:kSPColorBlue];
+    [btnDoCheckIn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDoCheckIn setTitle:@"Check In" forState:UIControlStateNormal];
+    [btnDoCheckIn.titleLabel setFont:[UIFont systemFontOfSize:14.0f]];
+    btnDoCheckIn.layer.cornerRadius = 5.0f;
+   // [btnDoCheckIn addTarget:self action:@selector(goSelectVisibility) forControlEvents:UIControlEventTouchUpInside];
+    [btnContainer addSubview:btnDoCheckIn];
     // Do any additional setup after loading the view.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

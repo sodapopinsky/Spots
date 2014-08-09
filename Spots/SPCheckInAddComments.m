@@ -57,6 +57,15 @@
     
     imageIsSet = NO;
     
+    
+    UIBarButtonItem *btn =
+    [[UIBarButtonItem alloc] initWithTitle:@""
+                                     style:UIBarButtonItemStyleBordered
+                                    target:nil
+                                    action:nil];
+    [[self navigationItem] setBackBarButtonItem:btn];
+    
+    
     NSDictionary *geometry = [place objectForKey:@"geometry"];
     NSDictionary *location = [geometry objectForKey:@"location"];
     
