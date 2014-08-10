@@ -30,7 +30,8 @@
                                             withAnimation:UIStatusBarAnimationFade];
     [self setTitle:@"Visibility"];
     [self.view setBackgroundColor:kSPColorLightGray];
-    
+     NSArray *facebookFriends = [[SPCache sharedCache] facebookFriends];
+    NSLog(@"%@",facebookFriends);
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300, 20)];
     [lbl setText:@"Select who you want to see this"];
     [lbl setFont:[UIFont systemFontOfSize:14.0f]];
@@ -54,6 +55,7 @@
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40, 320, btnContainer.frame.origin.y - 40) style:UITableViewStylePlain];
     self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
 }
@@ -73,7 +75,11 @@
         return 60.0f;
 
 }
-
+- (NSInteger) tableView: (UITableView*) tableView numberOfRowsInSection: (NSInteger) section{
+     NSArray *facebookFriends = [[SPCache sharedCache] facebookFriends];
+    
+    return [facebookFriends count];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
@@ -81,17 +87,23 @@
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-        SPSelectVisibilityCell *cell = (SPSelectVisibilityCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+       SPSelectVisibilityCell *cell = (SPSelectVisibilityCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+
+    
+    if (cell == nil) {
         
-        if (cell == nil) {
-            cell = [[SPSelectVisibilityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-      
-        return cell;
+        
+        cell = [[SPSelectVisibilityCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    [cell.name setText:@"thisName"];
     return cell;
+    
+
 }
 
 

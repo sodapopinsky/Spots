@@ -19,7 +19,11 @@
         
         [self.contentView setBackgroundColor:[UIColor whiteColor]];
  
+      name = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 250, 25)];
+      [self addSubview:name];
         
+        userAvatar = [[SPProfileImageView alloc] initWithFrame:CGRectMake(280, 5, 30, 30)];
+        [self addSubview:userAvatar];
     }
     return self;
 }
